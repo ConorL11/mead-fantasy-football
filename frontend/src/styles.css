@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Global Classes */
+
+:root{
+    --header-background: #702F00;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body { 
+    margin: 0;
+    background: #222;
+}
+
+.content { 
+    position: absolute;
+    top: 50px;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    color:white;
+}
+
+.pl_1 { 
+    padding-left: 10px;
+}
+
+.ml_1 {
+    margin-left: 10px;
+}
+.p2{
+    padding: 20px;
+}
+
+.m1 {
+    margin: 10px
+}
+
+.flexHorizontal {
+    display: flex;
+    align-items: center;
+}
+
+.subText {
+    font-weight: 100;
+    color: #ccc;
+}
+
+
+/* Nav Styling  */
+header {
+    height: 50px;
+    background: var(--header-background);
+    color: white;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+}
+
+h3 {
+    font-size: 1em;
+}
+
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle-label {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    margin-left: 1em;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+}
+
+.nav-dropdown-icon {
+    height: 20px;
+    width: 20px;
+    color: white;
+}
+
+nav {
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    left: 0;
+    background: var(--header-background);
+    width: 100%;
+    transform: scale(1,0);
+    transform-origin: top;
+    transition: transform 150ms ease-in-out;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    margin-bottom: 1em;
+    margin-left: 1em;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 50ms ease-in-out;
+}
+
+nav a:hover {
+    color: #000;
+}
+
+.nav-toggle:checked ~ nav {
+    transform: scale(1,1);
+}
+
+.nav-toggle:checked ~ nav a {
+    opacity: 1;
+    transition: opacity 100ms ease-in-out 100ms;
+}
+
+@media screen and (min-width: 800px){
+    .nav-toggle-label {
+        display: none;
+    }
+
+    header {
+        position: fixed;
+        display: grid;
+        grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+    }
+
+    .title { 
+        grid-column: 2 / 3;
+    }
+
+    nav {
+        all: unset;
+        grid-column: 3 / 4;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    nav a {
+        opacity: 1;
+        position: relative;
+    }
+
+    .navLink::before {
+        content: '';
+        display: block;
+        height: 5px;
+        background: black;
+        margin-bottom: 3px;
+        transform: scale(0,1);
+        transition: transform ease-in-out 100ms;
+    }
+
+    .navLink:hover::before {
+        transform: scale(1,1);
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    nav li {
+        margin-left: 3em;
+        margin-bottom: 0;
+    }
+}
+
+/* myTable and Home Page */
+.table-container {
+    width: 100%;
+    overflow-x: scroll;
+    font-weight: 100;
+}
+
+table.myTable {
+    width: 100%;
+    border-collapse: collapse;
+    background: #323232;
+}
+
+.myTable caption,
+.myTable th,
+.myTable td {
+    padding: 1rem;
+}
+
+.myTable caption, 
+.myTable th {
+    text-align: left;
+}
+
+.myTable caption {
+    background: hsl(0 0% 0%);
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.myTable th { 
+    background: hsl(0 0% 0% / 0.5);
+}
+
+.myTable tr:nth-of-type(2n) {
+    background: hsl(0 0% 0% / 0.1)
+}
+
+.myTable thead th{
+    font-weight: 500;
+    text-align: left;
+    border-bottom: 2px solid #ccc;
+}
+
+.myTable tbody td {
+    padding: 1rem;
+}
+  
+.myTable tbody tr:hover {
+    background-color: #333;
+}
+
+.myTable .team-display {
+    margin-top: 10px;
+}
+
+@media (max-width: 650px){
+    .myTable th {
+        display: none;
+    }
+    .myTable td {
+        display: grid;
+        grid-template-columns: 15ch auto;
+        padding: 0.5rem 1rem !important;
+        font-weight: 100;
+    }
+
+    .myTable td:first-child {
+        padding-top: 1rem !important;
+    }
+
+    .myTable td:last-child {
+        padding-bottom: 1rem !important;
+    }
+
+    .myTable td:not(:nth-of-type(1)):before {
+        content: attr(data-cell) ": ";
+        font-weight: 400;
+    }
+    td:nth-of-type(1) {
+        display: flex;
+        align-content: center;
+    }
+}
+
+.avatar img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid black;
+
+}
+
+.pastChampions {
+    width: 95%;
+    margin: 20px;
+}
+
+table.pastChampions {
+    width: 70%;
+    border: solid 1px black;
+    border-radius: 10px;
+    margin: 20px
+}
+
+.pastChampions thead th{
+    font-weight: 500;
+    text-align: left;
+    border-bottom: 2px solid black;
+}

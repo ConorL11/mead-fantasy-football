@@ -1,0 +1,17 @@
+const currentLeagueId = '990427440436625408';
+const sleeper2021 = '863906445559795712';
+const espnLeagueId = '322485';
+
+const pastWinners = [
+    {year: '2022', winningUser: 'Fisher', winningTeam: 'Big Bussin Bouncy Balls', losingUser: 'Cody', losingTeam: 'Just Last', punishment: 'Wore Griffs HS Football Jersey to the draft (kinda).'},
+    {year: '2021', winningUser: 'Rob', winningTeam: 'Unlucky Bastards', losingUser: 'Griff', losingTeam: 'Balerian the Dreadful', punishment: 'Got pelted with eggs'},
+    {year: '2020', winningUser: 'Desch', winningTeam: 'Pop Drop and Lockett', losingUser: 'Cody', losingTeam: 'I quit', punishment: 'Made an Only Fans (kinda)'},
+    {year: '2019', winningUser: 'Desch', winningTeam: "Philip Rivers' 10th Kid", losingUser: 'Ryan', losingTeam: 'Back to retirement', punishment: 'Wore a tutu to the draft (kinda)'},
+    {year: '2018', winningUser: 'Patty', winningTeam: 'The Boobskin', losingUser: 'Fisher', losingTeam: 'Mia Malkova', punishment: 'Had to get frosted tips (but looked good)'},
+    {year: '2017', winningUser: 'Rob', winningTeam: 'The ToddFather Part 2',  losingUser: 'Thomas', losingTeam: 'Well Darn', punishment: 'Wore a dildo to the FoCo bars'}, 
+    {year: '2016', winningUser: 'Conor', winningTeam: 'Curb Check', losingUser: 'John Brady', losingTeam: 'At Least Im Not at Wyoming', punishment: 'Did not follow through on head shaving'},
+    {year: '2015', winningUser: 'Cody', winningTeam: 'LOL Hiroshima',  losingUser: 'Thomas', losingTeam: 'Comeback Time Bitches', punishment: ' Did Standup Comedy'},
+    {year: '2014', winningUser: 'Ryan', winningTeam: 'The Rylo Show', losingUser: 'Perez', losingTeam: 'FUCK MARSHAWN LYNCH', punishment: 'Got Kicked out of the league'},
+];
+
+export {currentLeagueId, sleeper2021, espnLeagueId, pastWinners}

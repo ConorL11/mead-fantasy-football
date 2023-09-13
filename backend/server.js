@@ -2,12 +2,12 @@ import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
-import connectDB from './config/db.js';
+// import connectDB from './config/db.js';
 import cpiData from './data/cpiData.js';
 
 const port = process.env.PORT || 5000;
 
-connectDB(); // Connect to MongoDB
+// connectDB(); // Connect to MongoDB
 const app = express();
 
 app.get('/api/cpiData', (req, res) => {

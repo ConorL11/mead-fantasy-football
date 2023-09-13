@@ -41,7 +41,7 @@ function ConorsPowerIndex({show}){
     };
 
     useEffect(() => {
-        fetchData();
+        // fetchData();
     }, []);
 
     const postData = async (data) => {

@@ -4,8 +4,8 @@ import axios from "axios";
 function CPIRankings(){
     const [currentIndex, setCurrentIndex] = useState([]);
     const fetchRankings = async () => {
-        const rankingData = await axios.get('http://localhost:3005/cpi2023');
-        setCurrentIndex(rankingData.data[rankingData.data.length -1].data.sort((a,b) => b.settings.cpiRating - a.settings.cpiRating));
+        const rankingData = await axios.get('/api/cpiData/1');
+        setCurrentIndex(rankingData.data.sort((a,b) => b.settings.cpiRating - a.settings.cpiRating));
     };
 
     useEffect(() => {

@@ -34,19 +34,19 @@ function ConorsPowerIndex({show}){
                             user.avatar_link = "https://sleepercdn.com/avatars/thumbs/"+ user.avatar;
                         }
                     }
-                    postData(users);
+                    postData(currentWeek, users);
                 }
             })
         );
     };
 
     useEffect(() => {
-        // fetchData();
+        fetchData();
     }, []);
 
-    const postData = async (data) => {
+    const postData = async (currentWeek, data) => {
         await axios.post("http://localhost:3005/cpi2023", {
-            week: 1,
+            week: currentWeek,
             data: data
         });
     };

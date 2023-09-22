@@ -336,7 +336,6 @@ const cpiData = [
         "avatar_link": "https://sleepercdn.com/avatars/thumbs/f0edbf4278f53f9425db175073df6584"
       }
     ],
-    "id": 1
   }
 ];
 

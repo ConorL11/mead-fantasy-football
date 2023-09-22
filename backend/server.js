@@ -9,6 +9,8 @@ const port = process.env.PORT || 5000;
 
 // connectDB(); // Connect to MongoDB
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 app.get('/api/cpiData', (req, res) => {
     res.json(cpiData);
@@ -19,9 +21,9 @@ app.get('/api/cpiData/:week', (req, res) => {
     res.json(weeklycpiData);
 });
 
-// app.get('/', (req, res) => {
-//     res.send('API is running...');
-// });
+app.post('/api/cpiData', (req, res) => {
+    cpiData.push(req.body);
+});
 
 const __dirname = path.resolve();
 if(process.env.NODE_ENV === 'production'){

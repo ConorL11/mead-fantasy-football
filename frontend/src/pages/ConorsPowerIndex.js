@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import CPIRankings from "../components/CPIRankings";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 
 function ConorsPowerIndex({show}){
+    const [currentIndex, setCurrentIndex] = useState([]);
 
     const leagueId = '990427440436625408';
-    const fetchData = async () => {
+    const updateRankings = async () => {
         const nflStateUrl = 'https://api.sleeper.app/v1/state/nfl';
         const usersUrl = 'https://api.sleeper.app/v1/league/'+leagueId+'/users';
         const rostersUrl = 'https://api.sleeper.app/v1/league/'+leagueId+'/rosters';
-        const cpiUrl = 'http://localhost:3005/cpi2023';
+        const cpiUrl = '/api/cpiData';
 
         const getNflState = axios.get(nflStateUrl);
         const getUsers = axios.get(usersUrl);
@@ -40,20 +40,62 @@ function ConorsPowerIndex({show}){
         );
     };
 
+    const fetchRankings = async () => {
+        const nflStateUrl = 'https://api.sleeper.app/v1/state/nfl';
+        const cpiUrl = '/api/cpiData';
+    
+        const getNflState = axios.get(nflStateUrl);
+        const getCpi = axios.get(cpiUrl);
+
+        await axios.all([getNflState, getCpi]).then(
+            axios.spread((...responses) => {
+                const cpiData = responses[1].data;
+                const rankingData = cpiData[cpiData.length-1];
+                setCurrentIndex(rankingData.data.sort((a,b) => b.settings.cpiRating - a.settings.cpiRating));                
+            }),
+        );
+    }
+
     useEffect(() => {
-        fetchData();
+        updateRankings();
+        fetchRankings();
     }, []);
 
     const postData = async (currentWeek, data) => {
-        await axios.post("http://localhost:3005/cpi2023", {
+        await axios.post("/api/cpiData", {
             week: currentWeek,
             data: data
         });
     };
 
     return (
-        <div className="">
-           <CPIRankings />
+        <div className="table-container">
+            <table className="myTable">
+                <caption>Conors Power Index</caption>
+                <thead>
+                    <tr>
+                        <th>Team</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {currentIndex.map(team => (
+                        <tr key={team.user_id}>
+                            <td data-cell="Team">
+                                <div className="team-display flexHorizontal">
+                                    {team.metadata.avatar && <div className="avatar"><img src={team.metadata.avatar} alt="" width="50" height="50"/></div>}
+                                    {!team.metadata.avatar &&<div className="avatar"><img src={team.avatar_link} alt="" width="50" height="50"/></div>}
+                                    <div className="ml_1">
+                                        <div>{team.metadata.team_name}</div>
+                                        <div className="subText">({team.display_name})</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-cell="Power Index">{team.settings.cpiRating}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     )
 }

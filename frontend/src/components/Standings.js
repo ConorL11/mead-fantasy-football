@@ -14,7 +14,7 @@ function Standings(){
             const roster = rosters.find(roster => roster.owner_id === user.user_id);
             if (roster) {
                 user.settings = roster.settings;
-                user.settings.winning_pct = user.settings.wins + user.settings.ties + user.settings.losses > 0 ? user.settings.wins / user.settings.wins + user.settings.ties + user.settings.losses : 0;
+                user.settings.winning_pct = (user.settings.wins + user.settings.ties + user.settings.losses) > 0 ? user.settings.wins / (user.settings.wins + user.settings.ties + user.settings.losses) : 0;
                 user.avatar_link = "https://sleepercdn.com/avatars/thumbs/"+ user.avatar;
             }
         }

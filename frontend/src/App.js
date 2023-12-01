@@ -2,7 +2,7 @@ import NavLinks from "./components/NavLinks";
 import Route from "./components/Route";
 import BylawsPage from "./pages/BylawsPage";
 import HomePage from "./pages/HomePage";
-import AnalysisHomePage from "./pages/AnalysisHomePage";
+import AnalyticsPage from "./pages/AnalyticsPage";
 import APITestPage from "./pages/APITestPage";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
@@ -52,8 +52,8 @@ function App() {
                 <Route path="/bylaws">
                     <BylawsPage />
                 </Route>
-                <Route path="/analysis">
-                    <AnalysisHomePage/>
+                <Route path="/analytics">
+                    <AnalyticsPage/>
                 </Route>
                 <Route path="/conorspowerindex">
                     <ConorsPowerIndex/>

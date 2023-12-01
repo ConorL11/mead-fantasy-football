@@ -3,6 +3,37 @@ import axios from "axios";
 
 
 function ConorsPowerIndex({show}){
+
+
+
+    const [cpiData, setCpiData] = useState([]);
+
+    // CONOR WORKING HERE
+    useEffect(() => {
+        // const getCpiData = async () => {
+        //     const { data } = await axios.get('/api/cpiData');
+        //     setCpiData(data);
+        // };
+        // getCpiData();
+        updateRankings()
+
+
+    }, []);
+
+    cpiData.map(data => {
+        console.log(data)
+    })
+
+    // useEffect(() => {
+    //     const getLeagueMembers = async () => {
+    //         const { data } = await axios.get('/api/leagueMembers');
+    //         setLeagueMembers(data);
+    //     };
+
+    //     getLeagueMembers()
+    // }, []);
+
+
     const [currentIndex, setCurrentIndex] = useState([]);
 
     const leagueId = '990427440436625408';
@@ -34,39 +65,40 @@ function ConorsPowerIndex({show}){
                             user.avatar_link = "https://sleepercdn.com/avatars/thumbs/"+ user.avatar;
                         }
                     }
-                    postData(currentWeek, users);
+                    console.log(currentWeek, users)
+                    // postData(currentWeek, users);
                 }
             })
         );
     };
 
-    const fetchRankings = async () => {
-        const nflStateUrl = 'https://api.sleeper.app/v1/state/nfl';
-        const cpiUrl = '/api/cpiData';
+    // const fetchRankings = async () => {
+    //     const nflStateUrl = 'https://api.sleeper.app/v1/state/nfl';
+    //     const cpiUrl = '/api/cpiData';
     
-        const getNflState = axios.get(nflStateUrl);
-        const getCpi = axios.get(cpiUrl);
+    //     const getNflState = axios.get(nflStateUrl);
+    //     const getCpi = axios.get(cpiUrl);
 
-        await axios.all([getNflState, getCpi]).then(
-            axios.spread((...responses) => {
-                const cpiData = responses[1].data;
-                const rankingData = cpiData[cpiData.length-1];
-                setCurrentIndex(rankingData.data.sort((a,b) => b.settings.cpiRating - a.settings.cpiRating));                
-            }),
-        );
-    }
+    //     await axios.all([getNflState, getCpi]).then(
+    //         axios.spread((...responses) => {
+    //             const cpiData = responses[1].data;
+    //             const rankingData = cpiData[cpiData.length-1];
+    //             setCurrentIndex(rankingData.data.sort((a,b) => b.settings.cpiRating - a.settings.cpiRating));                
+    //         }),
+    //     );
+    // }
 
-    useEffect(() => {
-        updateRankings();
-        fetchRankings();
-    }, []);
+    // useEffect(() => {
+    //     updateRankings();
+    //     fetchRankings();
+    // }, []);
 
-    const postData = async (currentWeek, data) => {
-        await axios.post("/api/cpiData", {
-            week: currentWeek,
-            data: data
-        });
-    };
+    // const postData = async (currentWeek, data) => {
+    //     await axios.post("/api/cpiData", {
+    //         week: currentWeek,
+    //         data: data
+    //     });
+    // };
 
     return (
         <div className="table-container">
@@ -78,7 +110,7 @@ function ConorsPowerIndex({show}){
                         <th>Rating</th>
                     </tr>
                 </thead>
-                <tbody>
+                {/* <tbody>
                     {currentIndex.map(team => (
                         <tr key={team.user_id}>
                             <td data-cell="Team">
@@ -94,7 +126,7 @@ function ConorsPowerIndex({show}){
                             <td data-cell="Power Index">{team.settings.cpiRating}</td>
                         </tr>
                     ))}
-                </tbody>
+                </tbody> */}
             </table>
         </div>
     )

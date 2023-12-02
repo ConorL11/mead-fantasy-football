@@ -4,7 +4,7 @@ import { currentLeagueId } from "../content/constants";
 
 function AveragePoints(){
     const [currentAveragePoints, setCurrentAveragePoints] = useState([]);
-    
+
     const fetchAveragePoints = async () => {
         const responseUsers = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/users");
         const responseRosters = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/rosters");
@@ -20,8 +20,6 @@ function AveragePoints(){
                 user.avatar_link = "https://sleepercdn.com/avatars/thumbs/"+ user.avatar;
             }
         }
-        // users.sort((a,b) => b.settings.wins - a.settings.wins);
-
         // Clean up response data
         for(const user of users){
             if(!user.settings.winning_pct){
@@ -37,53 +35,30 @@ function AveragePoints(){
         }
 
         users.sort((a,b) => b.settings.average_points - a.settings.average_points);
-
         setCurrentAveragePoints(users);
     };
+
 
     useEffect(() => {
         fetchAveragePoints();
     }, []);
 
-    return(
-        // CONOR  - Table Display
-        // <div className="table-container">
-        //     <table className="myTable">
-        //         <caption>League Standings</caption>
-        //         <thead>
-        //             <tr>
-        //                 <th>Team</th>
-        //                 <th>Average Points</th>
+    const maxAveragePoints = Math.max(...currentAveragePoints.map(team => team.settings.average_points));
 
-        //             </tr>
-        //         </thead>
-        //         <tbody>
-        //             {currentAveragePoints.map(team => (
-        //                 <tr key={team.user_id}>
-        //                     <td data-cell="Team">
-        //                         <div className="team-display flexHorizontal">
-        //                             {team.metadata.avatar && <div className="avatar"><img src={team.metadata.avatar} alt="" width="50" height="50"/></div>}
-        //                             {!team.metadata.avatar &&<div className="avatar"><img src={team.avatar_link} alt="" width="50" height="50"/></div>}
-        //                             <div className="ml_1">
-        //                                 <div>{team.metadata.team_name}</div>
-        //                                 <div className="subText">({team.display_name})</div>
-        //                             </div>
-        //                         </div>
-        //                     </td>
-        //                     <td data-cell="Games Behind">{team.settings.average_points}</td>
-        //                 </tr>
-        //             ))}
-        //         </tbody>
-        //     </table>
-        // </div>
-        <div>
-            <h1>Average Points Per Week</h1>
+
+    return(
+        <div className="averagePointsContainer">
+            <h1>Average Weekly Points</h1>
+            <h3>{maxAveragePoints}</h3>
             {currentAveragePoints.map(team => (
-                <div key={team.user_id}>
-                     <div className="subText">{team.display_name}</div>
-                     <div>
-                        {team.metadata.avatar && <div className="avatar"><img src={team.metadata.avatar} alt="" width="50" height="50"/></div>}
-                        {!team.metadata.avatar && <div className="avatar"><img src={team.avatar_link} alt="" width="50" height="50"/></div>}
+                <div key={team.user_id} className="teamBar">
+                     <div className="teamName">{team.display_name}</div>
+                     <div className="flexHorizontal">
+                        {team.metadata.avatar && <img className="mediumAvatar" src={team.metadata.avatar} alt="" width="100" height="100"/>}
+                        {!team.metadata.avatar && <img className="mediumAvatar" src={team.avatar_link} alt="" width="100" height="100"/>}
+                        <div className={`coloredBar`} style={{ width: `${(team.settings.average_points / maxAveragePoints) * 90 }%` }}>
+                            <div className="teamPoints">{team.settings.average_points.toFixed(1)}</div>
+                        </div>
                     </div>
                 </div>
             ))}

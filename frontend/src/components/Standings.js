@@ -64,8 +64,8 @@ function Standings(){
                         <tr key={team.user_id}>
                             <td data-cell="Team">
                                 <div className="team-display flexHorizontal">
-                                    {team.metadata.avatar && <div className="avatar"><img src={team.metadata.avatar} alt="" width="50" height="50"/></div>}
-                                    {!team.metadata.avatar &&<div className="avatar"><img src={team.avatar_link} alt="" width="50" height="50"/></div>}
+                                    {team.metadata.avatar && <div className="smallAvatar"><img src={team.metadata.avatar} alt="" width="50" height="50"/></div>}
+                                    {!team.metadata.avatar &&<div className="smallAvatar"><img src={team.avatar_link} alt="" width="50" height="50"/></div>}
                                     <div className="ml_1">
                                         <div>{team.metadata.team_name}</div>
                                         <div className="subText">({team.display_name})</div>

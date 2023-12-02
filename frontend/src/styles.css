@@ -4,7 +4,14 @@
 
 :root{
     --header-background: #702F00;
+    --barColorOne: #446a88;
+    --barColorTwo: #32788f;
+    --barColorThree: #1d808d;
+    --barColorFour: #198886;
+    --barColorFive: #2b8673;
+    --barColorSix: #448864;
 }
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -269,12 +276,11 @@ table.myTable {
     }
 }
 
-.avatar img{
+.smallAvatar img{
     width: 30px;
     height: 30px;
     border-radius: 50%;
     border: 1px solid black;
-
 }
 
 .pastChampions {
@@ -293,4 +299,68 @@ table.pastChampions {
     font-weight: 500;
     text-align: left;
     border-bottom: 2px solid black;
+}
+
+
+/* Bar Grid Formatting */
+.averagePointsContainer {
+    width: 33%;
+    padding: 20px;
+    margin: 20px;
+    background-color: #333;
+    border-radius: 5%;
+}
+
+.mediumAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    z-index: 2;
+    background-color: black;
+}
+
+.teamName {
+    position: relative;
+    top: 10px;
+    left: 70px;
+
+}
+
+.teamPoints {
+    position: relative;
+    left: 28px;
+}
+
+.coloredBar { 
+    display: flex;
+    align-items: center;
+    height: 1.9em;
+    margin-left: -5px;
+    border-radius: 0 .9em .9em 0;
+    z-index: 1;
+}
+
+.teamBar:nth-child(1n) .coloredBar { 
+    background-color: var(--barColorOne);
+}
+
+.teamBar:nth-child(2n) .coloredBar { 
+    background-color: var(--barColorTwo);
+}
+
+.teamBar:nth-child(3n) .coloredBar { 
+    background-color: var(--barColorThree);
+}
+
+.teamBar:nth-child(4n) .coloredBar { 
+    background-color: var(--barColorFour);
+}
+
+.teamBar:nth-child(5n2n) .coloredBar { 
+    background-color: var(--barColorFive);
+}
+
+.teamBar:nth-child(6n) .coloredBar { 
+    background-color: var(--barColorSix);
 }

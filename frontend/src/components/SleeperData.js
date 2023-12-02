@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { currentLeagueId } from "../content/constants";
+import AveragePoints from "./AveragePoints";
 
 function SleeperData(){
     const [loading, setLoading] = useState([]);
-    const [data, setData] = useState([]);
+    const [sleeperScores, setSleeperScores] = useState([]);
 
     const fetchSleeperData = async () => {
 
         const responseUsers = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/users");
         const responseRosters = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/rosters");
-        const responseWeek1 = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/matchups/1");
+        // const responseWeek1 = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/matchups/1");
 
 
         const users = responseUsers.data; 
@@ -37,11 +38,8 @@ function SleeperData(){
                 user.settings.fpts_against = user.settings.fpts_against + user.settings.fpts_against_decimal/100;
             }
         }
-        console.log(responseUsers)
-        console.log(responseRosters)
-        console.log(responseWeek1)
 
-        setData(users);
+        setSleeperScores(users);
         setLoading(false);
     };
 
@@ -58,7 +56,11 @@ function SleeperData(){
                 Loading Cool Sleeper Data .....
             </div>
         )
-    } 
+    } else {
+        return (
+            <AveragePoints sleeperScores={sleeperScores} />
+        )
+    }
 }
 
 export default SleeperData;

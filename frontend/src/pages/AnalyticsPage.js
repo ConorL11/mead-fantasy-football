@@ -1,4 +1,4 @@
-import AveragePoints from "../components/AveragePoints";
+// import AveragePoints from "../components/AveragePoints";
 import SleeperData from "../components/SleeperData";
 
 function AnalyticsPage(){

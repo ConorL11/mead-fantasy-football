@@ -1,4 +1,5 @@
 import AveragePoints from "../components/AveragePoints";
+import SleeperData from "../components/SleeperData";
 
 function AnalyticsPage(){
 
@@ -8,7 +9,8 @@ function AnalyticsPage(){
                 Home Page for current seasson's analytics
             </div>
             <div>
-                <AveragePoints />
+                {/* <AveragePoints /> */}
+                <SleeperData />
             </div>
         </div>
     )

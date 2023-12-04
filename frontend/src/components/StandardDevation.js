@@ -16,7 +16,7 @@ function StandardDeviation(sleeperScores){
                 <h3>Based on Standard Deviation</h3>
                 {inconsistentTeams.map(team => (
                     <div key={team.user_id} className="teamBar">
-                        <div className="teamName">{team.display_name}</div>
+                        <div className="teamName">{team.nickname}</div>
                         <div className="flexHorizontal">
                             {team.metadata.avatar && <img className="mediumAvatar" src={team.metadata.avatar} alt="" width="100" height="100"/>}
                             {!team.metadata.avatar && <img className="mediumAvatar" src={team.avatar_link} alt="" width="100" height="100"/>}
@@ -33,7 +33,7 @@ function StandardDeviation(sleeperScores){
                 <h3>Based on Standard Deviation</h3>
                 {consistentTeams.map(team => (
                     <div key={team.user_id} className="teamBar">
-                        <div className="teamName">{team.display_name}</div>
+                        <div className="teamName">{team.nickname}</div>
                         <div className="flexHorizontal">
                             {team.metadata.avatar && <img className="mediumAvatar" src={team.metadata.avatar} alt="" width="100" height="100"/>}
                             {!team.metadata.avatar && <img className="mediumAvatar" src={team.avatar_link} alt="" width="100" height="100"/>}

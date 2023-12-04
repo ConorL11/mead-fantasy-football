@@ -3,17 +3,22 @@ import axios from "axios";
 import { currentLeagueId } from "../content/constants";
 import AveragePoints from "./AveragePoints";
 import StandardDeviation from "./StandardDevation";
+import KeyMatchups from "./KeyMatchups";
 
 function SleeperData(){
     const [loading, setLoading] = useState([]);
     const [sleeperScores, setSleeperScores] = useState([]);
+    const [closeGames, setCloseGames] = useState([]);
+    const [blowoutGames, setBlowoutGames] = useState([]);
 
     const fetchSleeperData = async () => {
 
+        const responseLeagueMembers = await axios.get('/api/leagueMembers');
         const responseNflState = await axios.get("https://api.sleeper.app/v1/state/nfl");
         const responseUsers = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/users");
         const responseRosters = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/rosters");
 
+        const leagueMembers = responseLeagueMembers.data;
         const currentWeek = responseNflState.data.week;
         const users = responseUsers.data; 
         const rosters = responseRosters.data.sort();
@@ -29,7 +34,12 @@ function SleeperData(){
         }
 
         // Append Matchup Data to Rosters and retrieve array of all Matchups to date
-        await fetchMatchups(currentWeek, rosterIdMap);
+        const allMatchups = await fetchMatchups(currentWeek, rosterIdMap);
+
+        const {closeGames, blowoutGames} = findKeyMatchups(allMatchups);
+
+        setCloseGames(closeGames);
+        setBlowoutGames(blowoutGames);
 
         for(const user of users){
             const roster = ownerIdMap[user.user_id];
@@ -45,6 +55,9 @@ function SleeperData(){
 
         // Clean up response data and add metrics for insights
         for(const user of users){
+            // Assign Nickname to User Object from leagueMembers Back End
+            user.nickname = leagueMembers.find(member => member.sleeper_id === user.user_id).user_nickname;
+
             if(!user.settings.winning_pct){
                 user.settings.winning_pct = 0;
             }
@@ -61,7 +74,6 @@ function SleeperData(){
             for(const week of user.weeklyPointsFor){
                 varSum += Math.pow((week.points - user.settings.average_points),2);
             }
-            // console.log(varSum)
             user.settings.standard_deviation = Math.pow((varSum / currentWeek-1),0.5);
         }
 
@@ -72,48 +84,40 @@ function SleeperData(){
 
     // Function to pull weekly matchups from Sleeper API, assign them to each roster object, and return array of all Matchups retrieved from the API
     const fetchMatchups = async (currentWeek, rosterIdMap) => {
+        let allMatchups = [];
+        let usedMatchups = [];
         for(let i=1; i < currentWeek; i++){
             let responseWeek = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/matchups/"+i);
             let week = responseWeek.data;
 
             for(const matchup of week){
                 let opponent = week.find((w) => w.matchup_id === matchup.matchup_id && w.roster_id !== matchup.roster_id);
+                if(usedMatchups.indexOf('week-'+i+'-matchup-'+matchup.matchup_id) === -1){
+                    usedMatchups.push('week-'+i+'-matchup-'+matchup.matchup_id);
+                    allMatchups.push({
+                        key: 'week-'+i+'-matchup-'+matchup.matchup_id,
+                        week: i,
+                        differential: Math.abs(matchup.points - opponent.points).toFixed(2),
+                        player1: matchup.roster_id, 
+                        player2: opponent.roster_id
+                    });
+                }
                 rosterIdMap[matchup.roster_id].weeklyPointsFor.push(matchup);
                 rosterIdMap[matchup.roster_id].weeklyPointsAgainst.push(opponent);
             }
-
         }
-        // return allMatchups;
+        return allMatchups;
     }
 
-    // const findKeyMatchups = (currentWeek, users) => {
-    //     let allMatchups = [];
-    //     let worstMatchups = [];
-    //     let bestMatchups = [];
+    // function to sort and select best and worst matchups when given an array of all matchups with the point differnetials
+    const findKeyMatchups = (matchups) => {
+        matchups.sort((a,b) => a.differential - b.differential);
+        const closeGames = matchups.slice(0,5);
+        const blowoutGames = matchups.slice(matchups.length - 5, matchups.length );
+        blowoutGames.sort((a,b) => b.differential - a.differential);
 
-    //     for(const user of users){
-    //         for(let i=0; i<currentWeek; i++){
-    //             allMatchups.push({
-
-    //             })
-    //         }
-    //     }
-
-    //     return {worstMatchups, bestMatchups}
-    // }
-
-
-    // // CONOR HYPOTHETICAL END DATA MODEL 
-
-    // const bestMatchups = [
-    //     week: 1,
-    //     differential = 60,
-    //     info: {
-
-    //     }
-    // ]
-
-
+        return {closeGames, blowoutGames};
+    }
 
     useEffect(() => {
         setLoading(true);
@@ -132,6 +136,7 @@ function SleeperData(){
             <div className="sleeperInsights">
                 <AveragePoints sleeperScores={sleeperScores} />
                 <StandardDeviation sleeperScores={sleeperScores} />
+                <KeyMatchups closeGames={closeGames} blowoutGames={blowoutGames}/>
             </div>
 
         )

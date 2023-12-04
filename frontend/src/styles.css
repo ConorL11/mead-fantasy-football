@@ -310,9 +310,54 @@ table.pastChampions {
 
 
 /* All Analytics Page Formatting */
+
+/* Grid Definitions */
 .sleeperInsights {
-    display: flex;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 50% 50%;
 }
+
+
+/* Average Points Formatting */ 
+.averagePointsContainer {
+    grid-column: 1;
+    grid-row: span 2;
+    padding: 20px;
+    margin: 20px;
+    background-color: #333;
+    border-radius: 5%;
+}
+
+/* Standard Deviation Formatting */ 
+.standardDeviationContainer {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: fit-content;
+    padding: 20px;
+    margin: 20px;
+    background-color: #333;
+    border-radius: 5%;
+}
+
+
+/* Key Matchups Formatting */ 
+.keyMatchupsContainer {
+    grid-column: 2;
+    grid-row: 2;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: fit-content;
+    padding: 20px;
+    margin: 20px;
+    background-color: #333;
+    border-radius: 5%;
+}
+
+
 
 
 .mediumAvatar {
@@ -392,33 +437,6 @@ table.pastChampions {
 .teamBar:nth-child(5n) .warmBar { 
     background-color: var(--warmColorFive);
 }
-
-
-/* Average Points Formatting */ 
-.averagePointsContainer {
-    width: 33%;
-    padding: 20px;
-    margin: 20px;
-    background-color: #333;
-    border-radius: 5%;
-}
-
-/* Standard Deviation Formatting */ 
-
-.standardDeviationContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 66%;
-    height: fit-content;
-    padding: 20px;
-    margin: 20px;
-    background-color: #333;
-    border-radius: 5%;
-}
-
-
-
-
 
 
 

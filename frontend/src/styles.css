@@ -4,12 +4,19 @@
 
 :root{
     --header-background: #702F00;
-    --barColorOne: #446a88;
-    --barColorTwo: #32788f;
-    --barColorThree: #1d808d;
-    --barColorFour: #198886;
-    --barColorFive: #2b8673;
-    --barColorSix: #448864;
+    --coolColorOne: #446a88;
+    --coolColorTwo: #32788f;
+    --coolColorThree: #1d808d;
+    --coolColorFour: #198886;
+    --coolColorFive: #2b8673;
+    --coolColorSix: #448864;
+
+    --warmColorOne: #3e0101;
+    --warmColorTwo: #660d03;
+    --warmColorThree: #663303;
+    --warmColorFour: #664803;
+    --warmColorFive: #676202;
+
 }
 
 *, *::before, *::after {
@@ -302,14 +309,11 @@ table.pastChampions {
 }
 
 
-/* Bar Grid Formatting */
-.averagePointsContainer {
-    width: 33%;
-    padding: 20px;
-    margin: 20px;
-    background-color: #333;
-    border-radius: 5%;
+/* All Analytics Page Formatting */
+.sleeperInsights {
+    display: flex;
 }
+
 
 .mediumAvatar {
     width: 50px;
@@ -341,26 +345,80 @@ table.pastChampions {
     z-index: 1;
 }
 
-.teamBar:nth-child(1n) .coloredBar { 
-    background-color: var(--barColorOne);
+
+
+.teamBar:nth-child(1n) .coolBar { 
+    background-color: var(--coolColorOne);
 }
 
-.teamBar:nth-child(2n) .coloredBar { 
-    background-color: var(--barColorTwo);
+.teamBar:nth-child(2n) .coolBar { 
+    background-color: var(--coolColorTwo);
 }
 
-.teamBar:nth-child(3n) .coloredBar { 
-    background-color: var(--barColorThree);
+.teamBar:nth-child(3n) .coolBar { 
+    background-color: var(--coolColorThree);
 }
 
-.teamBar:nth-child(4n) .coloredBar { 
-    background-color: var(--barColorFour);
+.teamBar:nth-child(4n) .coolBar { 
+    background-color: var(--coolColorFour);
 }
 
-.teamBar:nth-child(5n2n) .coloredBar { 
-    background-color: var(--barColorFive);
+.teamBar:nth-child(5n) .coolBar { 
+    background-color: var(--coolColorFive);
 }
 
-.teamBar:nth-child(6n) .coloredBar { 
-    background-color: var(--barColorSix);
+.teamBar:nth-child(6n) .coolBar { 
+    background-color: var(--coolColorSix);
 }
+
+
+
+.teamBar:nth-child(1n) .warmBar { 
+    background-color: var(--warmColorOne);
+}
+
+.teamBar:nth-child(2n) .warmBar { 
+    background-color: var(--warmColorTwo);
+}
+
+.teamBar:nth-child(3n) .warmBar { 
+    background-color: var(--warmColorThree);
+}
+
+.teamBar:nth-child(4n) .warmBar { 
+    background-color: var(--warmColorFour);
+}
+
+.teamBar:nth-child(5n) .warmBar { 
+    background-color: var(--warmColorFive);
+}
+
+
+/* Average Points Formatting */ 
+.averagePointsContainer {
+    width: 33%;
+    padding: 20px;
+    margin: 20px;
+    background-color: #333;
+    border-radius: 5%;
+}
+
+/* Standard Deviation Formatting */ 
+
+.standardDeviationContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 66%;
+    height: fit-content;
+    padding: 20px;
+    margin: 20px;
+    background-color: #333;
+    border-radius: 5%;
+}
+
+
+
+
+
+
+

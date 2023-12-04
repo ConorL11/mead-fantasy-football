@@ -75,7 +75,7 @@ function Standings(){
                             <td data-cell="Wins">{team.settings.wins}</td>
                             <td data-cell="Losses">{team.settings.losses}</td>
                             <td data-cell="Pct">
-                                <div>{team.settings.winning_pct*100}%</div>
+                                <div>{(team.settings.winning_pct*100).toFixed(0)}%</div>
                             </td>
                             <td data-cell="Games Behind">{team.settings.games_behind}</td>
                             <td data-cell="Points For">{team.settings.fpts}</td>

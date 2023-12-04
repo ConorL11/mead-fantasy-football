@@ -9,8 +9,8 @@ function NavLinks({show}){
     const links = [
         {label: 'Standings', path: '/', icon: <BiBarChartAlt2/>},
         {label: 'Bylaws', path: '/bylaws', icon: <GoLog/>},
-        // {label: 'Analysis', path: '/analysis', icon: <GoRocket/>},
-        {label: 'CPI', path: '/conorspowerindex', icon: <GoRocket/>},
+        {label: 'Analytics', path: '/analytics', icon: <GoRocket/>},
+        // {label: 'CPI', path: '/conorspowerindex', icon: <GoRocket/>},
         {label: 'History', path: '/history', icon: <GoTrophy/>},
 
     ];

@@ -64,8 +64,8 @@ function Standings(){
                         <tr key={team.user_id}>
                             <td data-cell="Team">
                                 <div className="team-display flexHorizontal">
-                                    {team.metadata.avatar && <div className="avatar"><img src={team.metadata.avatar} alt="" width="50" height="50"/></div>}
-                                    {!team.metadata.avatar &&<div className="avatar"><img src={team.avatar_link} alt="" width="50" height="50"/></div>}
+                                    {team.metadata.avatar && <div className="smallAvatar"><img src={team.metadata.avatar} alt="" width="50" height="50"/></div>}
+                                    {!team.metadata.avatar &&<div className="smallAvatar"><img src={team.avatar_link} alt="" width="50" height="50"/></div>}
                                     <div className="ml_1">
                                         <div>{team.metadata.team_name}</div>
                                         <div className="subText">({team.display_name})</div>
@@ -75,7 +75,7 @@ function Standings(){
                             <td data-cell="Wins">{team.settings.wins}</td>
                             <td data-cell="Losses">{team.settings.losses}</td>
                             <td data-cell="Pct">
-                                <div>{team.settings.winning_pct*100}%</div>
+                                <div>{(team.settings.winning_pct*100).toFixed(0)}%</div>
                             </td>
                             <td data-cell="Games Behind">{team.settings.games_behind}</td>
                             <td data-cell="Points For">{team.settings.fpts}</td>

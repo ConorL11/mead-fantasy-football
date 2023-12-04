@@ -4,7 +4,21 @@
 
 :root{
     --header-background: #702F00;
+    --coolColorOne: #446a88;
+    --coolColorTwo: #32788f;
+    --coolColorThree: #1d808d;
+    --coolColorFour: #198886;
+    --coolColorFive: #2b8673;
+    --coolColorSix: #448864;
+
+    --warmColorOne: #3e0101;
+    --warmColorTwo: #660d03;
+    --warmColorThree: #663303;
+    --warmColorFour: #664803;
+    --warmColorFive: #676202;
+
 }
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -269,12 +283,11 @@ table.myTable {
     }
 }
 
-.avatar img{
+.smallAvatar img{
     width: 30px;
     height: 30px;
     border-radius: 50%;
     border: 1px solid black;
-
 }
 
 .pastChampions {
@@ -294,3 +307,136 @@ table.pastChampions {
     text-align: left;
     border-bottom: 2px solid black;
 }
+
+
+/* All Analytics Page Formatting */
+
+/* Grid Definitions */
+.sleeperInsights {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 50% 50%;
+}
+
+
+/* Average Points Formatting */ 
+.averagePointsContainer {
+    grid-column: 1;
+    grid-row: span 2;
+    padding: 20px;
+    margin: 20px;
+    background-color: #333;
+    border-radius: 5%;
+}
+
+/* Standard Deviation Formatting */ 
+.standardDeviationContainer {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: fit-content;
+    padding: 20px;
+    margin: 20px;
+    background-color: #333;
+    border-radius: 5%;
+}
+
+
+/* Key Matchups Formatting */ 
+.keyMatchupsContainer {
+    grid-column: 2;
+    grid-row: 2;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: fit-content;
+    padding: 20px;
+    margin: 20px;
+    background-color: #333;
+    border-radius: 5%;
+}
+
+
+
+
+.mediumAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    z-index: 2;
+    background-color: black;
+}
+
+.teamName {
+    position: relative;
+    top: 10px;
+    left: 70px;
+
+}
+
+.teamPoints {
+    position: relative;
+    left: 28px;
+}
+
+.coloredBar { 
+    display: flex;
+    align-items: center;
+    height: 1.9em;
+    margin-left: -5px;
+    border-radius: 0 .9em .9em 0;
+    z-index: 1;
+}
+
+
+
+.teamBar:nth-child(1n) .coolBar { 
+    background-color: var(--coolColorOne);
+}
+
+.teamBar:nth-child(2n) .coolBar { 
+    background-color: var(--coolColorTwo);
+}
+
+.teamBar:nth-child(3n) .coolBar { 
+    background-color: var(--coolColorThree);
+}
+
+.teamBar:nth-child(4n) .coolBar { 
+    background-color: var(--coolColorFour);
+}
+
+.teamBar:nth-child(5n) .coolBar { 
+    background-color: var(--coolColorFive);
+}
+
+.teamBar:nth-child(6n) .coolBar { 
+    background-color: var(--coolColorSix);
+}
+
+
+
+.teamBar:nth-child(1n) .warmBar { 
+    background-color: var(--warmColorOne);
+}
+
+.teamBar:nth-child(2n) .warmBar { 
+    background-color: var(--warmColorTwo);
+}
+
+.teamBar:nth-child(3n) .warmBar { 
+    background-color: var(--warmColorThree);
+}
+
+.teamBar:nth-child(4n) .warmBar { 
+    background-color: var(--warmColorFour);
+}
+
+.teamBar:nth-child(5n) .warmBar { 
+    background-color: var(--warmColorFive);
+}
+
+
+

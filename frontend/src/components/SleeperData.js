@@ -44,6 +44,7 @@ function SleeperData(){
         for(const user of users){
             const roster = ownerIdMap[user.user_id];
             if (roster) {
+                user.roster_id = roster.roster_id;
                 user.settings = roster.settings;
                 user.settings.games_played = (user.settings.wins + user.settings.ties + user.settings.losses);
                 user.settings.winning_pct = (user.settings.wins + user.settings.ties + user.settings.losses) > 0 ? user.settings.wins / (user.settings.wins + user.settings.ties + user.settings.losses) : 0;
@@ -98,7 +99,7 @@ function SleeperData(){
                         key: 'week-'+i+'-matchup-'+matchup.matchup_id,
                         week: i,
                         differential: Math.abs(matchup.points - opponent.points).toFixed(2),
-                        player1: matchup.roster_id, 
+                        player1: matchup.roster_id,
                         player2: opponent.roster_id
                     });
                 }
@@ -136,7 +137,7 @@ function SleeperData(){
             <div className="sleeperInsights">
                 <AveragePoints sleeperScores={sleeperScores} />
                 <StandardDeviation sleeperScores={sleeperScores} />
-                <KeyMatchups closeGames={closeGames} blowoutGames={blowoutGames}/>
+                <KeyMatchups closeGames={closeGames} blowoutGames={blowoutGames} sleeperScores={sleeperScores}/>
             </div>
 
         )

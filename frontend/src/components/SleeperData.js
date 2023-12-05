@@ -128,8 +128,9 @@ function SleeperData(){
 
     if(loading){
         return(
-            <div>
-                Loading Cool Data from Sleeper.....
+            <div className="loadingContainer">
+                <div>Loading Sleeper Data.....</div>
+                <div className="spinner"></div>
             </div>
         )
     } else {
@@ -139,7 +140,6 @@ function SleeperData(){
                 <StandardDeviation sleeperScores={sleeperScores} />
                 <KeyMatchups closeGames={closeGames} blowoutGames={blowoutGames} sleeperScores={sleeperScores}/>
             </div>
-
         )
     }
 }

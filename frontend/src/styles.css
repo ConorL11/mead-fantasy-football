@@ -17,6 +17,10 @@
     --warmColorFour: #664803;
     --warmColorFive: #676202;
 
+    --winningColorOne: #5eae54c7;
+    --losingColorOne: #930303dc;
+
+
 }
 
 *, *::before, *::after {
@@ -44,6 +48,11 @@ body {
 .ml_1 {
     margin-left: 10px;
 }
+
+.mr_1 {
+    margin-right: 10px;
+}
+
 .p2{
     padding: 20px;
 }
@@ -52,15 +61,84 @@ body {
     margin: 10px
 }
 
+.mr_4 {
+    margin-right: 40px;
+}
+
+.ml_4 {
+    margin-left: 40px;
+}
+
+.mt_1 {
+    margin-top: 10px;
+}
+
+.mt_2 {
+    margin-top: 20px;
+}
+
+.mt_3 {
+    margin-top: 30px;
+}
+
+.mt_4 {
+    margin-top: 40px;
+}
+
+.mt_5 {
+    margin-top: 50px;
+}
+
+.heavy_font {
+    font-weight: 900;
+}
+
+.underline_font {
+    text-decoration: underline;
+}
+
+
 .flexHorizontal {
     display: flex;
     align-items: center;
+}
+
+.spaceBetween {
+    justify-content: space-between;
 }
 
 .subText {
     font-weight: 100;
     color: #ccc;
 }
+
+    /* Loading Spinner and Container*/
+.loadingContainer {
+    position: fixed;
+    top: 50%;
+    left: 40%;
+    display: flex;
+}
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: -0.25em;
+    left: 12em;
+    width: 50px;
+    height: 50px;
+    margin-top: -15px;
+    margin-left: -15px;
+    border-radius: 50%;
+    border: 5px solid #ccc;
+    border-top-color: #07d;
+    animation: spinner .6s linear infinite;
+}   
 
 
 /* Nav Styling  */
@@ -255,6 +333,7 @@ table.myTable {
 }
 
 @media (max-width: 650px){
+
     .myTable th {
         display: none;
     }
@@ -311,55 +390,69 @@ table.pastChampions {
 
 /* All Analytics Page Formatting */
 
-/* Grid Definitions */
-.sleeperInsights {
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 50% 50%;
+    /* Grid Definitions */
+@media (min-width: 650px){
+    .sleeperInsights {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: repeat(10em);
+        gap: 10px;
+    }
+    
+    .averagePointsContainer {
+        grid-column: 1;
+        grid-row: 1 / 9;
+        padding: 20px;
+        margin: 20px;
+        background-color: #333;
+        border-radius: 5%;
+    }
+    .standardDeviationContainer {
+        grid-column: 2;
+        grid-row: 1 / 5;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: fit-content;
+        padding: 20px;
+        margin: 20px;
+        background-color: #333;
+        border-radius: 5%;
+    }
+    
+    .keyMatchupsContainer {
+        grid-column: 2;
+        grid-row: 5 / 12;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        height: fit-content;
+        padding: 20px;
+        margin: 20px;
+        background-color: #333;
+        border-radius: 5%;
+    }
+}
+
+@media (max-width: 650px) {
+    .sleeperInsights {
+        margin: 25px;
+    }
+
+    .averagePointsContainer{
+        margin-bottom: 5em;
+    }
+
+    .standardDeviationContainer{
+        margin-bottom: 5em;
+    }
+
+    /* .keyMatchupsContainer{
+        margin-bottom: 20px;
+    } */
 }
 
 
-/* Average Points Formatting */ 
-.averagePointsContainer {
-    grid-column: 1;
-    grid-row: span 2;
-    padding: 20px;
-    margin: 20px;
-    background-color: #333;
-    border-radius: 5%;
-}
-
-/* Standard Deviation Formatting */ 
-.standardDeviationContainer {
-    grid-column: 2;
-    grid-row: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: fit-content;
-    padding: 20px;
-    margin: 20px;
-    background-color: #333;
-    border-radius: 5%;
-}
-
-
-/* Key Matchups Formatting */ 
-.keyMatchupsContainer {
-    grid-column: 2;
-    grid-row: 2;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: fit-content;
-    padding: 20px;
-    margin: 20px;
-    background-color: #333;
-    border-radius: 5%;
-}
-
-
-
-
+    /* Analytics Shared Classes */
 .mediumAvatar {
     width: 50px;
     height: 50px;
@@ -369,17 +462,6 @@ table.pastChampions {
     background-color: black;
 }
 
-.teamName {
-    position: relative;
-    top: 10px;
-    left: 70px;
-
-}
-
-.teamPoints {
-    position: relative;
-    left: 28px;
-}
 
 .coloredBar { 
     display: flex;
@@ -391,6 +473,18 @@ table.pastChampions {
 }
 
 
+
+/* Average Points */
+.teamName {
+    position: relative;
+    top: 10px;
+    left: 70px;
+}
+
+.teamPoints {
+    position: relative;
+    left: 28px;
+}
 
 .teamBar:nth-child(1n) .coolBar { 
     background-color: var(--coolColorOne);
@@ -418,6 +512,7 @@ table.pastChampions {
 
 
 
+/* Standard Deviation */
 .teamBar:nth-child(1n) .warmBar { 
     background-color: var(--warmColorOne);
 }
@@ -438,5 +533,123 @@ table.pastChampions {
     background-color: var(--warmColorFive);
 }
 
+/* Grid Definition - 2 rows*/
+.matchupContainer {
+    display: grid;
+    grid-template-columns: 1fr 25px 25px 1fr;
+    grid-template-rows: 20px auto;
+}
 
+.matchupWeek {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    margin-bottom: -25px;
+}
 
+.matchupSpread {
+    grid-column: 2 / 4;
+    grid-row: 1 / 2;
+    justify-self: center;
+    margin-bottom: -25px;
+}
+
+.shiftDown {
+    margin-top: 15px;
+}
+
+.team1Bar {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+}
+
+.team2Bar {
+    grid-column: 3 / 5;
+    grid-row: 2 / 3;
+
+}
+
+.vsContainer {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
+    display: flex;
+    align-items: flex-end;
+    z-index: 2;
+}
+
+.vsBubble {
+    background-color: black;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+.vsText {
+    position: absolute;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.matchupContainer .matchupTeam1Name {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.matchupContainer .matchupTeam2Name {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.matchupContainer .teamName1Text {
+    position: relative;
+    top: 5px;
+    margin-right: 40px;
+}
+
+.matchupContainer .teamName2Text {
+    position: relative;
+    top: 5px;
+    margin-left: 40px;
+}
+
+.matchupContainer .player2Name {
+    position: relative;
+    top: 10px;
+    left: 0px;
+}
+
+.matchupBar {
+    display: flex;
+    align-items: center;
+    height: 1.9em;
+    z-index: 1;
+    width: 100%;
+}
+
+/* .team1Bar:nth-child(1n) .winningBar { 
+    background-color: var(--warmColorOne);
+}
+
+.team2Bar:nth-child(1n) .losingBar { 
+    background-color: var(--coolColorOne);
+} */
+
+.winningBar {
+    background-color: var(--winningColorOne);
+}
+
+.losingBar {
+    background-color: var(--losingColorOne);
+}
+
+.player1Bar {
+    border-radius: 0 .9em .9em 0;
+    margin-left: -5px;
+    display: flex;
+    justify-content: end;
+}
+
+.player2Bar {
+    border-radius: 0.9em 0 0 0.9em;
+    margin-right: -5px;
+    display: flex;
+    justify-content: start;
+}

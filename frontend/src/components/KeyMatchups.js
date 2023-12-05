@@ -11,11 +11,11 @@ function KeyMatchups(props){
     }
 
 
-    console.log("teams", teams) 
-    console.log("rosterIdMap", rosterIdMap) 
+    // console.log("teams", teams) 
+    // console.log("rosterIdMap", rosterIdMap) 
 
-    console.log("blowoutGames", blowoutGames)
-    console.log("closeGames", closeGames)
+    // console.log("blowoutGames", blowoutGames)
+    // console.log("closeGames", closeGames)
 
     return(
         <div className="keyMatchupsContainer">

@@ -9,14 +9,13 @@ import cpiDataRoutes from './routes/cpiDataRoutes.js';
 const port = process.env.PORT || 5000;
 
 connectDB(); // Connect to MongoDB
-
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 app.use('/api/leagueMembers', leagueMemberRoutes);
-app.use('/api/cpiData', cpiDataRoutes);
+// app.use('/api/cpiData', cpiDataRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

@@ -5,11 +5,9 @@ import { currentLeagueId } from "../content/constants";
 function Standings(){
     const [currentStandings, setCurrentStandings] = useState([]);
     const fetchStandings = async () => {
-        const responseLeagueMembers = await axios.get('/api/leagueMembers');
         const responseUsers = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/users");
         const responseRosters = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/rosters");
 
-        const leagueMembers = responseLeagueMembers.data;
         const users = responseUsers.data; 
         const rosters = responseRosters.data.sort();
         for(const user of users){
@@ -24,9 +22,6 @@ function Standings(){
 
         // Clean up response data
         for(const user of users){
-            // Assign Nickname to User Object from leagueMembers Back End
-            user.user_name = leagueMembers.find(member => member.sleeper_id === user.user_id).user_name;
-
             if(!user.settings.winning_pct){
                 user.settings.winning_pct = 0;
             }
@@ -72,9 +67,8 @@ function Standings(){
                                     {team.metadata.avatar && <div className="smallAvatar"><img src={team.metadata.avatar} alt="" width="50" height="50"/></div>}
                                     {!team.metadata.avatar &&<div className="smallAvatar"><img src={team.avatar_link} alt="" width="50" height="50"/></div>}
                                     <div className="ml_1">
-                                        <div>{team.user_name}</div>
-                                        {/* <div>{team.metadata.team_name}</div>
-                                        <div className="subText">({team.display_name})</div> */}
+                                        <div>{team.metadata.team_name}</div>
+                                        <div className="subText">({team.display_name})</div>
                                     </div>
                                 </div>
                             </td>

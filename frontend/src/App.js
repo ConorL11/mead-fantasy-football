@@ -34,7 +34,7 @@ function App() {
         <div className="App">
             <div>
                 <header>
-                    <h3 className="title">Boobsinks Cargos</h3>
+                    <h3 className="title">Mead Fantasy Football</h3>
                     <input type="checkbox" id="nav-toggle" className="nav-toggle" ref={ref} checked={isChecked} onChange={handleCheck}/>
                     <nav>
                         <NavLinks/>

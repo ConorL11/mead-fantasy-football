@@ -4,6 +4,7 @@ import { currentLeagueId } from "../content/constants";
 import AveragePoints from "./AveragePoints";
 import StandardDeviation from "./StandardDevation";
 import KeyMatchups from "./KeyMatchups";
+import ManagerActivity from "./ManagerActivity";
 
 function SleeperData(){
     const [loading, setLoading] = useState([]);
@@ -18,6 +19,7 @@ function SleeperData(){
         const responseUsers = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/users");
         const responseRosters = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/rosters");
 
+
         const leagueMembers = responseLeagueMembers.data;
         const currentWeek = responseNflState.data.week;
         const users = responseUsers.data; 
@@ -30,16 +32,20 @@ function SleeperData(){
             rosterIdMap[roster.roster_id] = roster;
             rosterIdMap[roster.roster_id].weeklyPointsFor = [];
             rosterIdMap[roster.roster_id].weeklyPointsAgainst = [];
+            rosterIdMap[roster.roster_id].trades = 0;
+            rosterIdMap[roster.roster_id].adds = 0;
             ownerIdMap[roster.owner_id] = roster;
         }
 
         // Append Matchup Data to Rosters and retrieve array of all Matchups to date
         const allMatchups = await fetchMatchups(currentWeek, rosterIdMap);
-
         const {closeGames, blowoutGames} = findKeyMatchups(allMatchups);
 
         setCloseGames(closeGames);
         setBlowoutGames(blowoutGames);
+
+        // Append Transaction Counts to Rosters
+        await fetchTransactions(currentWeek, rosterIdMap);
 
         for(const user of users){
             const roster = ownerIdMap[user.user_id];
@@ -51,9 +57,12 @@ function SleeperData(){
                 user.avatar_link = "https://sleepercdn.com/avatars/thumbs/"+ user.avatar;
                 user.weeklyPointsFor = roster.weeklyPointsFor;
                 user.weeklyPointsAgainst = roster.weeklyPointsAgainst;
+                user.trades = roster.trades;
+                user.adds = roster.adds;
+                user.totalTransactions = user.trades + user.adds;
             }
         }
-
+        
         // Clean up response data and add metrics for insights
         for(const user of users){
             // Assign Nickname to User Object from leagueMembers Back End
@@ -80,7 +89,10 @@ function SleeperData(){
 
         setSleeperScores(users);
         setLoading(false);
+
     };
+
+
 
 
     // Function to pull weekly matchups from Sleeper API, assign them to each roster object, and return array of all Matchups retrieved from the API
@@ -110,6 +122,18 @@ function SleeperData(){
         return allMatchups;
     }
 
+    const fetchTransactions = async (currentWeek, rosterIdMap) => {
+        // Pull in Transactions and append to users via Roster Id Map
+        for(let i = 1; i < currentWeek; i++){
+            const week = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/transactions/"+i);
+            for(const transaction of week.data){
+                for(const rosterId of transaction.roster_ids){
+                    transaction.type === 'trade' ? rosterIdMap[rosterId].trades ++  : rosterIdMap[rosterId].adds ++;
+                }
+            }
+        }
+    }
+
     // function to sort and select best and worst matchups when given an array of all matchups with the point differnetials
     const findKeyMatchups = (matchups) => {
         matchups.sort((a,b) => a.differential - b.differential);
@@ -137,6 +161,7 @@ function SleeperData(){
         return (
             <div className="sleeperInsights">
                 <AveragePoints sleeperScores={sleeperScores} />
+                <ManagerActivity users={sleeperScores}  />
                 <StandardDeviation sleeperScores={sleeperScores} />
                 <KeyMatchups closeGames={closeGames} blowoutGames={blowoutGames} sleeperScores={sleeperScores}/>
             </div>

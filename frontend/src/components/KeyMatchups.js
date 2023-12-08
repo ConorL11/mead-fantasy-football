@@ -10,13 +10,6 @@ function KeyMatchups(props){
         rosterIdMap[user.roster_id] = user;
     }
 
-
-    // console.log("teams", teams) 
-    // console.log("rosterIdMap", rosterIdMap) 
-
-    console.log("blowoutGames", blowoutGames)
-    console.log("closeGames", closeGames)
-
     return(
         <div className="keyMatchupsContainer">
             <div>

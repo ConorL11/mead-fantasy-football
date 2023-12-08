@@ -16,7 +16,7 @@ function ManagerActivity(props){
                             {team.metadata.avatar && <img className="mediumAvatar" src={team.metadata.avatar} alt="" width="100" height="100"/>}
                             {!team.metadata.avatar && <img className="mediumAvatar" src={team.avatar_link} alt="" width="100" height="100"/>}
                             <div className={`coloredBar coolBar`} style={{ width: `${(team.adds / maxPickups) * 100 }%` }}>
-                                <div className="teamPoints">{team.adds.toFixed(1)}</div>
+                                <div className="teamPoints">{team.adds.toFixed(0)}</div>
                             </div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@ function ManagerActivity(props){
                             {team.metadata.avatar && <img className="mediumAvatar" src={team.metadata.avatar} alt="" width="100" height="100"/>}
                             {!team.metadata.avatar && <img className="mediumAvatar" src={team.avatar_link} alt="" width="100" height="100"/>}
                             <div className={`coloredBar coolBar`} style={{ width: `${(team.trades / maxTrades) * 100 }%` }}>
-                                <div className="teamPoints">{team.trades.toFixed(1)}</div>
+                                <div className="teamPoints">{team.trades.toFixed(0)}</div>
                             </div>
                         </div>
                     </div>

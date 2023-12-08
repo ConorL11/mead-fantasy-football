@@ -12,7 +12,7 @@ function StandardDeviation(sleeperScores){
     return(
         <div className="standardDeviationContainer">
             <div>
-                <h1>Highest Variance Teams</h1>
+                <h1>High Variance Teams</h1>
                 <h3>Based on Standard Deviation</h3>
                 {inconsistentTeams.map(team => (
                     <div key={team.user_id} className="teamBar">

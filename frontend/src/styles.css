@@ -112,13 +112,7 @@ body {
     color: #ccc;
 }
 
-    /* Loading Spinner and Container*/
-.loadingContainer {
-    position: fixed;
-    top: 50%;
-    left: 40%;
-    display: flex;
-}
+/* Loading Spinner */
 
 @keyframes spinner {
     to {transform: rotate(360deg);}
@@ -392,6 +386,13 @@ table.pastChampions {
 
     /* Grid Definitions */
 @media (min-width: 650px){
+
+    .loadingContainer {
+        position: fixed;
+        top: 50%;
+        left: 40%;
+        display: flex;
+    }
     .sleeperInsights {
         display: grid;
         grid-template-columns: 50% 50%;
@@ -448,6 +449,12 @@ table.pastChampions {
 }
 
 @media (max-width: 650px) {
+    /* Loading Spinner and Container*/
+    .loadingContainer {
+        position: fixed;
+        margin: 50px 0px 0px 25px;
+    }
+    
     .sleeperInsights {
         margin: 25px;
     }

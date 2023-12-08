@@ -407,9 +407,23 @@ table.pastChampions {
         background-color: #333;
         border-radius: 5%;
     }
-    .standardDeviationContainer {
+
+    .managerActivityContainer {
         grid-column: 2;
-        grid-row: 1 / 5;
+        grid-row: 1 / 9;
+        padding: 20px;
+        margin: 20px;
+        background-color: #333;
+        border-radius: 5%;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .standardDeviationContainer {
+        grid-column: 1;
+        grid-row: 9 / 14;
         display: grid;
         grid-template-columns: 1fr 1fr;
         height: fit-content;
@@ -421,7 +435,7 @@ table.pastChampions {
     
     .keyMatchupsContainer {
         grid-column: 2;
-        grid-row: 5 / 12;
+        grid-row: 9 / 14;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
@@ -439,6 +453,10 @@ table.pastChampions {
     }
 
     .averagePointsContainer{
+        margin-bottom: 5em;
+    }
+
+    .managerActivityContainer{
         margin-bottom: 5em;
     }
 
@@ -470,6 +488,7 @@ table.pastChampions {
     margin-left: -5px;
     border-radius: 0 .9em .9em 0;
     z-index: 1;
+    min-width: 15%;
 }
 
 
@@ -533,7 +552,7 @@ table.pastChampions {
     background-color: var(--warmColorFive);
 }
 
-/* Grid Definition - 2 rows*/
+/* Grid Definition*/
 .matchupContainer {
     display: grid;
     grid-template-columns: 1fr 25px 25px 1fr;
@@ -624,14 +643,6 @@ table.pastChampions {
     width: 100%;
 }
 
-/* .team1Bar:nth-child(1n) .winningBar { 
-    background-color: var(--warmColorOne);
-}
-
-.team2Bar:nth-child(1n) .losingBar { 
-    background-color: var(--coolColorOne);
-} */
-
 .winningBar {
     background-color: var(--winningColorOne);
 }
@@ -652,4 +663,13 @@ table.pastChampions {
     margin-right: -5px;
     display: flex;
     justify-content: start;
+}
+
+/* Manager Activity Styling */
+.pickupsContainer {
+    grid-column: 1;
+
+}
+.tradesContainer {
+    grid-column: 2;
 }

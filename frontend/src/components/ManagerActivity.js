@@ -1,9 +1,6 @@
 function ManagerActivity(props){
 
     const teams = props.users;
-    // teams.sort((a,b) => b.totalTransactions - a.totalTransactions);
-
-    // const maxTransactions = Math.max(...teams.map(team => team.totalTransactions));
     const maxTrades = Math.max(...teams.map(team => team.trades));
     const maxPickups = Math.max(...teams.map(team => team.adds));
 

@@ -63,9 +63,6 @@ function SleeperData(){
             }
         }
         
-
-        console.log("users",users)
-
         // Clean up response data and add metrics for insights
         for(const user of users){
             // Assign Nickname to User Object from leagueMembers Back End

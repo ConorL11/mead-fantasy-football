@@ -10,7 +10,7 @@ function StandardDeviation(sleeperScores){
     consistentTeams.sort((a,b) => a.settings.standard_deviation - b.settings.standard_deviation);
 
     return(
-        <div className="standardDeviationContainer">
+        <div className="standardDeviationContainer insightContainer">
             <div>
                 <h1>High Variance Teams</h1>
                 <h3>Based on Standard Deviation</h3>

@@ -4,7 +4,7 @@ function AveragePoints(sleeperScores){
     const maxAveragePoints = Math.max(...teams.map(team => team.settings.average_points));
 
     return(
-        <div className="averagePointsContainer">
+        <div className="averagePointsContainer insightContainer">
             <h1>Average Weekly Points</h1>
             {teams.map(team => (
                 <div key={team.user_id} className="teamBar">

@@ -11,7 +11,7 @@ function KeyMatchups(props){
     }
 
     return(
-        <div className="keyMatchupsContainer">
+        <div className="keyMatchupsContainer insightContainer">
             <div>
                 <h1>Closest Games</h1>
                 {closeGames.map(game => (

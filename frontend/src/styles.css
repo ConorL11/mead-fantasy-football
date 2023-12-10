@@ -38,7 +38,7 @@ body {
     height: 100%;
     width: 100%;
     display: grid;
-    color:white;
+    color: white;
 }
 
 .pl_1 { 
@@ -393,9 +393,11 @@ table.pastChampions {
         left: 40%;
         display: flex;
     }
+
     .sleeperInsights {
         display: grid;
-        grid-template-columns: 50% 50%;
+        width: 95%;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: repeat(10em);
         gap: 10px;
     }
@@ -505,6 +507,7 @@ table.pastChampions {
     position: relative;
     top: 10px;
     left: 70px;
+    width: fit-content;
 }
 
 .teamPoints {

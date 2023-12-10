@@ -5,6 +5,7 @@ import AveragePoints from "./AveragePoints";
 import StandardDeviation from "./StandardDevation";
 import KeyMatchups from "./KeyMatchups";
 import ManagerActivity from "./ManagerActivity";
+import LuckRating from "./LuckRating";
 
 function SleeperData(){
     const [loading, setLoading] = useState([]);
@@ -32,6 +33,8 @@ function SleeperData(){
             rosterIdMap[roster.roster_id] = roster;
             rosterIdMap[roster.roster_id].weeklyPointsFor = [];
             rosterIdMap[roster.roster_id].weeklyPointsAgainst = [];
+            rosterIdMap[roster.roster_id].weeklyExectedWins = [];
+
             rosterIdMap[roster.roster_id].trades = 0;
             rosterIdMap[roster.roster_id].adds = 0;
             ownerIdMap[roster.owner_id] = roster;
@@ -57,6 +60,9 @@ function SleeperData(){
                 user.avatar_link = "https://sleepercdn.com/avatars/thumbs/"+ user.avatar;
                 user.weeklyPointsFor = roster.weeklyPointsFor;
                 user.weeklyPointsAgainst = roster.weeklyPointsAgainst;
+                user.weeklyExectedWins = roster.weeklyExectedWins;
+                user.expectedWins = roster.weeklyExectedWins.reduce((acc, value) => acc + value);
+                user.luckRating = user.settings.wins - user.expectedWins;
                 user.trades = roster.trades;
                 user.adds = roster.adds;
                 user.totalTransactions = user.trades + user.adds;
@@ -103,7 +109,9 @@ function SleeperData(){
             let responseWeek = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/matchups/"+i);
             let week = responseWeek.data;
 
-            for(const matchup of week){
+            week.sort((a,b) => a.points - b.points);
+
+            for(const [index, matchup] of week.entries()){
                 let opponent = week.find((w) => w.matchup_id === matchup.matchup_id && w.roster_id !== matchup.roster_id);
                 if(usedMatchups.indexOf('week-'+i+'-matchup-'+matchup.matchup_id) === -1){
                     usedMatchups.push('week-'+i+'-matchup-'+matchup.matchup_id);
@@ -115,6 +123,7 @@ function SleeperData(){
                         player2: opponent.roster_id
                     });
                 }
+                rosterIdMap[matchup.roster_id].weeklyExectedWins.push(index/ (week.length-1))
                 rosterIdMap[matchup.roster_id].weeklyPointsFor.push(matchup);
                 rosterIdMap[matchup.roster_id].weeklyPointsAgainst.push(opponent);
             }
@@ -122,6 +131,9 @@ function SleeperData(){
         return allMatchups;
     }
 
+
+
+    // Function to get transactions and assign them to roster ID Map
     const fetchTransactions = async (currentWeek, rosterIdMap) => {
         // Pull in Transactions and append to users via Roster Id Map
         for(let i = 1; i < currentWeek; i++){
@@ -164,6 +176,7 @@ function SleeperData(){
                 <ManagerActivity users={sleeperScores}  />
                 <StandardDeviation sleeperScores={sleeperScores} />
                 <KeyMatchups closeGames={closeGames} blowoutGames={blowoutGames} sleeperScores={sleeperScores}/>
+                <LuckRating teams={sleeperScores}  />
             </div>
         )
     }

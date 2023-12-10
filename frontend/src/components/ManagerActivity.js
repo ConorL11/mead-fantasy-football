@@ -5,7 +5,7 @@ function ManagerActivity(props){
     const maxPickups = Math.max(...teams.map(team => team.adds));
 
     return(
-        <div className="managerActivityContainer">
+        <div className="managerActivityContainer insightContainer">
             <h1>Manager Activity</h1>
             <div className="pickupsContainer">
                 <h2>Pickups</h2>

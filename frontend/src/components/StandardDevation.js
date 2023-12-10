@@ -10,7 +10,7 @@ function StandardDeviation(sleeperScores){
     consistentTeams.sort((a,b) => a.settings.standard_deviation - b.settings.standard_deviation);
 
     return(
-        <div className="standardDeviationContainer">
+        <div className="standardDeviationContainer insightContainer">
             <div>
                 <h1>High Variance Teams</h1>
                 <h3>Based on Standard Deviation</h3>
@@ -20,7 +20,7 @@ function StandardDeviation(sleeperScores){
                         <div className="flexHorizontal">
                             {team.metadata.avatar && <img className="mediumAvatar" src={team.metadata.avatar} alt="" width="100" height="100"/>}
                             {!team.metadata.avatar && <img className="mediumAvatar" src={team.avatar_link} alt="" width="100" height="100"/>}
-                            <div className={`coloredBar warmBar`} style={{ width: `${(team.settings.standard_deviation / maxStandardDeviation) * 90 }%` }}>
+                            <div className={`coloredBar warmBar`} style={{ width: `${(team.settings.standard_deviation / maxStandardDeviation) * 75 }%` }}>
                                 <div className="teamPoints">{team.settings.standard_deviation.toFixed(1)}</div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@ function StandardDeviation(sleeperScores){
                         <div className="flexHorizontal">
                             {team.metadata.avatar && <img className="mediumAvatar" src={team.metadata.avatar} alt="" width="100" height="100"/>}
                             {!team.metadata.avatar && <img className="mediumAvatar" src={team.avatar_link} alt="" width="100" height="100"/>}
-                            <div className={`coloredBar coolBar`} style={{ width: `${(team.settings.standard_deviation / maxStandardDeviation) * 90 }%` }}>
+                            <div className={`coloredBar coolBar`} style={{ width: `${(team.settings.standard_deviation / maxStandardDeviation) * 75 }%` }}>
                                 <div className="teamPoints">{team.settings.standard_deviation.toFixed(1)}</div>
                             </div>
                         </div>

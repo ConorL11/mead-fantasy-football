@@ -38,7 +38,7 @@ body {
     height: 100%;
     width: 100%;
     display: grid;
-    color:white;
+    color: white;
 }
 
 .pl_1 { 
@@ -137,7 +137,7 @@ body {
 
 /* Nav Styling  */
 header {
-    height: 50px;
+    height: 60px;
     background: var(--header-background);
     color: white;
     text-align: center;
@@ -393,9 +393,18 @@ table.pastChampions {
         left: 40%;
         display: flex;
     }
+
+    .insightContainer {
+        padding: 20px;
+        margin: 20px;
+        background-color: #333;
+        border-radius: 5%;
+    }
+
     .sleeperInsights {
         display: grid;
-        grid-template-columns: 50% 50%;
+        width: 95%;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: repeat(10em);
         gap: 10px;
     }
@@ -403,19 +412,11 @@ table.pastChampions {
     .averagePointsContainer {
         grid-column: 1;
         grid-row: 1 / 9;
-        padding: 20px;
-        margin: 20px;
-        background-color: #333;
-        border-radius: 5%;
     }
 
     .managerActivityContainer {
         grid-column: 2;
         grid-row: 1 / 9;
-        padding: 20px;
-        margin: 20px;
-        background-color: #333;
-        border-radius: 5%;
 
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -427,11 +428,6 @@ table.pastChampions {
         grid-row: 9 / 14;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        height: fit-content;
-        padding: 20px;
-        margin: 20px;
-        background-color: #333;
-        border-radius: 5%;
     }
     
     .keyMatchupsContainer {
@@ -441,10 +437,14 @@ table.pastChampions {
         grid-template-columns: 1fr 1fr;
         gap: 20px;
         height: fit-content;
-        padding: 20px;
-        margin: 20px;
-        background-color: #333;
-        border-radius: 5%;
+    }
+
+    .luckRatingContainer {
+        grid-column: 1;
+        grid-row: 14 / 20;
+    }
+    .teamLuckContainer { 
+        width: 60%;
     }
 }
 
@@ -471,9 +471,12 @@ table.pastChampions {
         margin-bottom: 5em;
     }
 
-    /* .keyMatchupsContainer{
+    .keyMatchupsContainer{
         margin-bottom: 20px;
-    } */
+    }
+    .teamLuckContainer { 
+        width: 100%;
+    }
 }
 
 
@@ -505,6 +508,7 @@ table.pastChampions {
     position: relative;
     top: 10px;
     left: 70px;
+    width: fit-content;
 }
 
 .teamPoints {
@@ -662,7 +666,7 @@ table.pastChampions {
     border-radius: 0 .9em .9em 0;
     margin-left: -5px;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .player2Bar {
@@ -679,4 +683,76 @@ table.pastChampions {
 }
 .tradesContainer {
     grid-column: 2;
+}
+
+/* Luck Rating Styling */
+.teamLuckContainer {
+    display: grid;
+    grid-template-columns: 1fr 25px 25px 1fr;
+    grid-template-rows: 20px auto;
+}
+
+.luckAvatar {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
+    display: flex;
+    align-items: flex-end;
+    z-index: 2;
+}
+
+.negativeLuckContainer {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.negativeLuckBar { 
+    display: flex;
+    flex-direction: row-reverse;
+    align-self: center;
+    align-items: center;
+    height: 1.9em;
+    border-radius: .9em 0 0 .9em;
+    z-index: 1;
+    min-width: 45%;
+    background-color: var(--losingColorOne);
+}
+
+.negativeLuckTeamPoints {
+    margin-right: 35px;
+}
+
+.negativeLuckTeamName {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    justify-self: flex-end;
+    margin: 10px 5px;
+}
+
+.positiveLuckTeamName {
+    grid-column: 4 / 5;
+    grid-row: 1 / 2;
+    margin: 10px 5px;
+}
+
+.positiveLuckContainer {
+    grid-column: 3 / 5;
+    grid-row: 2 / 3;
+    display: flex;
+}
+
+.positiveLuckBar { 
+    display: flex;
+    align-self: center;
+    align-items: center;
+    height: 1.9em;
+    border-radius: 0 .9em .9em 0;
+    z-index: 1;
+    min-width: 35%;
+    background-color: var(--winningColorOne);
+}
+
+.positiveLuckTeamPoints {
+    margin-left: 35px;
 }

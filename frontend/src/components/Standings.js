@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { currentLeagueId } from "../content/constants";
+import { currentLeagueId, censorContent } from "../content/constants";
 
 function Standings(){
     const [currentStandings, setCurrentStandings] = useState([]);
@@ -68,15 +68,24 @@ function Standings(){
                     {currentStandings.map(team => (
                         <tr key={team.user_id}>
                             <td data-cell="Team">
-                                <div className="team-display flexHorizontal">
-                                    {team.metadata.avatar && <div className="smallAvatar"><img src={team.metadata.avatar} alt="" width="50" height="50"/></div>}
-                                    {!team.metadata.avatar &&<div className="smallAvatar"><img src={team.avatar_link} alt="" width="50" height="50"/></div>}
-                                    <div className="ml_1">
-                                        <div>{team.user_name}</div>
-                                        {/* <div>{team.metadata.team_name}</div>
-                                        <div className="subText">({team.display_name})</div> */}
-                                    </div>
-                                </div>
+                                {censorContent ? 
+                                    <div className="team-display flexHorizontal">
+                                        <div className="smallAvatar"><img src={`/headshots/${team.user_id}.png`} alt="" /></div>
+                                        <div className="ml_1">
+                                            <div>{team.user_name}</div>
+                                        </div>
+                                    </div> : 
+                                    <div className="team-display flexHorizontal">
+                                        {team.metadata.avatar && <div className="smallAvatar"><img src={team.metadata.avatar} alt="" width="50" height="50"/></div>}
+                                        {!team.metadata.avatar &&<div className="smallAvatar"><img src={team.avatar_link} alt="" width="50" height="50"/></div>}
+                                        <div className="ml_1">
+                                            <div>
+                                                <div>{team.metadata.team_name}</div>
+                                                <div className="subText">({team.display_name})</div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                }
                             </td>
                             <td data-cell="Wins">{team.settings.wins}</td>
                             <td data-cell="Losses">{team.settings.losses}</td>

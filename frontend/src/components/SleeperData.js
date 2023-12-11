@@ -6,6 +6,7 @@ import StandardDeviation from "./StandardDevation";
 import KeyMatchups from "./KeyMatchups";
 import ManagerActivity from "./ManagerActivity";
 import LuckRating from "./LuckRating";
+import OutlierWeeks from "./OutlierWeeks";
 
 function SleeperData(){
     const [loading, setLoading] = useState([]);
@@ -178,6 +179,7 @@ function SleeperData(){
                 <StandardDeviation sleeperScores={sleeperScores} censorContent={censorContent}/>
                 <KeyMatchups closeGames={closeGames} blowoutGames={blowoutGames} sleeperScores={sleeperScores} censorContent={censorContent}/>
                 <LuckRating teams={sleeperScores} censorContent={censorContent}/>
+                <OutlierWeeks teams={sleeperScores} censorContent={censorContent}/>
             </div>
         )
     }

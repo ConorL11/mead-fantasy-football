@@ -1,7 +1,7 @@
 const currentLeagueId = '990427440436625408';
 const sleeper2021 = '863906445559795712';
 const espnLeagueId = '322485';
-const censorContent = 1; // Use this variable to censor non professional content from site
+const censorContent = 0; // Use this variable to censor non professional content from site
 
 const pastWinners = [
     {year: '2022', winningUser: 'Fisher', winningTeam: 'Big Bussin Bouncy Balls', losingUser: 'Cody', losingTeam: 'Just Last', punishment: 'Wore Griffs HS Football Jersey to the draft (kinda).'},

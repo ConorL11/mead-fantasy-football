@@ -5,6 +5,8 @@ function LuckRating(props){
     teams.sort((a,b) => b.luckRating - a.luckRating);
     const maxLuckRating = Math.max(...teams.map(team => team.luckRating));
 
+    console.log(teams)
+
     return(
         <div className="luckRatingContainer insightContainer">
             <h1>Luck Rating</h1>
@@ -20,7 +22,7 @@ function LuckRating(props){
                                 </div>
                             </div>}
                             <img className="luckAvatar mediumAvatar" src={`/headshots/${team.user_id}.png`} alt="" />
-                            {team.luckRating >= 0 && <div className="positiveLuckTeamName">{team.nickname}</div>}
+                            {team.luckRating >= 0 && <div className="positiveLuckTeamName">{team.user_name}</div>}
                             {team.luckRating >= 0 && <div className="positiveLuckContainer">
                                 <div className="positiveLuckBar" style={{ width: `${(Math.abs(team.luckRating) / maxLuckRating) * 100 }%` }}>
                                     <div className="positiveLuckTeamPoints">{team.luckRating.toFixed(1)}</div>

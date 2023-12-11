@@ -28,7 +28,7 @@ function KeyMatchups(props){
                             {censorContent ? 
                                 <div>
                                     <div className="matchupTeam1Name">
-                                    <div className="teamName1Text">{rosterIdMap[game.player1].user_name}</div>
+                                    <div className="teamName1Text">{rosterIdMap[game.player1].user_name.split(" ")[0]}</div>
                                     </div>
                                     <div className="flexHorizontal">
                                         <div className=""><img className="mediumAvatar" src={`/headshots/${rosterIdMap[game.player1].user_id}.png`} alt="" /></div>
@@ -60,7 +60,7 @@ function KeyMatchups(props){
                             {censorContent ? 
                                 <div>
                                     <div className="matchupTeam2Name">
-                                        <div className="teamName2Text">{rosterIdMap[game.player2].user_name}</div>
+                                        <div className="teamName2Text">{rosterIdMap[game.player2].user_name.split(" ")[0]}</div>
                                     </div>
                                     <div className="flexHorizontal">
                                         <div className={`matchupBar player2Bar ${rosterIdMap[game.player1].weeklyPointsFor[game.week - 1].points < rosterIdMap[game.player2].weeklyPointsFor[game.week - 1].points ? 'winningBar' : 'losingBar'}`}>
@@ -100,7 +100,7 @@ function KeyMatchups(props){
                             {censorContent ? 
                                 <div>
                                     <div className="matchupTeam1Name">
-                                    <div className="teamName1Text">{rosterIdMap[game.player1].user_name}</div>
+                                    <div className="teamName1Text">{rosterIdMap[game.player1].user_name.split(" ")[0]}</div>
                                     </div>
                                     <div className="flexHorizontal">
                                         <div className=""><img className="mediumAvatar" src={`/headshots/${rosterIdMap[game.player1].user_id}.png`} alt="" /></div>
@@ -132,7 +132,7 @@ function KeyMatchups(props){
                             {censorContent ? 
                                 <div>
                                     <div className="matchupTeam2Name">
-                                        <div className="teamName2Text">{rosterIdMap[game.player2].user_name}</div>
+                                        <div className="teamName2Text">{rosterIdMap[game.player2].user_name.split(" ")[0]}</div>
                                     </div>
                                     <div className="flexHorizontal">
                                         <div className={`matchupBar player2Bar ${rosterIdMap[game.player1].weeklyPointsFor[game.week - 1].points < rosterIdMap[game.player2].weeklyPointsFor[game.week - 1].points ? 'winningBar' : 'losingBar'}`}>
@@ -161,5 +161,4 @@ function KeyMatchups(props){
         </div>
     )
 }
-
 export default KeyMatchups;

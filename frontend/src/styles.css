@@ -442,8 +442,26 @@ table.pastChampions {
         grid-column: 1;
         grid-row: 14 / 20;
     }
+
     .teamLuckContainer { 
         width: 60%;
+    }
+
+    .outlierWeeksContainer {
+        grid-column: 2;
+        grid-row: 14 / 20;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .bestWeekContainer {
+        grid-column: 1;
+    }
+    
+    .worstWeekContainer {
+        grid-column: 2;
     }
 }
 
@@ -491,9 +509,24 @@ table.pastChampions {
     .luckRatingContainer {
         margin-bottom: 25px;
     }
+
     .teamLuckContainer { 
         width: 45%;
     }
+    .outlierWeeksContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .bestWeekContainer {
+        grid-column: 1;
+    }
+    
+    .worstWeekContainer {
+        grid-column: 2;
+    }
+
 }
 
 @media (max-width: 650px) {
@@ -520,10 +553,11 @@ table.pastChampions {
     }
 
     .keyMatchupsContainer{
-        margin-bottom: 20px;
+        margin-bottom: 5em;
     }
-    .teamLuckContainer { 
-        width: 100%;
+
+    .outlierWeeksContainer {
+        margin-bottom: 5em;
     }
 }
 
@@ -547,7 +581,7 @@ table.pastChampions {
     margin-left: -5px;
     border-radius: 0 .9em .9em 0;
     z-index: 1;
-    min-width: 15%;
+    min-width: 25%;
 }
 
 
@@ -805,3 +839,5 @@ table.pastChampions {
 .positiveLuckTeamPoints {
     margin-left: 35px;
 }
+
+/* Outlier Points  */

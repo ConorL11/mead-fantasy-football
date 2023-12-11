@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { currentLeagueId } from "../content/constants";
+import { currentLeagueId, censorContent } from "../content/constants";
 import AveragePoints from "./AveragePoints";
 import StandardDeviation from "./StandardDevation";
 import KeyMatchups from "./KeyMatchups";
@@ -73,6 +73,7 @@ function SleeperData(){
         for(const user of users){
             // Assign Nickname to User Object from leagueMembers Back End
             user.nickname = leagueMembers.find(member => member.sleeper_id === user.user_id).user_nickname;
+            user.user_name = leagueMembers.find(member => member.sleeper_id === user.user_id).user_name;
 
             if(!user.settings.winning_pct){
                 user.settings.winning_pct = 0;
@@ -172,11 +173,11 @@ function SleeperData(){
     } else {
         return (
             <div className="sleeperInsights">
-                <AveragePoints sleeperScores={sleeperScores} />
-                <ManagerActivity users={sleeperScores}  />
-                <StandardDeviation sleeperScores={sleeperScores} />
-                <KeyMatchups closeGames={closeGames} blowoutGames={blowoutGames} sleeperScores={sleeperScores}/>
-                <LuckRating teams={sleeperScores}  />
+                <AveragePoints sleeperScores={sleeperScores} censorContent={censorContent}/>
+                <ManagerActivity users={sleeperScores}  censorContent={censorContent}/>
+                <StandardDeviation sleeperScores={sleeperScores} censorContent={censorContent}/>
+                <KeyMatchups closeGames={closeGames} blowoutGames={blowoutGames} sleeperScores={sleeperScores} censorContent={censorContent}/>
+                <LuckRating teams={sleeperScores} censorContent={censorContent}/>
             </div>
         )
     }

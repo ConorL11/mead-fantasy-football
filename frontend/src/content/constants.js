@@ -1,6 +1,7 @@
 const currentLeagueId = '990427440436625408';
 const sleeper2021 = '863906445559795712';
 const espnLeagueId = '322485';
+const censorContent = 1; // Use this variable to censor non professional content from site
 
 const pastWinners = [
     {year: '2022', winningUser: 'Fisher', winningTeam: 'Big Bussin Bouncy Balls', losingUser: 'Cody', losingTeam: 'Just Last', punishment: 'Wore Griffs HS Football Jersey to the draft (kinda).'},
@@ -14,4 +15,4 @@ const pastWinners = [
     {year: '2014', winningUser: 'Ryan', winningTeam: 'The Rylo Show', losingUser: 'Perez', losingTeam: 'FUCK MARSHAWN LYNCH', punishment: 'Got Kicked out of the league'},
 ];
 
-export {currentLeagueId, sleeper2021, espnLeagueId, pastWinners}
+export {currentLeagueId, sleeper2021, espnLeagueId, censorContent, pastWinners,}

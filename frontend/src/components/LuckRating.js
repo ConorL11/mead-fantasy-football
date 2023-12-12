@@ -5,8 +5,6 @@ function LuckRating(props){
     teams.sort((a,b) => b.luckRating - a.luckRating);
     const maxLuckRating = Math.max(...teams.map(team => team.luckRating));
 
-    console.log(teams)
-
     return(
         <div className="luckRatingContainer insightContainer">
             <h1>Luck Rating</h1>

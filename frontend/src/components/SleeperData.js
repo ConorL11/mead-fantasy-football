@@ -76,16 +76,17 @@ function SleeperData(){
             user.nickname = leagueMembers.find(member => member.sleeper_id === user.user_id).user_nickname;
             user.user_name = leagueMembers.find(member => member.sleeper_id === user.user_id).user_name;
 
+            // by default sleeper API has this as undefined at the start of a season. Comment written in 2023 at start of the sesason
             if(!user.settings.winning_pct){
                 user.settings.winning_pct = 0;
             }
-            if(user.settings.fpts_decimal !== 0){
-                user.settings.fpts = user.settings.fpts + user.settings.fpts_decimal/100;
-                user.settings.average_points = user.settings.fpts / user.settings.games_played;
-            }
-            if(user.settings.fpts_against_decimal !== 0){
-                user.settings.fpts_against = user.settings.fpts_against + user.settings.fpts_against_decimal/100;
-            }
+
+            user.settings.fpts = user.settings.fpts + user.settings.fpts_decimal / 100;
+            user.settings.average_points = user.settings.fpts / user.settings.games_played;
+            user.settings.fpts_against = user.settings.fpts_against + user.settings.fpts_against_decimal/100;
+
+            delete user.settings.fpts_decimal;
+            delete user.settings.fpts_against_decimal;
 
             // Standard Deviation Calculation
             let varSum = 0;

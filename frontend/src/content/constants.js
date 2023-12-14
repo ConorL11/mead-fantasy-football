@@ -2,7 +2,9 @@ const currentLeagueId = '990427440436625408';
 const sleeper2021 = '863906445559795712';
 const espnLeagueId = '322485';
 const censorContent = 1; // Use this variable to censor non professional content from site
+const espnTestApiUrl = 'https://fantasy.espn.com/apis/v3/games/ffl/seasons/2019/segments/0/leagues/322485';
 
+// Old ESPN League URLs https://fantasy.espn.com/football/league/history?leagueId=322485&seasonId=2023
 const pastWinners = [
     {year: '2022', winningUser: 'Fisher', winningTeam: 'Big Bussin Bouncy Balls', losingUser: 'Cody', losingTeam: 'Just Last', punishment: 'Wore Griffs HS Football Jersey to the draft (kinda).'},
     {year: '2021', winningUser: 'Rob', winningTeam: 'Unlucky Bastards', losingUser: 'Griff', losingTeam: 'Balerian the Dreadful', punishment: 'Got pelted with eggs'},
@@ -15,4 +17,4 @@ const pastWinners = [
     {year: '2014', winningUser: 'Ryan', winningTeam: 'The Rylo Show', losingUser: 'Perez', losingTeam: 'FUCK MARSHAWN LYNCH', punishment: 'Got Kicked out of the league'},
 ];
 
-export {currentLeagueId, sleeper2021, espnLeagueId, censorContent, pastWinners,}
+export {currentLeagueId, sleeper2021, espnLeagueId, censorContent, pastWinners, espnTestApiUrl}

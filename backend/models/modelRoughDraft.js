@@ -1,7 +1,10 @@
 
 // Questions to ask about the users data model
-// 1 - can any user have multiple ESPN IDs or multiple Sleeper IDs? How do I handle a change in an active sleeper ID or active ESPN ID in my data pipeline?
 
+// 1 - can any user have multiple ESPN IDs or multiple Sleeper IDs? 
+// How do I handle a change in an active sleeper ID or active ESPN ID in my data pipeline?
+
+// 
 
 const users = [
     {
@@ -19,9 +22,19 @@ const users = [
             luck: 'float',
             pointsAgainst: 'float',
         }, 
-        season_averages: {
-            
-        },
+        season_summaries: [
+            {
+                season: 'int',
+                points: 'float',
+                average_points,
+                stdDev: 'float', 
+                pickups: 'float',
+                trades: 'float',
+                wins: 'float', 
+                luck: 'float',
+                pointsAgainst: 'float'
+            },
+        ],
         outlier_weeks: {
             maxPoints: {
                 points,        
@@ -75,5 +88,23 @@ const users = [
     },
 ];
 
+const matchups = [
+    {
+        season,
+        leagueId,
+        matchups: {
+            // copy sleeper matchups format here
+        }
 
-// 
+    }
+]
+
+
+const transactions = [
+    {
+        season,
+        transactions: {
+            // copy sleeper matchups format here
+        }
+    }
+]

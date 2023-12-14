@@ -12,35 +12,11 @@ import connectDB from "./config/db.js";
 dotenv.config();
 connectDB();
 
-// cpiData Seeder Functions
-const importData = async () => {
-    try {
-        await cpiDataModel.deleteMany();
-        const createdData = await cpiDataModel.insertMany(cpiData);
-        console.log('Data Imported!'.green.inverse);
-        process.exit();
-    } catch (error) {
-        console.log(`${error}`.red.inverse);
-        process.exit(1);
-    }
-}
-
-const destroyData = async () => {
-    try {
-        await cpiDataModel.deleteMany();
-        console.log('Data Destroyed!'.red.inverse);
-        process.exit();
-    } catch (error) {
-        console.log(`${error}`.red.inverse);
-        process.exit(1);
-    }
-}
-
-// League Member Seeder Functions
+// // cpiData Seeder Functions
 // const importData = async () => {
 //     try {
-//         await LeagueMember.deleteMany();
-//         const createdMembers = await LeagueMember.insertMany(leagueMembers);
+//         await cpiDataModel.deleteMany();
+//         const createdData = await cpiDataModel.insertMany(cpiData);
 //         console.log('Data Imported!'.green.inverse);
 //         process.exit();
 //     } catch (error) {
@@ -51,7 +27,7 @@ const destroyData = async () => {
 
 // const destroyData = async () => {
 //     try {
-//         await LeagueMember.deleteMany();
+//         await cpiDataModel.deleteMany();
 //         console.log('Data Destroyed!'.red.inverse);
 //         process.exit();
 //     } catch (error) {
@@ -59,6 +35,30 @@ const destroyData = async () => {
 //         process.exit(1);
 //     }
 // }
+
+// League Member Seeder Functions
+const importData = async () => {
+    try {
+        await LeagueMember.deleteMany();
+        const createdMembers = await LeagueMember.insertMany(leagueMembers);
+        console.log('Data Imported!'.green.inverse);
+        process.exit();
+    } catch (error) {
+        console.log(`${error}`.red.inverse);
+        process.exit(1);
+    }
+}
+
+const destroyData = async () => {
+    try {
+        await LeagueMember.deleteMany();
+        console.log('Data Destroyed!'.red.inverse);
+        process.exit();
+    } catch (error) {
+        console.log(`${error}`.red.inverse);
+        process.exit(1);
+    }
+}
 
 if(process.argv[2] === '-d') {
     destroyData();

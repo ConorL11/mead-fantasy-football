@@ -1,11 +1,11 @@
 import { pastWinners } from "../content/constants";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import HistoricalData from "../components/HistoricalData"; // temp import for front end testing 
 
 function HistoryPage() {
 
     const [leagueMembers, setLeagueMembers] = useState([]);
-
 
     useEffect(() => {
         const getLeagueMembers = async () => {
@@ -13,8 +13,9 @@ function HistoryPage() {
             setLeagueMembers(data);
         };
 
-        getLeagueMembers()
+        getLeagueMembers();
     }, []);
+
 
     return (
         <div>
@@ -57,6 +58,7 @@ function HistoryPage() {
                     ))}
                 </tbody>
             </table>
+            <HistoricalData />
         </div>
     )
 }

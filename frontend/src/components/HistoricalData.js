@@ -8,7 +8,6 @@ function HistoricalData(){
 
     // general function to pull Historical Data and Transform it to desired data model
     const fetchHistoricalData = async () => {
-
         // get transaction history from Sleeper
         let transactions = [];
         const transactions2021 = await fetchHistoricalTransactions(leagueId2021, 2021);
@@ -29,10 +28,26 @@ function HistoricalData(){
         return seasonTransactions;
     }
 
+    const fetchEspnData = async() => {
+        let response = await axios.get("https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2022/segments/0/leagues/322485?view=mTeam");
+        let espnTransactions = [];
+
+        console.log("espn response", response);
+        response.data.teams.map(team =>
+            espnTransactions.push({
+                team: team.name,
+                owners: team.owners,
+                pickups: team.transactionCounter.acquisitions,
+                trades: team.transactionCounter.trades
+            })
+        );
+        console.log("ESPN Data",espnTransactions);
+    }
 
 
     useEffect(() => {
         fetchHistoricalData();
+        fetchEspnData();
     }, []);
 
     return (

@@ -73,8 +73,8 @@ function SleeperData(){
         // Clean up response data and add metrics for insights
         for(const user of users){
             // Assign Nickname to User Object from leagueMembers Back End
-            user.nickname = leagueMembers.find(member => member.sleeper_id === user.user_id).user_nickname;
-            user.user_name = leagueMembers.find(member => member.sleeper_id === user.user_id).user_name;
+            user.nickname = leagueMembers.find(member => member.sleeper_ids.some(id => id === user.user_id )).user_nickname;
+            user.user_name = leagueMembers.find(member => member.sleeper_ids.some(id => id === user.user_id )).user_name;
 
             // by default sleeper API has this as undefined at the start of a season. Comment written in 2023 at start of the sesason
             if(!user.settings.winning_pct){

@@ -25,7 +25,7 @@ function Standings(){
         // Clean up response data
         for(const user of users){
             // Assign Nickname to User Object from leagueMembers Back End
-            user.user_name = leagueMembers.find(member => member.sleeper_id === user.user_id).user_name;
+            user.user_name = leagueMembers.find(member => member.sleeper_ids.some(id => id === user.user_id ) ).user_name;
 
             if(!user.settings.winning_pct){
                 user.settings.winning_pct = 0;

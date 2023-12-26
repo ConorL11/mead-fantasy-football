@@ -14,16 +14,19 @@ const LeagueMemberSchema = new mongoose.Schema({
         type: String,
         required: false
     }, 
-    espn_id: {
-        type: String,
-        required: true, 
-        unique: true
-    }, 
-    sleeper_id: {
-        type: String,
-        required: true, 
-        unique: true
-    }
+    espn_ids: [
+        {
+            type: String,
+            required: false, 
+            unique: false
+        }
+    ], 
+    sleeper_ids: [
+        {
+            type: String,
+            required: false
+        }
+    ]
 });
 
 const LeagueMember = mongoose.model("LeagueMember", LeagueMemberSchema );

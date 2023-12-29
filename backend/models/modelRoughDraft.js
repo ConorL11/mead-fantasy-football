@@ -103,8 +103,15 @@ const matchups = [
 const transactions = [
     {
         season,
-        transactions: {
-            // copy sleeper matchups format here
-        }
+        teams: [
+            {
+                name: 'team name',
+                owners: 'sleeper / espn owner ids',
+                transactions: {
+                    pickups: 'pickups',
+                    trades: 'trades'
+                }
+            }
+        ]
     }
 ]

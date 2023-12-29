@@ -138,6 +138,7 @@ function SleeperData(){
 
     // Function to get transactions and assign them to roster ID Map
     const fetchTransactions = async (currentWeek, rosterIdMap) => {
+        console.log("rosterIdMap",rosterIdMap)
         // Pull in Transactions and append to users via Roster Id Map
         for(let i = 1; i < currentWeek; i++){
             const week = await axios.get("https://api.sleeper.app/v1/league/"+currentLeagueId+"/transactions/"+i);

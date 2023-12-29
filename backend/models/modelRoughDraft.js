@@ -4,6 +4,13 @@
 // 1 - can any user have multiple ESPN IDs or multiple Sleeper IDs? 
 // How do I handle a change in an active sleeper ID or active ESPN ID in my data pipeline?
 
+
+// Future DB To Dos: 
+// Potentially calculate and insert matchup outliers and calculated stats into DB
+// Get playoff stats for winners brackets
+// Get full season stats including key playoff games
+
+
 const users = [
     {
         user_id: 'string', 
@@ -99,8 +106,6 @@ const seasons = [
                     points: 'float',
                     average_points,
                     stdDev: 'float', 
-                    pickups: 'float',
-                    trades: 'float',
                     wins: 'float', 
                     luck: 'float',
                     pointsAgainst: 'float'

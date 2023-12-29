@@ -33,13 +33,17 @@ const pastSeasons = [
 // Fully Build out Desired Data Structure for DB
 // Transform ESPN Data - transactions
 // Transform Sleeper Data - transactions
+// Transform ESPN Data - League Summaries
+
 
 
 // Remaining Steps
 
-// Transform ESPN Data - League Summaries
 // Transform Sleeper Data - League Summaries
+// Transform Matchup Data for Sleeper to align with ESPN Style
 // Run an insert with the transactions array of objects
+
+// Add Match
 
 
 // Pull all JSON Data
@@ -149,13 +153,23 @@ function processEspnData(seasonData){
     let teams = []; 
     for(const team of seasonData.teams) {
         let tempTeam = {
-            team_id: team.id,
-            team_name: team.name,
+            teamId: team.id,
+            teamName: team.name,
             owners: team.owners,
             transactions: {
                 adds: team.transactionCounter.acquisitions,
                 trades: team.transactionCounter.trades
-            }
+            },
+            summary: {
+                regularSeason: {
+                    wins: team.record.overall.wins,
+                    losses: team.record.overall.losses,
+                    percentage: team.record.overall.percentage,
+                    playoffSeed: team.playoffSeed,
+                    points: team.record.overall.pointsFor,
+                    pointsAgainst: team.record.overall.pointsAgainst,
+                },
+            },
         }
         teams.push(tempTeam);
     }
@@ -190,18 +204,44 @@ function processSleeperData(seasonData){
         }
     }
 
+    // CONOR - work here. Sort a list of standings, then grab the ranks for playoff seeds.
+    // Get standings for playoff seeds
+    // const standings = seasonData.rosters.map((team_id, settings: {wins, fpts, fpts_against}) => {
+
+    // })
+    // const standings = {
+    //     teamId: seasonData.rosters.team_id,  
+    //     wins: seasonData.rosters.settings.wins,
+    //     points: roster.settings.fpts + roster.settings.fpts_decimal / 100,
+    // }
+
+    const sortedStandingsArray = standingsArray.sort((a, b) => b.wins - a.wins || b.points - a.points);
+
+    standings.sort((a,b))
+
     // Populate array with data
     for(const user of seasonData.users){
         const roster = ownerIdMap[user.user_id];
         if(roster){
+            console.log(roster.settings.losses)
             teams.push({
+                teamId: roster.roster_id,
+                teamName: user.metadata.team_name,
                 owners: [roster.owner_id],
-                team_id: roster.roster_id,
-                team_name: user.metadata.team_name,
                 transactions : {
                     adds: roster.adds,
                     trades: roster.trades
-                }
+                }, 
+                summary: {
+                    regularSeason: {
+                        wins: roster.settings.wins,
+                        losses: roster.settings.losses,
+                        percentage: roster.settings.wins / (roster.settings.wins + roster.settings.losses),
+                        playoffSeed: roster.settings.wins, // CONOR - Need to pull this from playoff bracket endpoint
+                        points: roster.settings.fpts + roster.settings.fpts_decimal / 100,
+                        pointsAgainst: roster.settings.fpts_against + roster.settings.fpts_against_decimal / 100,
+                    },
+                },
             });
         }
     }

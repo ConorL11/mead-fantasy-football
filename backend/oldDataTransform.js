@@ -3,7 +3,6 @@ import axios from "axios";
 import { readFile } from 'fs/promises';
 import fs from 'fs'
 
-
 // constants for league access
 const leagueId2021 = '730899355048996864';
 const espnLeagueId = '322485';
@@ -32,11 +31,12 @@ const pastSeasons = [
 // 3 - Pull League History JSON Object from Data / Consants
 // Modify ESPN Calls so I can get matchup data included. Re-import new JSON files with Matchup Data included
 // Fully Build out Desired Data Structure for DB
+// Transform ESPN Data - transactions
+// Transform Sleeper Data - transactions
 
 
 // Remaining Steps
-// Transform ESPN Data - transactions
-// Transform Sleeper Data - transactions
+
 // Transform ESPN Data - League Summaries
 // Transform Sleeper Data - League Summaries
 // Run an insert with the transactions array of objects
@@ -45,6 +45,8 @@ const pastSeasons = [
 // Pull all JSON Data
 try {
 
+    console.log('Extracting Data... ')
+    // Pull Data from MongoDB for league Members
     const {data: members} = await axios.get('http://localhost:4000/api/leagueMembers');
 
     // Pull data from ESPN leagues where the privacy blocks me from grabbing it directly
@@ -61,6 +63,9 @@ try {
 
     // Pull data from Sleeper Leagues
     const rawData2021 = await fetchSleeperData(leagueId2021);
+
+    // Begin Transforming Data
+    console.log('Transforming Data...')
 
     // initialize variable to host all processed data
     let seasons = [];
@@ -89,12 +94,53 @@ try {
 
     // sort final array based on year
     seasons.sort((a,b) => a.season - b.season);
-    console.log(seasons)
+    console.log('Data transform completed!')
 
     debugger
 
 } catch (error) {
     console.log(error);
+}
+
+// Extraction Functions
+
+// Sleeper Fetching Functions
+async function fetchSleeperData(leagueId){
+    const {data: league} = await axios.get("https://api.sleeper.app/v1/league/"+leagueId);
+    const {data: users} = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/users");
+    const {data: rosters} = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/rosters");
+    const transactions = await fetchSleeperTransactions(leagueId);
+    const matchups = await fetchSleeperMatchups(leagueId);
+    return {season: Number(league.season), league, users, rosters, transactions, matchups};
+}
+
+// Function to fetch Sleeper Transactions for completed seasons 
+async function fetchSleeperTransactions(leagueId) {
+    let allTransactions = [];
+    const countGames =  16 // might need to change this based on season length
+    for(let i=1; i <= countGames; i++){
+        try {
+            let responseTransactions = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/transactions/"+i);
+            allTransactions.push(responseTransactions.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    return allTransactions;
+}
+
+async function fetchSleeperMatchups(leagueId) {
+    let allMatchups = [];
+    const countGames = 16 // might need to change this based on season length
+    for(let i=1; i <= countGames; i++){
+        try {
+            let responseMatchups = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/matchups/"+i);
+            allMatchups.push(responseMatchups.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    return allMatchups;
 }
 
 
@@ -160,48 +206,11 @@ function processSleeperData(seasonData){
         }
     }
 
+    teams.sort((a,b) => a.team_id - b.team_id);
+
+    // Conor - Debugging statement here to show my teams
     // console.log(ownerIdMap['730905664234332160']);
 
     return {season: seasonData.season, teams}
 }
 
-
-
-// Sleeper Fetching Functions
-async function fetchSleeperData(leagueId){
-    const {data: league} = await axios.get("https://api.sleeper.app/v1/league/"+leagueId);
-    const {data: users} = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/users");
-    const {data: rosters} = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/rosters");
-    const transactions = await fetchSleeperTransactions(leagueId);
-    const matchups = await fetchSleeperMatchups(leagueId);
-    return {season: Number(league.season), league, users, rosters, transactions, matchups};
-}
-
-// Function to fetch Sleeper Transactions for completed seasons 
-async function fetchSleeperTransactions(leagueId) {
-    let allTransactions = [];
-    const countGames =  16 // might need to change this based on season length
-    for(let i=1; i <= countGames; i++){
-        try {
-            let responseTransactions = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/transactions/"+i);
-            allTransactions.push(responseTransactions.data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    return allTransactions;
-}
-
-async function fetchSleeperMatchups(leagueId) {
-    let allMatchups = [];
-    const countGames = 16 // might need to change this based on season length
-    for(let i=1; i <= countGames; i++){
-        try {
-            let responseMatchups = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/matchups/"+i);
-            allMatchups.push(responseMatchups.data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    return allMatchups;
-}

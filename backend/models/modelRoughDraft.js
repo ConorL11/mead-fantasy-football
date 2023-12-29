@@ -13,6 +13,7 @@ const users = [
         user_nickname: 'string',
         active_espn_id: 'string', 
         active_sleeper_id: 'string',
+        active_player: true,
         historical_averages: {
             points: 'float',
             stdDev: 'float', 
@@ -87,6 +88,36 @@ const users = [
         }, 
     },
 ];
+
+const seasons = [
+    {
+        season: '20XX', 
+        teams: [
+            {
+                team_id: 'string',
+                team_name: 'string',
+                owners: ['owners'],
+                summary: {
+                    points: 'float',
+                    average_points,
+                    stdDev: 'float', 
+                    pickups: 'float',
+                    trades: 'float',
+                    wins: 'float', 
+                    luck: 'float',
+                    pointsAgainst: 'float'
+                },
+                transactions: {
+                    pickups: 'int',
+                    trades: 'int'
+                }, 
+                matchups: {
+
+                }
+            }
+        ],
+    },
+]
 
 const matchups = [
     {

@@ -8,17 +8,9 @@ import LeagueMember from "./models/leagueMembersModel.js";
 import cpiDataModel from "./models/cpiDataModel.js";
 import cpiData from "./data/cpiData.js";
 
-// import connectDB from "./config/db.js";
-
-// File Path things
-
-import { readFile } from 'fs/promises';
-import fs from 'fs'
-import path from "path";
-import { existsSync } from "fs";
-
+import connectDB from "./config/db.js";
 dotenv.config();
-// connectDB();
+connectDB();
 
 // // cpiData Seeder Functions
 // const importData = async () => {
@@ -68,31 +60,8 @@ const destroyData = async () => {
     }
 }
 
-// Historical Data Seeder Functions
-const fetchHistoricalData = async () => {
-
-    const currentDirectory = process.cwd();
-    const filePath = process.cwd() + '/data/leagueData2015.json';
-
-
-    if (fs.existsSync(filePath)) {
-        console.log('The file exists.');
-    } else {
-        console.log('The file does not exist.');
-    }
-
-    // try {
-    //     let data = JSON.parse(await readFile("./data/leagueData2015.json", "utf8"));
-    //     console.log(data)
-    // } catch(error) {
-    //     console.log(`${error}`.red.inverse);
-    //     process.exit(1);
-    // }
-}
-
 if(process.argv[2] === '-d') {
     destroyData();
 } else {
-    // importData();
-    fetchHistoricalData();
+    importData();
 }

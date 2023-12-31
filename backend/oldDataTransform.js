@@ -19,32 +19,9 @@ const pastSeasons = [
     {year: '2014', platform: 'espn', winningUser: 'Ryan', winningTeam: 'The Rylo Show', losingUser: 'Perez', losingTeam: 'FUCK MARSHAWN LYNCH', punishment: 'Got Kicked out of the league'},
 ];
 
-// ESPN API v2 - works for seasons 2017 and earlier
-// https://fantasy.espn.com/apis/v3/games/ffl/leagueHistory/322485?seasonId=2017&view=mTeam
+// initialize variable to host all processed data
 
-// ESPN API v3 - works for seasons 2018 on
-// https://fantasy.espn.com/apis/v3/games/ffl/seasons/2020/segments/0/leagues/322485?view=mTeam
-
-// Completed Steps
-// 1 - Pull League Data for each season
-// 2 - Pull leagueMembers from Mongo
-// 3 - Pull League History JSON Object from Data / Consants
-// Modify ESPN Calls so I can get matchup data included. Re-import new JSON files with Matchup Data included
-// Fully Build out Desired Data Structure for DB
-// Transform ESPN Data - transactions
-// Transform Sleeper Data - transactions
-// Transform ESPN Data - League Summaries
-
-
-
-// Remaining Steps
-
-// Transform Sleeper Data - League Summaries
-// Transform Matchup Data for Sleeper to align with ESPN Style
-// Run an insert with the transactions array of objects
-
-// Add Match
-
+let seasons = [];
 
 // Pull all JSON Data
 try {
@@ -54,12 +31,22 @@ try {
     const {data: members} = await axios.get('http://localhost:4000/api/leagueMembers');
 
     // Pull data from ESPN leagues where the privacy blocks me from grabbing it directly
-    const rawData2014 = JSON.parse(fs.readFileSync('./data/leagueData2014.json'))[0];
-    const rawData2015 = JSON.parse(fs.readFileSync('./data/leagueData2015.json'))[0];
-    const rawData2016 = JSON.parse(fs.readFileSync('./data/leagueData2016.json'))[0];
-    const rawData2017 = JSON.parse(fs.readFileSync('./data/leagueData2017.json'))[0];
-    const rawData2018 = JSON.parse(fs.readFileSync('./data/leagueData2018.json'));
-    const rawData2019 = JSON.parse(fs.readFileSync('./data/leagueData2019.json'));
+    // When running this from the root directory, use these
+    const rawData2014 = JSON.parse(fs.readFileSync('./backend/data/leagueData2014.json'))[0];
+    const rawData2015 = JSON.parse(fs.readFileSync('./backend/data/leagueData2015.json'))[0];
+    const rawData2016 = JSON.parse(fs.readFileSync('./backend/data/leagueData2016.json'))[0];
+    const rawData2017 = JSON.parse(fs.readFileSync('./backend/data/leagueData2017.json'))[0];
+    const rawData2018 = JSON.parse(fs.readFileSync('./backend/data/leagueData2018.json'));
+    const rawData2019 = JSON.parse(fs.readFileSync('./backend/data/leagueData2019.json'));
+
+
+    // When running script from the backend directory, uses these
+    // const rawData2014 = JSON.parse(fs.readFileSync('./data/leagueData2014.json'))[0];
+    // const rawData2015 = JSON.parse(fs.readFileSync('./data/leagueData2015.json'))[0];
+    // const rawData2016 = JSON.parse(fs.readFileSync('./data/leagueData2016.json'))[0];
+    // const rawData2017 = JSON.parse(fs.readFileSync('./data/leagueData2017.json'))[0];
+    // const rawData2018 = JSON.parse(fs.readFileSync('./data/leagueData2018.json'));
+    // const rawData2019 = JSON.parse(fs.readFileSync('./data/leagueData2019.json'));
 
     // Pull data from public ESPN leagues
     const {data: rawData2020} = await axios.get(`https://fantasy.espn.com/apis/v3/games/ffl/seasons/2020/segments/0/leagues/${322485}?view=mTeam&view=mBoxscore`);
@@ -70,9 +57,6 @@ try {
 
     // Begin Transforming Data
     console.log('Transforming Data...')
-
-    // initialize variable to host all processed data
-    let seasons = [];
 
     // Put together object of ESPN seasons to loop over and process
     let rawEspnSeasons = [
@@ -99,8 +83,6 @@ try {
     // sort final array based on year
     seasons.sort((a,b) => a.season - b.season);
     console.log('Data transform completed!')
-
-    debugger
 
 } catch (error) {
     console.log(error);
@@ -183,7 +165,11 @@ function processSleeperData(seasonData){
     // Create Roster Maps
     let rosterIdMap = {};
     let ownerIdMap = {};
-    for(const roster of seasonData.rosters){
+
+    // Sort rosters to get playoff seeds
+    seasonData.rosters.sort((a,b) => b.settings.wins - a.settings.wins || ((b.settings.fpts + b.settings.fpts_decimal / 100) - (a.settings.fpts + a.settings.fpts_decimal / 100)));
+    for(const [index, roster] of seasonData.rosters.entries()){
+        roster.settings.playoffSeed = index+1;
         rosterIdMap[roster.roster_id] = roster;
         rosterIdMap[roster.roster_id].weeklyPointsFor = [];
         rosterIdMap[roster.roster_id].weeklyPointsAgainst = [];
@@ -204,26 +190,10 @@ function processSleeperData(seasonData){
         }
     }
 
-    // CONOR - work here. Sort a list of standings, then grab the ranks for playoff seeds.
-    // Get standings for playoff seeds
-    // const standings = seasonData.rosters.map((team_id, settings: {wins, fpts, fpts_against}) => {
-
-    // })
-    // const standings = {
-    //     teamId: seasonData.rosters.team_id,  
-    //     wins: seasonData.rosters.settings.wins,
-    //     points: roster.settings.fpts + roster.settings.fpts_decimal / 100,
-    // }
-
-    const sortedStandingsArray = standingsArray.sort((a, b) => b.wins - a.wins || b.points - a.points);
-
-    standings.sort((a,b))
-
     // Populate array with data
     for(const user of seasonData.users){
         const roster = ownerIdMap[user.user_id];
         if(roster){
-            console.log(roster.settings.losses)
             teams.push({
                 teamId: roster.roster_id,
                 teamName: user.metadata.team_name,
@@ -237,7 +207,7 @@ function processSleeperData(seasonData){
                         wins: roster.settings.wins,
                         losses: roster.settings.losses,
                         percentage: roster.settings.wins / (roster.settings.wins + roster.settings.losses),
-                        playoffSeed: roster.settings.wins, // CONOR - Need to pull this from playoff bracket endpoint
+                        playoffSeed: roster.settings.playoffSeed,
                         points: roster.settings.fpts + roster.settings.fpts_decimal / 100,
                         pointsAgainst: roster.settings.fpts_against + roster.settings.fpts_against_decimal / 100,
                     },
@@ -254,3 +224,31 @@ function processSleeperData(seasonData){
     return {season: seasonData.season, teams}
 }
 
+export default seasons
+
+
+
+// Conors Debugging and workflow notes
+// ESPN API v2 - works for seasons 2017 and earlier
+// https://fantasy.espn.com/apis/v3/games/ffl/leagueHistory/322485?seasonId=2017&view=mTeam
+
+// ESPN API v3 - works for seasons 2018 on
+// https://fantasy.espn.com/apis/v3/games/ffl/seasons/2020/segments/0/leagues/322485?view=mTeam
+
+// Completed Steps
+// 1 - Pull League Data for each season
+// 2 - Pull leagueMembers from Mongo
+// 3 - Pull League History JSON Object from Data / Consants
+// Modify ESPN Calls so I can get matchup data included. Re-import new JSON files with Matchup Data included
+// Fully Build out Desired Data Structure for DB
+// Transform ESPN Data - transactions
+// Transform Sleeper Data - transactions
+// Transform ESPN Data - League Summaries
+// Transform Sleeper Data - League Summaries
+
+
+
+// Remaining Steps
+// Run an insert with the transactions array of objects
+// Transform Matchup Data for Sleeper to align with ESPN Style
+// Add Matchups to data

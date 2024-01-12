@@ -126,7 +126,7 @@ function SleeperData(){
                         player2: opponent.roster_id
                     });
                 }
-                rosterIdMap[matchup.roster_id].weeklyExectedWins.push(index/ (week.length-1))
+                rosterIdMap[matchup.roster_id].weeklyExectedWins.push(index/ (week.length-1));
                 rosterIdMap[matchup.roster_id].weeklyPointsFor.push(matchup);
                 rosterIdMap[matchup.roster_id].weeklyPointsAgainst.push(opponent);
             }

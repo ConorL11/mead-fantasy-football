@@ -12,6 +12,7 @@ const seasonsSchema = new mongoose.Schema({
                 playoffSeed: {type: Number},
                 points: {type: Number},
                 pointsAgainst: {type: Number},
+                // standardDeviation: {type: Number},
                 wins: {type: Number},
             },
         }, 
@@ -20,8 +21,20 @@ const seasonsSchema = new mongoose.Schema({
         transactions: {
             adds: {type: Number},
             trades: {type: Number}
-        }
+        },
     }],
+    // matchups: [{
+    //     id: {type: String, required: true},
+    //     week: {type: Number, required: true},
+    //     away: {
+    //         teamId: {type: Number, required: true},
+    //         points: {type: Number, required: true},
+    //     },
+    //     home: {
+    //         teamId: {type: Number, required: true},
+    //         points: {type: Number, required: true},
+    //     }
+    // }],
 });
 
 const Season = mongoose.model("Season", seasonsSchema );

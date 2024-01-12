@@ -116,9 +116,17 @@ const seasons = [
                 }, 
             }
         ],
-        matchups: [
-
-        ],
-
+        matchups: [{
+            id: 1,
+            week: 1,
+            away: {
+                teamId: 1,
+                points: 120,
+            },
+            home: {
+                teamId: 1,
+                points: 120,
+            }
+        }],
     },
 ]

@@ -4,7 +4,12 @@
 // 1 - can any user have multiple ESPN IDs or multiple Sleeper IDs? 
 // How do I handle a change in an active sleeper ID or active ESPN ID in my data pipeline?
 
-// 
+
+// Future DB To Dos: 
+// Potentially calculate and insert matchup outliers and calculated stats into DB
+// Get playoff stats for winners brackets
+// Get full season stats including key playoff games
+
 
 const users = [
     {
@@ -13,6 +18,7 @@ const users = [
         user_nickname: 'string',
         active_espn_id: 'string', 
         active_sleeper_id: 'string',
+        active_player: true,
         historical_averages: {
             points: 'float',
             stdDev: 'float', 
@@ -50,7 +56,7 @@ const users = [
                 points,
                 season,
                 week
-            },            
+            },
             minPointsAgainst: {
                 points,
                 season,
@@ -88,23 +94,39 @@ const users = [
     },
 ];
 
-const matchups = [
+const seasons = [
     {
-        season,
-        leagueId,
-        matchups: {
-            // copy sleeper matchups format here
-        }
-
-    }
-]
-
-
-const transactions = [
-    {
-        season,
-        transactions: {
-            // copy sleeper matchups format here
-        }
-    }
+        season: '20XX', 
+        teams: [
+            {
+                team_id: 'string',
+                team_name: 'string',
+                owners: ['owners'],
+                summary: {
+                    points: 'float',
+                    average_points,
+                    stdDev: 'float', 
+                    wins: 'float', 
+                    luck: 'float',
+                    pointsAgainst: 'float'
+                },
+                transactions: {
+                    pickups: 'int',
+                    trades: 'int'
+                }, 
+            }
+        ],
+        matchups: [{
+            id: 1,
+            week: 1,
+            away: {
+                teamId: 1,
+                points: 120,
+            },
+            home: {
+                teamId: 1,
+                points: 120,
+            }
+        }],
+    },
 ]

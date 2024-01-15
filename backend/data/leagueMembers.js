@@ -84,6 +84,26 @@ const leagueMembers = [
         ], 
         sleeper_ids: ['731377043694030848'],
         isActive: true
+    }, 
+    {
+        user_id: '11', 
+        user_name: 'John Brady III', 
+        user_nickname: 'John Brady',
+        espn_ids: [
+            '{124E7068-E3A5-4D34-B5D3-AF4B4E8DBEB6}'
+        ], 
+        sleeper_ids: [],
+        isActive: true
+    },
+    {
+        user_id: '12', 
+        user_name: 'Jacob Perez', 
+        user_nickname: 'Perez',
+        espn_ids: [
+            '{9EBEDCE9-95FD-4CC5-BEDC-E995FD3CC557}'
+        ], 
+        sleeper_ids: [],
+        isActive: true
     }
 ];
 

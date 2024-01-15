@@ -1,7 +1,6 @@
 import { pastWinners } from "../content/constants";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import HistoricalData from "../components/HistoricalData"; // temp import for front end testing 
 
 function HistoryPage() {
 
@@ -58,7 +57,6 @@ function HistoryPage() {
                     ))}
                 </tbody>
             </table>
-            <HistoricalData />
         </div>
     )
 }

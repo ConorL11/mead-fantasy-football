@@ -137,7 +137,6 @@ body {
 
 /* Nav Styling  */
 header {
-    height: 60px;
     background: var(--header-background);
     color: white;
     text-align: center;

@@ -5,9 +5,11 @@ import fs from 'fs'
 
 // constants for league access
 const leagueId2021 = '730899355048996864';
+const leagueId2023 = '990427440436625408';
 const espnLeagueId = '322485';
 
 const pastSeasons = [
+    {year: '2023', platform: 'sleeper', winningUser: 'Boobsink', winningTeam: 'Americas Fantasy Team', losingUser: '???', losingTeam: '????', punishment: 'Likely no punishment or eggs'},
     {year: '2022', platform: 'espn', winningUser: 'Fisher', winningTeam: 'Big Bussin Bouncy Balls', losingUser: 'Cody', losingTeam: 'Just Last', punishment: 'Wore Griffs HS Football Jersey to the draft (kinda).'},
     {year: '2021', platform: 'sleeper', winningUser: 'Rob', winningTeam: 'Unlucky Bastards', losingUser: 'Griff', losingTeam: 'Balerian the Dreadful', punishment: 'Got pelted with eggs'},
     {year: '2020', platform: 'espn', winningUser: 'Desch', winningTeam: 'Pop Drop and Lockett', losingUser: 'Cody', losingTeam: 'I quit', punishment: 'Made an Only Fans (kinda)'},
@@ -54,6 +56,8 @@ try {
 
     // Pull data from Sleeper Leagues
     const rawData2021 = await fetchSleeperData(leagueId2021);
+    const rawData2023 = await fetchSleeperData(leagueId2023);
+
 
     // Begin Transforming Data
     console.log('Transforming Data...')
@@ -70,6 +74,11 @@ try {
         {season: 2022, rawData: rawData2022},
     ];
 
+    let rawSleeperSeasons = [
+        {season: 2021, rawData: rawData2021},
+        {season: 2023, rawData: rawData2023}
+    ];
+
     // Process ESPN Data
     for(const season of rawEspnSeasons){
         let processedData = processEspnData(season.rawData);
@@ -77,12 +86,16 @@ try {
     }
 
     // Process Sleeper Data
-    let processedData = processSleeperData(rawData2021);
-    seasons.push(processedData);
+    for(const season of rawSleeperSeasons){
+        let processedData = processSleeperData(season.rawData);
+        seasons.push(processedData);
+    }
 
     // sort final array based on year
     seasons.sort((a,b) => a.season - b.season);
+
     console.log('Data transform completed!')
+    debugger
 
 } catch (error) {
     console.log(error);
@@ -103,7 +116,7 @@ async function fetchSleeperData(leagueId){
 // Function to fetch Sleeper Transactions for completed seasons 
 async function fetchSleeperTransactions(leagueId) {
     let allTransactions = [];
-    const countGames =  16 // might need to change this based on season length
+    const countGames =  17 // might need to change this based on season length
     for(let i=1; i <= countGames; i++){
         try {
             let responseTransactions = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/transactions/"+i);
@@ -117,7 +130,7 @@ async function fetchSleeperTransactions(leagueId) {
 
 async function fetchSleeperMatchups(leagueId) {
     let allMatchups = [];
-    const countGames = 16 // might need to change this based on season length
+    const countGames = 17 // might need to change this based on season length
     for(let i=1; i <= countGames; i++){
         try {
             let responseMatchups = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/matchups/"+i);
@@ -159,7 +172,6 @@ function processEspnData(seasonData){
             let points = week.away.teamId === team.id ? week.away.totalPoints : week.home.totalPoints;
             varSum += Math.pow((points - (team.record.overall.pointsFor / seasonData.settings.scheduleSettings.matchupPeriodCount)),2);
         }
-
         team.record.standardDeviation = Math.pow((varSum / seasonData.settings.scheduleSettings.matchupPeriodCount),0.5);
 
         let tempTeam = {
@@ -202,6 +214,7 @@ function processSleeperData(seasonData){
         rosterIdMap[roster.roster_id].weeklyPointsFor = [];
         rosterIdMap[roster.roster_id].weeklyPointsAgainst = [];
         rosterIdMap[roster.roster_id].weeklyExectedWins = [];
+        rosterIdMap[roster.roster_id].schedule = [];
         rosterIdMap[roster.roster_id].trades = 0;
         rosterIdMap[roster.roster_id].adds = 0;
         ownerIdMap[roster.owner_id] = roster;
@@ -218,11 +231,68 @@ function processSleeperData(seasonData){
         }
     }
 
-    debugger
+    //Transform Matchup Data Structure to match ESPN Matchup Structure
+    let schedule = [];
+    let usedMatchups = [];
+    let weekCounter = 1;
+    let matchupCounter = 1;
+    for(const week of seasonData.matchups){
+        for(const [index, user] of week.entries()){
+            let opponent = week.find((o) => o.matchup_id === user.matchup_id && o.roster_id !== user.roster_id);
+            if(usedMatchups.indexOf('week-'+weekCounter+'-matchup-'+user.matchup_id) === -1){
+                usedMatchups.push('week-'+weekCounter+'-matchup-'+user.matchup_id);
+
+                let matchObj = {
+                    home: {
+                        pointsByScoringPeriod: {[weekCounter]: user.points},
+                        teamId: user.roster_id,
+                        tiebreak: 0,
+                        totalPoints: user.points
+                    },
+                    id: matchupCounter,
+                    matchupPeriodId: weekCounter
+                };
+                if(opponent){
+                    matchObj.away = {
+                        pointsByScoringPeriod: {[weekCounter]: opponent.points},
+                        teamId: opponent.roster_id,
+                        tiebreak: 0,
+                        totalPoints: opponent.points
+                    }
+                }
+
+                schedule.push(matchObj);
+                matchupCounter++;
+            }
+        }
+        weekCounter++;
+    }
+
+    // Assign all matchups to teams
+    for(const game of schedule){
+        // Only tracking Regular Season Matchups
+        if(game.matchupPeriodId < seasonData.league.settings.playoff_week_start){
+            rosterIdMap[game.away.teamId].schedule.push(game);
+            rosterIdMap[game.home.teamId].schedule.push(game);
+        }
+    }
+
     // Populate array with data
     for(const user of seasonData.users){
         const roster = ownerIdMap[user.user_id];
         if(roster){
+            
+            // calcluate standard deviation
+            let totalPoints = roster.settings.fpts + roster.settings.fpts_decimal / 100;
+            let AveragePoints = totalPoints / (seasonData.league.settings.playoff_week_start - 1);
+            let varSum = 0;
+            for(const week of roster.schedule){
+                let points = week.away.userId === user.id ? week.away.totalPoints : week.home.totalPoints;
+                varSum += Math.pow(points - AveragePoints,2);
+            }
+            roster.settings.standardDeviation = Math.pow((varSum / (seasonData.league.settings.playoff_week_start - 1)),0.5);
+
+            // Populate Teams Array
             teams.push({
                 teamId: roster.roster_id,
                 teamName: user.metadata.team_name,
@@ -239,6 +309,7 @@ function processSleeperData(seasonData){
                         playoffSeed: roster.settings.playoffSeed,
                         points: roster.settings.fpts + roster.settings.fpts_decimal / 100,
                         pointsAgainst: roster.settings.fpts_against + roster.settings.fpts_against_decimal / 100,
+                        standardDeviation: roster.settings.standardDeviation
                     },
                 },
             });
@@ -247,11 +318,9 @@ function processSleeperData(seasonData){
 
     teams.sort((a,b) => a.team_id - b.team_id);
 
-    // Conor - Debugging statement here to show my teams
-    // console.log(ownerIdMap['730905664234332160']);
-
-    return {season: seasonData.season, teams}
+    return {season: seasonData.season, teams, schedule}
 }
+
 
 export default seasons
 
@@ -276,10 +345,6 @@ export default seasons
 // Transform Sleeper Data - League Summaries
 // Run an insert with the transactions array of objects
 // Add Standard Deviation to ESPN Data
-
-
-
-// Remaining Steps
 // Transform Matchup Data for Sleeper to align with ESPN Style
 // Add Standard Deviation to Sleeper Data
 // Add Matchups to data

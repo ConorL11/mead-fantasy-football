@@ -7,11 +7,7 @@ function HistoricalData(){
 
     const fetchHistoricalData = async() => {
         const seasons = await axios.get('/api/seasons');
-        const members = await axios.get('/api/leaguemembers');
-
-        console.log('seasons', seasons)
-        console.log('members', members)
-
+        console.log(seasons)
     }
 
     useEffect(() => {

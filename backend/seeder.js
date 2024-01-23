@@ -15,7 +15,6 @@ import connectDB from "./config/db.js";
 dotenv.config();
 connectDB();
 
-
 // // cpiData Seeder Functions
 // const importData = async () => {
 //     try {

@@ -11,16 +11,16 @@ const espnLeagueId = '322485';
 
 // Constant for Past Season Results
 const seasonResults = [
-    {season: '2023', platform: 'sleeper', championUser: "658e44679c85c8b96b5f5177", runnerUpUser:  "658e44679c85c8b96b5f5173", losingUser: "658e44679c85c8b96b5f5178"},
-    {season: '2022', platform: 'espn', championUser: "658e44679c85c8b96b5f517b", runnerUpUser: "658e44679c85c8b96b5f5173", losingUser: "658e44679c85c8b96b5f5179"},
-    {season: '2021', platform: 'sleeper', championUser: "658e44679c85c8b96b5f5174", runnerUpUser: "658e44679c85c8b96b5f5178", losingUser: "658e44679c85c8b96b5f5173"},
-    {season: '2020', platform: 'espn', championUser: "658e44679c85c8b96b5f5175", runnerUpUser: "658e44679c85c8b96b5f5174", losingUser: "658e44679c85c8b96b5f5179" },
-    {season: '2019', platform: 'espn', championUser: "658e44679c85c8b96b5f5175", runnerUpUser: "658e44679c85c8b96b5f5177", losingUser: "658e44679c85c8b96b5f5179"},
-    {season: '2018', platform: 'espn', championUser: "658e44679c85c8b96b5f5178", runnerUpUser: "658e44679c85c8b96b5f5179", losingUser: "658e44679c85c8b96b5f5176"},
-    {season: '2017', platform: 'espn', championUser: "658e44679c85c8b96b5f5174", runnerUpUser: "658e44679c85c8b96b5f5176", losingUser: "658e44679c85c8b96b5f517a"},
-    {season: '2016', platform: 'espn', championUser: "658e44679c85c8b96b5f5172", runnerUpUser: "658e44679c85c8b96b5f5178", losingUser: "658e44679c85c8b96b5f517c"},
-    {season: '2015', platform: 'espn', championUser: "658e44679c85c8b96b5f5179", runnerUpUser: "658e44679c85c8b96b5f5175", losingUser: "658e44679c85c8b96b5f517a"},
-    {season: '2014', platform: 'espn', championUser: "658e44679c85c8b96b5f5176", runnerUpUser: "658e44679c85c8b96b5f5175", losingUser: "658e44679c85c8b96b5f517d"},
+    {season: 2023, platform: 'sleeper', championUser: "658e44679c85c8b96b5f5177", runnerUpUser:  "658e44679c85c8b96b5f5173", losingUser: "658e44679c85c8b96b5f5178"},
+    {season: 2022, platform: 'espn', championUser: "658e44679c85c8b96b5f517b", runnerUpUser: "658e44679c85c8b96b5f5173", losingUser: "658e44679c85c8b96b5f5179"},
+    {season: 2021, platform: 'sleeper', championUser: "658e44679c85c8b96b5f5174", runnerUpUser: "658e44679c85c8b96b5f5178", losingUser: "658e44679c85c8b96b5f5173"},
+    {season: 2020, platform: 'espn', championUser: "658e44679c85c8b96b5f5175", runnerUpUser: "658e44679c85c8b96b5f5174", losingUser: "658e44679c85c8b96b5f5179" },
+    {season: 2019, platform: 'espn', championUser: "658e44679c85c8b96b5f5175", runnerUpUser: "658e44679c85c8b96b5f5177", losingUser: "658e44679c85c8b96b5f5179"},
+    {season: 2018, platform: 'espn', championUser: "658e44679c85c8b96b5f5178", runnerUpUser: "658e44679c85c8b96b5f5179", losingUser: "658e44679c85c8b96b5f5176"},
+    {season: 2017, platform: 'espn', championUser: "658e44679c85c8b96b5f5174", runnerUpUser: "658e44679c85c8b96b5f5176", losingUser: "658e44679c85c8b96b5f517a"},
+    {season: 2016, platform: 'espn', championUser: "658e44679c85c8b96b5f5172", runnerUpUser: "658e44679c85c8b96b5f5178", losingUser: "658e44679c85c8b96b5f517c"},
+    {season: 2015, platform: 'espn', championUser: "658e44679c85c8b96b5f5179", runnerUpUser: "658e44679c85c8b96b5f5175", losingUser: "658e44679c85c8b96b5f517a"},
+    {season: 2014, platform: 'espn', championUser: "658e44679c85c8b96b5f5176", runnerUpUser: "658e44679c85c8b96b5f5175", losingUser: "658e44679c85c8b96b5f517d"},
 ];
 
 // const seasonResultsReadable = [
@@ -89,6 +89,7 @@ try {
         {season: 2022, rawData: rawData2022},
     ];
 
+    // Put together object of Sleeper seasons to loop over and process
     let rawSleeperSeasons = [
         {season: 2021, rawData: rawData2021},
         {season: 2023, rawData: rawData2023}
@@ -108,6 +109,17 @@ try {
 
     // sort final array based on year
     seasons.sort((a,b) => a.season - b.season);
+
+    // CONOR Working Here
+    // add hardcoded playoff results to the object
+    for(const season of seasons){
+        for(const seasonResult of seasonResults){
+            if(seasonResult.season == season.season){
+                season.results = {...seasonResult}
+                delete season.results.season;
+            }
+        }
+    }
 
     console.log('Data transform completed!')
     debugger

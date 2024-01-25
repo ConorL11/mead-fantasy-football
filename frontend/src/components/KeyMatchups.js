@@ -31,7 +31,7 @@ function KeyMatchups(props){
                                     <div className="teamName1Text">{rosterIdMap[game.player1].user_name.split(" ")[0]}</div>
                                     </div>
                                     <div className="flexHorizontal">
-                                        <div className=""><img className="mediumAvatar" src={`/headshots/${rosterIdMap[game.player1].user_id}.png`} alt="" /></div>
+                                        <div className=""><img className="mediumAvatar" src={`/headshots/${rosterIdMap[game.player1].member_id}.png`} alt="" /></div>
                                         <div className={`matchupBar player1Bar ${rosterIdMap[game.player1].weeklyPointsFor[game.week - 1].points > rosterIdMap[game.player2].weeklyPointsFor[game.week - 1].points ? 'winningBar' : 'losingBar'}`}>
                                             <div className="mr_4">{rosterIdMap[game.player1].weeklyPointsFor[game.week-1].points}</div>
                                         </div>   
@@ -66,7 +66,7 @@ function KeyMatchups(props){
                                         <div className={`matchupBar player2Bar ${rosterIdMap[game.player1].weeklyPointsFor[game.week - 1].points < rosterIdMap[game.player2].weeklyPointsFor[game.week - 1].points ? 'winningBar' : 'losingBar'}`}>
                                             <div className="ml_4">{rosterIdMap[game.player2].weeklyPointsFor[game.week-1].points}</div>
                                         </div>   
-                                        <div className=""><img className="mediumAvatar" src={`/headshots/${rosterIdMap[game.player2].user_id}.png`} alt="" /></div>
+                                        <div className=""><img className="mediumAvatar" src={`/headshots/${rosterIdMap[game.player2].member_id}.png`} alt="" /></div>
                                     </div>
                                 </div> : 
                                 <div>
@@ -103,7 +103,7 @@ function KeyMatchups(props){
                                     <div className="teamName1Text">{rosterIdMap[game.player1].user_name.split(" ")[0]}</div>
                                     </div>
                                     <div className="flexHorizontal">
-                                        <div className=""><img className="mediumAvatar" src={`/headshots/${rosterIdMap[game.player1].user_id}.png`} alt="" /></div>
+                                        <div className=""><img className="mediumAvatar" src={`/headshots/${rosterIdMap[game.player1].member_id}.png`} alt="" /></div>
                                         <div className={`matchupBar player1Bar ${rosterIdMap[game.player1].weeklyPointsFor[game.week - 1].points > rosterIdMap[game.player2].weeklyPointsFor[game.week - 1].points ? 'winningBar' : 'losingBar'}`}>
                                             <div className="mr_4">{rosterIdMap[game.player1].weeklyPointsFor[game.week-1].points}</div>
                                         </div>   
@@ -138,7 +138,7 @@ function KeyMatchups(props){
                                         <div className={`matchupBar player2Bar ${rosterIdMap[game.player1].weeklyPointsFor[game.week - 1].points < rosterIdMap[game.player2].weeklyPointsFor[game.week - 1].points ? 'winningBar' : 'losingBar'}`}>
                                             <div className="ml_4">{rosterIdMap[game.player2].weeklyPointsFor[game.week-1].points}</div>
                                         </div>   
-                                        <div className=""><img className="mediumAvatar" src={`/headshots/${rosterIdMap[game.player2].user_id}.png`} alt="" /></div>
+                                        <div className=""><img className="mediumAvatar" src={`/headshots/${rosterIdMap[game.player2].member_id}.png`} alt="" /></div>
                                     </div>
                                 </div> : 
                                 <div>

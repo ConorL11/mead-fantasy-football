@@ -27,6 +27,18 @@ function SleeperData(){
         const users = responseUsers.data; 
         const rosters = responseRosters.data.sort();
 
+        // Create League Member Map
+        let memberMap = {};
+        for(const member of leagueMembers){
+            for(const id of member.espn_ids){
+                memberMap[id] = member;
+            }
+            for(const id of member.sleeper_ids){
+                memberMap[id] = member;
+            }
+        }
+
+
         // Create Roster Maps
         let rosterIdMap = {};
         let ownerIdMap = {};
@@ -75,6 +87,9 @@ function SleeperData(){
             // Assign Nickname to User Object from leagueMembers Back End
             user.nickname = leagueMembers.find(member => member.sleeper_ids.some(id => id === user.user_id )).user_nickname;
             user.user_name = leagueMembers.find(member => member.sleeper_ids.some(id => id === user.user_id )).user_name;
+
+            // Assign Member ID to User Object from leagueMembers Back End
+            user.member_id = memberMap[user.user_id]._id;
 
             // by default sleeper API has this as undefined at the start of a season. Comment written in 2023 at start of the sesason
             if(!user.settings.winning_pct){

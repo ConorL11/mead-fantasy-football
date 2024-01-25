@@ -15,7 +15,7 @@ function AveragePoints(props){
                         <div>
                             <div className="teamName">{team.user_name}</div>
                             <div className="flexHorizontal">
-                                <div ><img className="mediumAvatar" src={`/headshots/${team.user_id}.png`} alt="" /></div>
+                                <div ><img className="mediumAvatar" src={`/headshots/${team.member_id}.png`} alt="" /></div>
                                 <div className={`coloredBar coolBar`} style={{ width: `${(team.settings.average_points / maxAveragePoints) * 90 }%` }}>
                                     <div className="teamPoints">{team.settings.average_points.toFixed(1)}</div>
                                 </div>

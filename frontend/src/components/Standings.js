@@ -70,7 +70,7 @@ function Standings(){
                             <td data-cell="Team">
                                 {censorContent ? 
                                     <div className="team-display flexHorizontal">
-                                        <div className="smallAvatar"><img src={`/headshots/${team.user_id}.png`} alt="" /></div>
+                                        <div className="smallAvatar"><img src={`/headshots/${team.member_id}.png`} alt="" /></div>
                                         <div className="ml_1">
                                             <div>{team.user_name}</div>
                                         </div>

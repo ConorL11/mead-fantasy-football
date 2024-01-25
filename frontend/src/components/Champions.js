@@ -13,6 +13,7 @@ function Champions(){
         const {data: members} = await axios.get('/api/leagueMembers');
         const champions = processData(seasons, members);
         console.log('champions', champions)
+        console.log('members', members)
         setChampions(champions) ;
     }
 
@@ -118,9 +119,15 @@ function Champions(){
             <h1>Trophy Room</h1>
             {champions.map(season => (
                 <div key={season.season}>
-                    <div className="flexHorizontal">
+                    <div>
+                        <h2>{season.season}</h2>
+                        <div ><img className="mediumAvatar" src={`/headshots/${season.champion.user._id}.png`} alt=""/></div>
                         <div>{season.champion.user.user_name}</div>
-                    </div> 
+                        <div>{season.champion.stats.summary.regularSeason.wins} - {season.champion.stats.summary.regularSeason.losses}</div>
+                        <div>{(season.champion.stats.summary.regularSeason.points / (season.champion.stats.summary.regularSeason.wins + season.champion.stats.summary.regularSeason.losses)).toFixed(1)} PPG</div>
+                        <div>{(season.champion.stats.summary.regularSeason.pointsAgainst / (season.champion.stats.summary.regularSeason.wins + season.champion.stats.summary.regularSeason.losses)).toFixed(1)} OPPG</div>
+
+                    </div>
                 </div>
             ))}
         </div>

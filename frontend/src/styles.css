@@ -839,4 +839,47 @@ table.pastChampions {
     margin-left: 35px;
 }
 
-/* Outlier Points  */
+/* Trophy Room  */
+.trophyRoom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trophyRoomSeasonGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.25fr 1fr 1fr 0.25fr;
+    place-items: center;
+}
+
+.trophyRoomSeason {
+    grid-column: 2 / 3;
+    grid-row: 1;
+}
+
+.trophyRoomChampion {
+    grid-column: 2 / 3;
+    grid-row: 2;
+}
+
+.trophyRoomRunnerUp {
+    grid-column: 1 / 2;
+    grid-row: 3;
+}
+
+.trophyRoomHighScorer {
+    grid-column: 3 / 4;
+    grid-row: 3;
+}
+
+.trophyRoomLoser {
+    grid-column: 2 / 3;
+    grid-row: 3;
+}
+
+.trophyRoomUserCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

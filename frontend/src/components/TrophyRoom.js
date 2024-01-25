@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function Champions(){
+function TrophyRoom(){
     const [champions, setChampions] = useState([]);
 
     useEffect(() => {
@@ -111,21 +111,48 @@ function Champions(){
                 break;
             }
         }
-        return stats
+        return stats;
     }
     
     return (
-        <div>
+        <div className="trophyRoom">
             <h1>Trophy Room</h1>
             {champions.map(season => (
                 <div key={season.season}>
-                    <div>
-                        <h2>{season.season}</h2>
-                        <div ><img className="mediumAvatar" src={`/headshots/${season.champion.user._id}.png`} alt=""/></div>
-                        <div>{season.champion.user.user_name}</div>
-                        <div>{season.champion.stats.summary.regularSeason.wins} - {season.champion.stats.summary.regularSeason.losses}</div>
-                        <div>{(season.champion.stats.summary.regularSeason.points / (season.champion.stats.summary.regularSeason.wins + season.champion.stats.summary.regularSeason.losses)).toFixed(1)} PPG</div>
-                        <div>{(season.champion.stats.summary.regularSeason.pointsAgainst / (season.champion.stats.summary.regularSeason.wins + season.champion.stats.summary.regularSeason.losses)).toFixed(1)} OPPG</div>
+                    <div className="trophyRoomSeasonGrid">
+                        <h2 className="trophyRoomSeason">{season.season}</h2>
+                        <div className="trophyRoomUserCard trophyRoomChampion">
+                            <h2>League Champion</h2>
+                            <div ><img className="mediumAvatar" src={`/headshots/${season.champion.user._id}.png`} alt=""/></div>
+                            <div>{season.champion.user.user_name}</div>
+                            <div>{season.champion.stats.summary.regularSeason.wins} - {season.champion.stats.summary.regularSeason.losses}</div>
+                            <div>{(season.champion.stats.summary.regularSeason.points / (season.champion.stats.summary.regularSeason.wins + season.champion.stats.summary.regularSeason.losses)).toFixed(1)} PPG</div>
+                            <div>{(season.champion.stats.summary.regularSeason.pointsAgainst / (season.champion.stats.summary.regularSeason.wins + season.champion.stats.summary.regularSeason.losses)).toFixed(1)} OPPG</div>
+                        </div>
+                        <div className="trophyRoomUserCard trophyRoomRunnerUp">
+                            <h3>Runner Up</h3>
+                            <div ><img className="mediumAvatar" src={`/headshots/${season.runnerUp.user._id}.png`} alt=""/></div>
+                            <div>{season.runnerUp.user.user_name}</div>
+                            <div>{season.runnerUp.stats.summary.regularSeason.wins} - {season.runnerUp.stats.summary.regularSeason.losses}</div>
+                            <div>{(season.runnerUp.stats.summary.regularSeason.points / (season.runnerUp.stats.summary.regularSeason.wins + season.runnerUp.stats.summary.regularSeason.losses)).toFixed(1)} PPG</div>
+                            <div>{(season.runnerUp.stats.summary.regularSeason.pointsAgainst / (season.runnerUp.stats.summary.regularSeason.wins + season.runnerUp.stats.summary.regularSeason.losses)).toFixed(1)} OPPG</div>
+                        </div>
+                        <div className="trophyRoomUserCard trophyRoomLoser" >
+                            <h3>Biggest Loser</h3>
+                            <div ><img className="mediumAvatar" src={`/headshots/${season.loser.user._id}.png`} alt=""/></div>
+                            <div>{season.loser.user.user_name}</div>
+                            <div>{season.loser.stats.summary.regularSeason.wins} - {season.loser.stats.summary.regularSeason.losses}</div>
+                            <div>{(season.loser.stats.summary.regularSeason.points / (season.loser.stats.summary.regularSeason.wins + season.loser.stats.summary.regularSeason.losses)).toFixed(1)} PPG</div>
+                            <div>{(season.loser.stats.summary.regularSeason.pointsAgainst / (season.loser.stats.summary.regularSeason.wins + season.loser.stats.summary.regularSeason.losses)).toFixed(1)} OPPG</div>
+                        </div>
+                        <div className="trophyRoomUserCard trophyRoomHighScorer">
+                            <h3>High Scorer </h3>
+                            <div ><img className="mediumAvatar" src={`/headshots/${season.highScorer.user._id}.png`} alt=""/></div>
+                            <div>{season.highScorer.user.user_name}</div>
+                            <div>{season.highScorer.stats.summary.regularSeason.wins} - {season.highScorer.stats.summary.regularSeason.losses}</div>
+                            <div>{(season.highScorer.stats.summary.regularSeason.points / (season.highScorer.stats.summary.regularSeason.wins + season.highScorer.stats.summary.regularSeason.losses)).toFixed(1)} PPG</div>
+                            <div>{(season.highScorer.stats.summary.regularSeason.pointsAgainst / (season.highScorer.stats.summary.regularSeason.wins + season.highScorer.stats.summary.regularSeason.losses)).toFixed(1)} OPPG</div>
+                        </div>
 
                     </div>
                 </div>
@@ -135,4 +162,4 @@ function Champions(){
 
 }
 
-export default Champions
+export default TrophyRoom

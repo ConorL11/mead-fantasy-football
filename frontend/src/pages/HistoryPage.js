@@ -1,12 +1,12 @@
 // import { pastWinners } from "../content/constants";
 // import { useState, useEffect } from "react";
 // import axios from "axios";
-import HistoricalData from "../components/HistoricalData";
+import Champions from "../components/Champions";
 
 function HistoryPage() {
 
     return (
-        <HistoricalData/>
+        <Champions/>
     )
 }
 

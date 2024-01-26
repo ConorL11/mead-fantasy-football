@@ -1,14 +1,15 @@
 import NavLinks from "./components/NavLinks";
 import Route from "./components/Route";
+
 import BylawsPage from "./pages/BylawsPage";
 import HomePage from "./pages/HomePage";
 import AnalyticsPage from "./pages/AnalyticsPage";
-import APITestPage from "./pages/APITestPage";
+import HistoryPage from "./pages/HistoryPage";
+import TrophyRoomPage from "./pages/TrophyRoomPage";
+
 import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 import useOutsideClick from "./hooks/useOutsideClick";
-import HistoryPage from "./pages/HistoryPage";
-import ConorsPowerIndex from "./pages/ConorsPowerIndex";
 
 function App() {
 
@@ -55,14 +56,11 @@ function App() {
                 <Route path="/analytics">
                     <AnalyticsPage/>
                 </Route>
-                <Route path="/conorspowerindex">
-                    <ConorsPowerIndex/>
-                </Route>
-                <Route path="/analysis/apitest">
-                    <APITestPage/>
-                </Route>
                 <Route path="/history">
                     <HistoryPage/>
+                </Route>
+                <Route path="/trophyroom">
+                    <TrophyRoomPage/>
                 </Route>
             </div>
         </div>

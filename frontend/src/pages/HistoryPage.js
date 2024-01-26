@@ -1,12 +1,12 @@
 // import { pastWinners } from "../content/constants";
 // import { useState, useEffect } from "react";
 // import axios from "axios";
-import TrophyRoom from "../components/TrophyRoom";
+import TrophyRoom from "./TrophyRoomPage";
 
 function HistoryPage() {
 
     return (
-        <TrophyRoom/>
+        <div>I'm the Generic History Page</div>
     )
 }
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function TrophyRoom(){
+function TrophyRoomPage(){
     const [champions, setChampions] = useState([]);
 
     useEffect(() => {
@@ -159,4 +159,4 @@ function TrophyRoom(){
     )
 }
 
-export default TrophyRoom
+export default TrophyRoomPage

@@ -12,8 +12,6 @@ function TrophyRoom(){
         const {data: seasons} = await axios.get('/api/seasons');
         const {data: members} = await axios.get('/api/leagueMembers');
         const champions = processData(seasons, members);
-        console.log('champions', champions)
-        console.log('members', members)
         setChampions(champions) ;
     }
 
@@ -119,7 +117,7 @@ function TrophyRoom(){
             <h1>Trophy Room</h1>
             {champions.map(season => (
                 <div key={season.season}>
-                    <div className="trophyRoomSeasonGrid">
+                    <div className="trophyRoomSeasonGrid insightContainer">
                         <h2 className="trophyRoomSeason">{season.season}</h2>
                         <div className="trophyRoomUserCard trophyRoomChampion">
                             <h2>League Champion</h2>
@@ -159,7 +157,6 @@ function TrophyRoom(){
             ))}
         </div>
     )
-
 }
 
 export default TrophyRoom

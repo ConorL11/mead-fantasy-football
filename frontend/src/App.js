@@ -1,4 +1,4 @@
-import NavLinks from "./components/NavLinks";
+import NavBar from "./components/NavBar";
 import Route from "./components/Route";
 
 import BylawsPage from "./pages/BylawsPage";
@@ -38,7 +38,7 @@ function App() {
                     <h3 className="title">Mead Fantasy Football</h3>
                     <input type="checkbox" id="nav-toggle" className="nav-toggle" ref={ref} checked={isChecked} onChange={handleCheck}/>
                     <nav>
-                        <NavLinks/>
+                        <NavBar/>
                     </nav>
                     <label htmlFor="nav-toggle" className="nav-toggle-label" onClick={handleMenuClick}>
                         <span><AiOutlineMenu className="nav-dropdown-icon"/></span>

@@ -136,8 +136,8 @@ body {
     animation: spinner .6s linear infinite;
 }   
 
-
-/* Nav Styling  */
+/* Conor Working Here */ 
+/* Mobile Nav Styling  */
 header {
     background: var(--header-background);
     border-bottom: 2px solid var(--burnt-orange);   
@@ -192,6 +192,7 @@ nav ul {
     list-style: none;
     font-size: x-small;
     text-align: left;
+    width: fit-content;
 }
 
 nav li {
@@ -199,10 +200,28 @@ nav li {
     margin-left: 1em;
 }
 
+.navIcon {
+    padding: 0 0.5em;
+}
+
+.navParentLink {
+    padding: 0.5em 0em;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+
+.navParentLink > a > span:first-child{
+    display: none;
+}
+
+.navSubMenu {
+    padding: 0.5em 0em;
+}
+
 nav a {
     color: white;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
     text-transform: uppercase;
     opacity: 0;
     transition: opacity 50ms ease-in-out;
@@ -221,9 +240,8 @@ nav a:hover {
     transition: opacity 100ms ease-in-out 100ms;
 }
 
-
-
-@media screen and (min-width: 800px){
+/* Desktop Nav Styling */
+@media screen and (min-width: 1300px){
     .nav-toggle-label {
         display: none;
     }
@@ -266,9 +284,9 @@ nav a:hover {
     }
 
     nav ul {
-        /* display: flex;
-        justify-content: flex-end; */
+        width: auto;
         display: grid;
+
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 0.1fr
     }
@@ -279,11 +297,14 @@ nav a:hover {
         margin-bottom: 0;
     }
 
+    .navIcon {
+        padding: 0 0.5em;
+    }
+
     .navSubMenu {
         grid-column: span 1;
         grid-row: 2;
         width: fit-content;
-        /* white-space: pre; */
         background-color: black;
         border: 1px solid var(--burnt-orange);
         margin: 2rem 0;
@@ -291,18 +312,27 @@ nav a:hover {
         border-radius: 0.5rem;
         box-shadow: 0 10px 15px -3px rgba(46, 41, 51, 0.08),
           0 4px 6px -2px rgba(71, 63, 79, 0.16);
+        display: none;
+    }
+
+    .navSubMenu .navIcon { 
+        padding-right: 0.5rem;
+    }
+
+    .showNavSubMenu {
+        display: block;
+    }
+
+    .navParentLink {
+        all: unset;
+    }
+
+    .navParentLink > a > span:first-child{
+        display: inline-block;
     }
 
     .navSubMenu a {
         font-size: 0.8rem;
-    }
-
-    .navSubMenuPlaceholder {
-
-    }
-
-    .showSubMenu {
-        display: block;
     }
 }
 
@@ -876,6 +906,23 @@ table.pastChampions {
 .positiveLuckTeamPoints {
     margin-left: 35px;
 }
+
+/* History Page */
+.historyPageGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(25em, 1fr));
+    gap: 1em;
+}
+
+.historyPageGrid a {
+    height: 25em;
+    padding: 20px;
+    margin: 20px;
+    background-color: #333;
+    border-radius: 5%;
+    color: white;
+}
+
 
 /* Trophy Room  */
 .trophyRoom {

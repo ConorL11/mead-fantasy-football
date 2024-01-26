@@ -926,7 +926,24 @@ table.pastChampions {
     margin: 20px;
     background-color: #333;
     border-radius: 5%;
-    color: white;
+    color: var(--offWhiteHeaders);
+    text-decoration: none;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+
+    /* transition: box-shadow 0.1s ease-in-out;
+    transition: color 0.1s ease-in-out; */
+}
+
+.historyPageGrid a:hover {
+    color: var(--burnt-orange-light);
+    box-shadow: inset 0 0 0.5em rgba(0, 0, 0, 0.5);
+}
+
+.bigIcon {
+    font-size: 6em;
 }
 
 
@@ -947,6 +964,8 @@ table.pastChampions {
 .trophyRoomSeason {
     grid-column: 2 / 3;
     grid-row: 1;
+    margin-top: 0;
+    align-self: self-start;
 }
 
 .trophyRoomChampion {

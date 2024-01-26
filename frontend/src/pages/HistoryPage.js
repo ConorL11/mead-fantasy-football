@@ -11,8 +11,9 @@ function HistoryPage() {
         <div className="historyPageGrid">
             {historyLinks.map((link) => (
                 <Link key={link.label} to={link.path} className="historyPageCard">
-                    <span >{link.icon}</span>
-                    <span className="pl_1">{link.label}</span>
+                    <h2 className="">{link.label}</h2>
+                    <div className="bigIcon">{link.icon}</div>
+                    <div className="">{link.description}</div>
                 </Link>
             ))}
         </div>

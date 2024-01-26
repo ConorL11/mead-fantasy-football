@@ -23,7 +23,7 @@ function OutlierWeeks(props){
                             <div key={team.user_id} className="teamBar">
                                 <div className="teamName">{team.user_name}</div>
                                 <div className="flexHorizontal">
-                                    <div ><img className="mediumAvatar" src={`/headshots/${team.user_id}.png`} alt="" /></div>
+                                    <div ><img className="mediumAvatar" src={`/headshots/${team.member_id}.png`} alt="" /></div>
                                     <div className={`coloredBar coolBar`} style={{ width: `${(team.bestWeek / maxBestWeek) * 80 }%` }}>
                                         <div className="teamPoints">{team.bestWeek}</div>
                                     </div>
@@ -55,7 +55,7 @@ function OutlierWeeks(props){
                             <div key={team.user_id} className="teamBar">
                                 <div className="teamName">{team.user_name}</div>
                                 <div className="flexHorizontal">
-                                    <div ><img className="mediumAvatar" src={`/headshots/${team.user_id}.png`} alt="" /></div>
+                                    <div ><img className="mediumAvatar" src={`/headshots/${team.member_id}.png`} alt="" /></div>
                                     <div className={`coloredBar warmBar`} style={{ width: `${(team.worstWeek / maxWorstWeek) * 75 }%` }}>
                                         <div className="teamPoints">{team.worstWeek}</div>
                                     </div>

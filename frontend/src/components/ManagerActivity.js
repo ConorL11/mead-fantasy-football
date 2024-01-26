@@ -17,7 +17,7 @@ function ManagerActivity(props){
                             <div key={team.user_id} className="teamBar">
                                 <div className="teamName">{team.user_name}</div>
                                 <div className="flexHorizontal">
-                                    <div ><img className="mediumAvatar" src={`/headshots/${team.user_id}.png`} alt="" /></div>
+                                    <div ><img className="mediumAvatar" src={`/headshots/${team.member_id}.png`} alt="" /></div>
                                     <div className={`coloredBar coolBar`} style={{ width: `${(team.adds / maxPickups) * 100 }%` }}>
                                         <div className="teamPoints">{team.adds.toFixed(0)}</div>
                                     </div>
@@ -49,7 +49,7 @@ function ManagerActivity(props){
                             <div key={team.user_id} className="teamBar">
                                 <div className="teamName">{team.user_name}</div>
                                 <div className="flexHorizontal">
-                                    <div ><img className="mediumAvatar" src={`/headshots/${team.user_id}.png`} alt="" /></div>
+                                    <div ><img className="mediumAvatar" src={`/headshots/${team.member_id}.png`} alt="" /></div>
                                     <div className={`coloredBar coolBar`} style={{ width: `${(team.trades / maxTrades) * 100 }%` }}>
                                         <div className="teamPoints">{team.trades.toFixed(0)}</div>
                                     </div>

@@ -19,7 +19,7 @@ function LuckRating(props){
                                     <div className="negativeLuckTeamPoints">{team.luckRating.toFixed(2)}</div>
                                 </div>
                             </div>}
-                            <img className="luckAvatar mediumAvatar" src={`/headshots/${team.user_id}.png`} alt="" />
+                            <img className="luckAvatar mediumAvatar" src={`/headshots/${team.member_id}.png`} alt="" />
                             {team.luckRating >= 0 && <div className="positiveLuckTeamName">{team.user_name}</div>}
                             {team.luckRating >= 0 && <div className="positiveLuckContainer">
                                 <div className="positiveLuckBar" style={{ width: `${(Math.abs(team.luckRating) / maxLuckRating) * 100 }%` }}>

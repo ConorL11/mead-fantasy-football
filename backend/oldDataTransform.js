@@ -8,18 +8,33 @@ const leagueId2021 = '730899355048996864';
 const leagueId2023 = '990427440436625408';
 const espnLeagueId = '322485';
 
-const pastSeasons = [
-    {year: '2023', platform: 'sleeper', winningUser: 'Boobsink', winningTeam: 'Americas Fantasy Team', losingUser: '???', losingTeam: '????', punishment: 'Likely no punishment or eggs'},
-    {year: '2022', platform: 'espn', winningUser: 'Fisher', winningTeam: 'Big Bussin Bouncy Balls', losingUser: 'Cody', losingTeam: 'Just Last', punishment: 'Wore Griffs HS Football Jersey to the draft (kinda).'},
-    {year: '2021', platform: 'sleeper', winningUser: 'Rob', winningTeam: 'Unlucky Bastards', losingUser: 'Griff', losingTeam: 'Balerian the Dreadful', punishment: 'Got pelted with eggs'},
-    {year: '2020', platform: 'espn', winningUser: 'Desch', winningTeam: 'Pop Drop and Lockett', losingUser: 'Cody', losingTeam: 'I quit', punishment: 'Made an Only Fans (kinda)'},
-    {year: '2019', platform: 'espn', winningUser: 'Desch', winningTeam: "Philip Rivers' 10th Kid", losingUser: 'Ryan', losingTeam: 'Back to retirement', punishment: 'Wore a tutu to the draft (kinda)'},
-    {year: '2018', platform: 'espn', winningUser: 'Patty', winningTeam: 'The Boobskin', losingUser: 'Fisher', losingTeam: 'Mia Malkova', punishment: 'Had to get frosted tips (but looked good)'},
-    {year: '2017', platform: 'espn', winningUser: 'Rob', winningTeam: 'The ToddFather Part 2',  losingUser: 'Thomas', losingTeam: 'Well Darn', punishment: 'Wore a dildo to the FoCo bars'}, 
-    {year: '2016', platform: 'espn', winningUser: 'Conor', winningTeam: 'Curb Check', losingUser: 'John Brady', losingTeam: 'At Least Im Not at Wyoming', punishment: 'Did not follow through on head shaving'},
-    {year: '2015', platform: 'espn', winningUser: 'Cody', winningTeam: 'LOL Hiroshima',  losingUser: 'Thomas', losingTeam: 'Comeback Time Bitches', punishment: ' Did Standup Comedy'},
-    {year: '2014', platform: 'espn', winningUser: 'Ryan', winningTeam: 'The Rylo Show', losingUser: 'Perez', losingTeam: 'FUCK MARSHAWN LYNCH', punishment: 'Got Kicked out of the league'},
+
+// Constant for Past Season Results
+const seasonResults = [
+    {season: 2023, platform: 'sleeper', championUser: "658e44679c85c8b96b5f5177", runnerUpUser:  "658e44679c85c8b96b5f5173", losingUser: "658e44679c85c8b96b5f5178"},
+    {season: 2022, platform: 'espn', championUser: "658e44679c85c8b96b5f517b", runnerUpUser: "658e44679c85c8b96b5f5173", losingUser: "658e44679c85c8b96b5f5179"},
+    {season: 2021, platform: 'sleeper', championUser: "658e44679c85c8b96b5f5174", runnerUpUser: "658e44679c85c8b96b5f5178", losingUser: "658e44679c85c8b96b5f5173"},
+    {season: 2020, platform: 'espn', championUser: "658e44679c85c8b96b5f5175", runnerUpUser: "658e44679c85c8b96b5f5174", losingUser: "658e44679c85c8b96b5f5179" },
+    {season: 2019, platform: 'espn', championUser: "658e44679c85c8b96b5f5175", runnerUpUser: "658e44679c85c8b96b5f5177", losingUser: "658e44679c85c8b96b5f5179"},
+    {season: 2018, platform: 'espn', championUser: "658e44679c85c8b96b5f5178", runnerUpUser: "658e44679c85c8b96b5f5179", losingUser: "658e44679c85c8b96b5f5176"},
+    {season: 2017, platform: 'espn', championUser: "658e44679c85c8b96b5f5174", runnerUpUser: "658e44679c85c8b96b5f5176", losingUser: "658e44679c85c8b96b5f517a"},
+    {season: 2016, platform: 'espn', championUser: "658e44679c85c8b96b5f5172", runnerUpUser: "658e44679c85c8b96b5f5178", losingUser: "658e44679c85c8b96b5f517c"},
+    {season: 2015, platform: 'espn', championUser: "658e44679c85c8b96b5f5179", runnerUpUser: "658e44679c85c8b96b5f5175", losingUser: "658e44679c85c8b96b5f517a"},
+    {season: 2014, platform: 'espn', championUser: "658e44679c85c8b96b5f5176", runnerUpUser: "658e44679c85c8b96b5f5175", losingUser: "658e44679c85c8b96b5f517d"},
 ];
+
+// const seasonResultsReadable = [
+//     {year: '2023', platform: 'sleeper', winningUser: 'Boobsink', winningTeam: 'Americas Fantasy Team', losingUser: '???', losingTeam: '????', punishment: 'Likely no punishment or eggs'},
+//     {year: '2022', platform: 'espn', winningUser: 'Fisher', winningTeam: 'Big Bussin Bouncy Balls', losingUser: 'Cody', losingTeam: 'Just Last', punishment: 'Wore Griffs HS Football Jersey to the draft (kinda).'},
+//     {year: '2021', platform: 'sleeper', winningUser: 'Rob', winningTeam: 'Unlucky Bastards', losingUser: 'Griff', losingTeam: 'Balerian the Dreadful', punishment: 'Got pelted with eggs'},
+//     {year: '2020', platform: 'espn', winningUser: 'Desch', winningTeam: 'Pop Drop and Lockett', losingUser: 'Cody', losingTeam: 'I quit', punishment: 'Made an Only Fans (kinda)'},
+//     {year: '2019', platform: 'espn', winningUser: 'Desch', winningTeam: "Philip Rivers' 10th Kid", losingUser: 'Ryan', losingTeam: 'Back to retirement', punishment: 'Wore a tutu to the draft (kinda)'},
+//     {year: '2018', platform: 'espn', winningUser: 'Patty', winningTeam: 'The Boobskin', losingUser: 'Fisher', losingTeam: 'Mia Malkova', punishment: 'Had to get frosted tips (but looked good)'},
+//     {year: '2017', platform: 'espn', winningUser: 'Rob', winningTeam: 'The ToddFather Part 2',  losingUser: 'Thomas', losingTeam: 'Well Darn', punishment: 'Wore a dildo to the FoCo bars'}, 
+//     {year: '2016', platform: 'espn', winningUser: 'Conor', winningTeam: 'Curb Check', losingUser: 'John Brady', losingTeam: 'At Least Im Not at Wyoming', punishment: 'Did not follow through on head shaving'},
+//     {year: '2015', platform: 'espn', winningUser: 'Cody', winningTeam: 'LOL Hiroshima',  losingUser: 'Thomas', losingTeam: 'Comeback Time Bitches', punishment: ' Did Standup Comedy'},
+//     {year: '2014', platform: 'espn', winningUser: 'Ryan', winningTeam: 'The Rylo Show', losingUser: 'Perez', losingTeam: 'FUCK MARSHAWN LYNCH', punishment: 'Got Kicked out of the league'},
+// ];
 
 // initialize variable to host all processed data
 
@@ -74,6 +89,7 @@ try {
         {season: 2022, rawData: rawData2022},
     ];
 
+    // Put together object of Sleeper seasons to loop over and process
     let rawSleeperSeasons = [
         {season: 2021, rawData: rawData2021},
         {season: 2023, rawData: rawData2023}
@@ -93,6 +109,17 @@ try {
 
     // sort final array based on year
     seasons.sort((a,b) => a.season - b.season);
+
+    // CONOR Working Here
+    // add hardcoded playoff results to the object
+    for(const season of seasons){
+        for(const seasonResult of seasonResults){
+            if(seasonResult.season == season.season){
+                season.results = {...seasonResult}
+                delete season.results.season;
+            }
+        }
+    }
 
     console.log('Data transform completed!')
     debugger
@@ -327,6 +354,7 @@ export default seasons
 
 
 // Conors Debugging and workflow notes
+// Old ESPN Leagues URL: https://fantasy.espn.com/football/league/history?leagueId=322485&seasonId=2023
 // ESPN API v2 - works for seasons 2017 and earlier
 // https://fantasy.espn.com/apis/v3/games/ffl/leagueHistory/322485?seasonId=2017&view=mTeam
 

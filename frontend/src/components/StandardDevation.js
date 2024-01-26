@@ -22,7 +22,7 @@ function StandardDeviation(props){
                             <div>
                                 <div className="teamName">{team.user_name}</div>
                                 <div className="flexHorizontal">
-                                    <img className="mediumAvatar" src={`/headshots/${team.user_id}.png`} alt="" />
+                                    <img className="mediumAvatar" src={`/headshots/${team.member_id}.png`} alt="" />
                                     <div className={`coloredBar warmBar`} style={{ width: `${(team.settings.standard_deviation / maxStandardDeviation) * 75 }%` }}>
                                         <div className="teamPoints">{team.settings.standard_deviation.toFixed(1)}</div>
                                     </div>
@@ -51,7 +51,7 @@ function StandardDeviation(props){
                             <div>
                                 <div className="teamName">{team.user_name}</div>
                                 <div className="flexHorizontal">
-                                    <img className="mediumAvatar" src={`/headshots/${team.user_id}.png`} alt="" />
+                                    <img className="mediumAvatar" src={`/headshots/${team.member_id}.png`} alt="" />
                                     <div className={`coloredBar coolBar`} style={{ width: `${(team.settings.standard_deviation / maxStandardDeviation) * 75 }%` }}>
                                         <div className="teamPoints">{team.settings.standard_deviation.toFixed(1)}</div>
                                     </div>

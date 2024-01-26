@@ -12,6 +12,19 @@ function Standings(){
         const leagueMembers = responseLeagueMembers.data;
         const users = responseUsers.data; 
         const rosters = responseRosters.data.sort();
+
+        // Create League Member Map
+        let memberMap = {};
+        for(const member of leagueMembers){
+            for(const id of member.espn_ids){
+                memberMap[id] = member;
+            }
+            for(const id of member.sleeper_ids){
+                memberMap[id] = member;
+            }
+        }
+
+
         for(const user of users){
             const roster = rosters.find(roster => roster.owner_id === user.user_id);
             if (roster) {
@@ -19,6 +32,8 @@ function Standings(){
                 user.settings.winning_pct = (user.settings.wins + user.settings.ties + user.settings.losses) > 0 ? user.settings.wins / (user.settings.wins + user.settings.ties + user.settings.losses) : 0;
                 user.avatar_link = "https://sleepercdn.com/avatars/thumbs/"+ user.avatar;
             }
+            // Assign Member ID to User Object from leagueMembers Back End
+            user.member_id = memberMap[user.user_id]._id;
         }
         users.sort((a,b) => b.settings.wins - a.settings.wins);
 
@@ -70,7 +85,7 @@ function Standings(){
                             <td data-cell="Team">
                                 {censorContent ? 
                                     <div className="team-display flexHorizontal">
-                                        <div className="smallAvatar"><img src={`/headshots/${team.user_id}.png`} alt="" /></div>
+                                        <div className="smallAvatar"><img src={`/headshots/${team.member_id}.png`} alt="" /></div>
                                         <div className="ml_1">
                                             <div>{team.user_name}</div>
                                         </div>

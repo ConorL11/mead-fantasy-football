@@ -1,6 +1,24 @@
 import mongoose from "mongoose";
 
 const seasonsSchema = new mongoose.Schema({
+    results: {
+        championUser: {type: String},
+        losingUser: {type: String},
+        platform: {type: String},
+        runnerUpUser: {type: String},
+    },
+    schedule: [{
+        id: {type: String, required: true},
+        matchupPeriodId: {type: Number, required: true},
+        away: {
+            teamId: {type: Number, required: false},
+            totalPoints: {type: Number, required: false},
+        },
+        home: {
+            teamId: {type: Number, required: false},
+            totalPoints: {type: Number, required: false},
+        }
+    }],
     season: {type: Number, required: true, unique: true}, 
     teams: [{
         owners: [
@@ -22,18 +40,6 @@ const seasonsSchema = new mongoose.Schema({
             adds: {type: Number},
             trades: {type: Number}
         },
-    }],
-    schedule: [{
-        id: {type: String, required: true},
-        matchupPeriodId: {type: Number, required: true},
-        away: {
-            teamId: {type: Number, required: false},
-            totalPoints: {type: Number, required: false},
-        },
-        home: {
-            teamId: {type: Number, required: false},
-            totalPoints: {type: Number, required: false},
-        }
     }],
 });
 

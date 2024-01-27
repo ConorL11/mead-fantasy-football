@@ -4,7 +4,7 @@ import { BiBarChartAlt2 } from "react-icons/bi"
 
 const historyLinks = [
     {label: 'Trophy Room', path: '/trophyroom', icon: <GoTrophy/>, description: 'Check out the past winners and losers of the league'},
-    // {label: 'Manager Comparison', path: '/managercomparison', icon: <GoTrophy/>},
+    {label: 'Top Managers', path: '/topmanagers', icon: <GoTrophy/>},
     // {label: 'Head to Head', path: '/headtohead', icon: <GoTrophy/>},
     // {label: 'Individual Performance', path: '/individualperformance', icon: <GoTrophy/>},
     // {label: 'Season Comparison', path: '/seasoncomparison', icon: <GoTrophy/>},

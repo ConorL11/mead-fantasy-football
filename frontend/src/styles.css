@@ -155,6 +155,7 @@ header {
 }
 
 h3 {
+    padding-top: 0.35em;
     font-size: 1em;
 }
 
@@ -256,18 +257,19 @@ nav a:hover {
         position: fixed;
         display: grid;
         grid-template-columns: 1fr 2fr 3fr 1fr;
-        grid-template-rows: 1fr 0.25fr;
     }
 
     .title { 
         grid-column: 2 / 3;
         grid-row: 1;
+        padding-top: 1em;
     }
 
     nav {
         all: unset;
         grid-column: 3 / 4;
-        align-items: center;
+        display: grid;
+        padding-top: 1.5em;
     }
 
     nav a {
@@ -279,7 +281,7 @@ nav a:hover {
         content: '';
         display: block;
         height: 5px;
-        background: black;
+        background: var(--burnt-orange);
         margin-bottom: 3px;
         transform: scale(0,1);
         transition: transform ease-in-out 100ms;
@@ -291,10 +293,11 @@ nav a:hover {
 
     nav ul {
         width: auto;
-        display: grid;
+        display: flex;
+    }
 
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 0.1fr
+    .navTopPadding {
+        padding-top: 2rem;
     }
 
     nav li {
@@ -313,8 +316,8 @@ nav a:hover {
         width: fit-content;
         background-color: black;
         border: 1px solid var(--burnt-orange);
-        margin: 2rem 0;
-        padding: 1rem;
+        margin: 1em 0;
+        padding: 1em;
         border-radius: 0.5rem;
         box-shadow: 0 10px 15px -3px rgba(46, 41, 51, 0.08),
           0 4px 6px -2px rgba(71, 63, 79, 0.16);
@@ -635,7 +638,7 @@ table.pastChampions {
 }
 
 
-    /* Analytics Shared Classes */
+/* Analytics Shared Classes */
 .mediumAvatar {
     position: relative;
     width: 50px;
@@ -932,14 +935,11 @@ table.pastChampions {
     display: flex;
     flex-direction: column;
     align-items: center ;
-
-    /* transition: box-shadow 0.1s ease-in-out;
-    transition: color 0.1s ease-in-out; */
 }
 
 .historyPageGrid a:hover {
     color: var(--burnt-orange-light);
-    box-shadow: inset 0 0 0.5em rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 0.5em var(--burnt-orange);
 }
 
 .bigIcon {
@@ -964,8 +964,8 @@ table.pastChampions {
 .trophyRoomSeason {
     grid-column: 2 / 3;
     grid-row: 1;
-    margin-top: 0;
-    align-self: self-start;
+    align-self: self-end;
+    margin: 0;
 }
 
 .trophyRoomChampion {

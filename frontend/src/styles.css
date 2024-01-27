@@ -49,6 +49,10 @@ body {
     padding-left: 10px;
 }
 
+.pl_2 { 
+    padding-left: 2em;
+}
+
 .ml_1 {
     margin-left: 10px;
 }
@@ -196,6 +200,7 @@ nav ul {
     font-size: x-small;
     text-align: left;
     width: fit-content;
+    white-space: pre;
 }
 
 nav li {
@@ -667,7 +672,6 @@ table.pastChampions {
     position: relative;
     top: 10px;
     left: 70px;
-    width: fit-content;
 }
 
 .teamPoints {
@@ -994,3 +998,56 @@ table.pastChampions {
     align-items: center;
     text-align: center;
 }
+
+/* Top Managers  */
+
+
+@media screen and (min-width: 1300px){
+    .teamNameGrid {
+        display: grid;
+        grid-template-columns: 0.2fr 1fr;
+    }
+    
+    .noTextBreak {
+        white-space: pre;
+    }
+}
+
+@media screen and (max-width: 1300px){
+    .teamNameGrid {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr;
+    }
+    
+    .noTextBreak {
+        white-space: pre;
+    }
+}
+
+.recordContainer {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
+    display: flex;
+    align-items: flex-end;
+    z-index: 2;
+    margin-left: -1em;
+}
+
+.recordBubble {
+    background-color: black;
+    border-radius: 50%;
+    height: 50px;
+    width: 55px;
+}
+.recordText {
+    position: absolute;
+    margin-left: 5px;
+    margin-bottom: 15px;
+}
+
+.topMnagerActivityContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+

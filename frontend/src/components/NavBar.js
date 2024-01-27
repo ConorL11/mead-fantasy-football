@@ -52,7 +52,7 @@ function NavBar({show}){
     });
 
     return(
-        <div >
+        <div>
             <ul>
                 {renderedLinks}
             </ul>

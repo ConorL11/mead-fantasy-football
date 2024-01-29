@@ -1,16 +1,19 @@
 
-function TopManagersAveragePlayoffSeed({members: managers}){
+function TopManagersLuckRating({members: managers, seasons}){
+
+
+
+    console.log('seasons', seasons);
+    console.log('managers', managers);
+
 
     managers = managers.filter(manager => manager.active);
 
-    for(const manager of managers){
-        manager.averagePlayoffSeed = manager.seedTotal / manager.seasons;
-    }
-    const maxPlayoffSeed = Math.max(...managers.map(manager => manager.averagePlayoffSeed));
+    // const maxPlayoffSeed = Math.max(...managers.map(manager => manager.averagePlayoffSeed));
     return(
         <div className="insightContainer">
-            <h1>Average Playoff Seed</h1>
-                <div>
+            <h1>Overall Luck Rating</h1>
+                {/* <div>
                     {managers.sort((a,b) => a.averagePlayoffSeed - b.averagePlayoffSeed).map(manager => (
                         <div key={manager.user_id} className="teamBar">
                             <div className="teamName">{manager.user_name}</div>
@@ -22,9 +25,9 @@ function TopManagersAveragePlayoffSeed({members: managers}){
                             </div>
                         </div>
                     ))}
-                </div>
+                </div> */}
         </div>
     )
 }
 
-export default TopManagersAveragePlayoffSeed
+export default TopManagersLuckRating

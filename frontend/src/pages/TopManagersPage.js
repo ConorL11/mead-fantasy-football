@@ -5,11 +5,13 @@ import TopManagersChamps from "../components/TopManagersChamps";
 import TopManagersRecords from "../components/TopManagersRecords";
 import TopManagersAveragePlayoffSeed from "../components/TopManagersAveragePlayoffSeed";
 import TopManagersActivity from "../components/TopManagersActivity";
+import TopManagersLuckRating from "../components/TopManagersLuckRating";
 
 
 function TopManagersPage(){
     const [loading, setLoading] = useState([]);
     const [members, setMembers] = useState([]);
+    const [seasons, setSeasons] = useState([]);
 
 
     useEffect(() => {
@@ -22,6 +24,7 @@ function TopManagersPage(){
         const {data: membersRaw} = await axios.get('/api/leagueMembers');
         const members = processData(seasonsRaw, membersRaw);
         setMembers(members);
+        setSeasons(seasonsRaw);
         setLoading(false);
     }
 
@@ -97,6 +100,7 @@ function TopManagersPage(){
                 <TopManagersRecords members={members}/>
                 <TopManagersAveragePlayoffSeed members={members}/>
                 <TopManagersActivity members={members}/>
+                <TopManagersLuckRating members={members} seasons={seasons}/>
             </div>
         )
     }

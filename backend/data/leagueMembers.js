@@ -76,7 +76,7 @@ const leagueMembers = [
     }, 
     {
         user_id: '10', 
-        user_name: 'Fisher Bourne', 
+        user_name: 'Fisher Bourn', 
         user_nickname: 'Fisher',
         espn_ids: [
             '{76B1BE6C-3522-4504-882D-67CEABF0C0DF}', 

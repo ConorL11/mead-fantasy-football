@@ -14,7 +14,7 @@ function TopManagersLuckRating({members: managers}){
     return(
         <div className="insightContainer">
             <h1>Overall Luck Rating</h1>
-            <h2>Actual Wins - Expected Wins</h2>
+            <h2>Calculated based on Expected Wins vs Actual Wins</h2>
             <div>
                 {managers.map(manager => (
                     <div key={manager.user_id} className="teamLuckContainer">

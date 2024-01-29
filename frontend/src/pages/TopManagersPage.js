@@ -6,12 +6,13 @@ import TopManagersRecords from "../components/TopManagersRecords";
 import TopManagersAveragePlayoffSeed from "../components/TopManagersAveragePlayoffSeed";
 import TopManagersActivity from "../components/TopManagersActivity";
 import TopManagersLuckRating from "../components/TopManagersLuckRating";
+import TopManagersPlayoffAppearances from "../components/TopManagersPlayoffAppearances";
 
 
 function TopManagersPage(){
     const [loading, setLoading] = useState([]);
     const [members, setMembers] = useState([]);
-    const [seasons, setSeasons] = useState([]);
+    // const [seasons, setSeasons] = useState([]);
 
 
     useEffect(() => {
@@ -24,7 +25,6 @@ function TopManagersPage(){
         const {data: membersRaw} = await axios.get('/api/leagueMembers');
         const members = processData(seasonsRaw, membersRaw);
         setMembers(members);
-        setSeasons(seasonsRaw);
         setLoading(false);
     }
 
@@ -59,6 +59,9 @@ function TopManagersPage(){
             // Expected Wins
             member.expectedWins = 0;
 
+            // Playoff Appearances
+            member.playoffAppearances = 0;
+
             managerLookup[member._id] = member;
             for(const id of member.espn_ids){
                 ownerLookup[id] = member;
@@ -83,6 +86,8 @@ function TopManagersPage(){
                 ownerLookup[team.owners[0]].adds += team.transactions.adds;
                 ownerLookup[team.owners[0]].trades += team.transactions.trades;
                 ownerLookup[team.owners[0]].expectedWins += team.summary.regularSeason.expectedWins;
+
+                ownerLookup[team.owners[0]].playoffAppearances += (team.summary.regularSeason.playoffSeed <= 6) ? 1 : 0;
             }
         }
 
@@ -103,8 +108,9 @@ function TopManagersPage(){
                 <TopManagersPoints members={members}/>
                 <TopManagersRecords members={members}/>
                 <TopManagersAveragePlayoffSeed members={members}/>
-                <TopManagersActivity members={members}/>
+                <TopManagersPlayoffAppearances members={members}/>
                 <TopManagersLuckRating members={members}/>
+                <TopManagersActivity members={members}/>
             </div>
         )
     }

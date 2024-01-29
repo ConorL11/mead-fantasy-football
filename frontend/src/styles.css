@@ -1024,6 +1024,12 @@ table.pastChampions {
     }
 }
 
+.champsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+}
+
 .recordContainer {
     grid-column: 2 / 4;
     grid-row: 2 / 3;

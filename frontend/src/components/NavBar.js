@@ -34,10 +34,9 @@ function NavBar({show}){
                         <span>{link.label}</span>
                     </Link>
                     {link.submenu && (
-                        // <div className="navSubMenu">
                         <div className={`navSubMenu ${showSubMenu ? 'showNavSubMenu' : ''}`}>
                             {link.submenu.map((submenuLink) => (
-                                <div key={submenuLink.label}>
+                                <div key={submenuLink.label} className="navSubMenuItem">
                                 <Link to={submenuLink.path}>
                                     <span className="navIcon">{submenuLink.icon}</span>
                                     <span>{submenuLink.label}</span>

@@ -7,11 +7,7 @@
     --burnt-orange: #702F00;
     --burnt-orange-light: #c55a0d;
     --offWhiteHeaders: #c2c2c2;
-
-
     --offWhiteBody: #e1e1e1;
-
-
     --coolColorOne: #446a88;
     --coolColorTwo: #32788f;
     --coolColorThree: #1d808d;
@@ -51,6 +47,10 @@ body {
 
 .pl_1 { 
     padding-left: 10px;
+}
+
+.pl_2 { 
+    padding-left: 2em;
 }
 
 .ml_1 {
@@ -200,6 +200,7 @@ nav ul {
     font-size: x-small;
     text-align: left;
     width: fit-content;
+    white-space: pre;
 }
 
 nav li {
@@ -224,6 +225,10 @@ nav li {
 .navSubMenu {
     padding: 0.5em 0em;
 }
+
+.navSubMenuItem {
+    padding: 0.75em 0;
+    border-bottom: 1px solid #333;}
 
 nav a {
     color: var(--offWhiteHeaders);
@@ -667,7 +672,6 @@ table.pastChampions {
     position: relative;
     top: 10px;
     left: 70px;
-    width: fit-content;
 }
 
 .teamPoints {
@@ -994,3 +998,62 @@ table.pastChampions {
     align-items: center;
     text-align: center;
 }
+
+/* Top Managers  */
+
+
+@media screen and (min-width: 1300px){
+    .teamNameGrid {
+        display: grid;
+        grid-template-columns: 0.2fr 1fr;
+    }
+    
+    .noTextBreak {
+        white-space: pre;
+    }
+}
+
+@media screen and (max-width: 1300px){
+    .teamNameGrid {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr;
+    }
+    
+    .noTextBreak {
+        white-space: pre;
+    }
+}
+
+.champsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+}
+
+.recordContainer {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
+    display: flex;
+    align-items: flex-end;
+    z-index: 2;
+    margin-left: -1em;
+}
+
+.recordBubble {
+    background-color: black;
+    border-radius: 50%;
+    height: 50px;
+    width: 55px;
+}
+.recordText {
+    position: absolute;
+    margin-left: 5px;
+    margin-bottom: 15px;
+}
+
+.topMnagerActivityContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+

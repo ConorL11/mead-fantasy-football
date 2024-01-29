@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import HistoryPage from "./pages/HistoryPage";
 import TrophyRoomPage from "./pages/TrophyRoomPage";
+import TopManagersPage from "./pages/TopManagersPage";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
@@ -61,6 +62,9 @@ function App() {
                 </Route>
                 <Route path="/trophyroom">
                     <TrophyRoomPage/>
+                </Route>
+                <Route path="/topmanagers">
+                    <TopManagersPage/>
                 </Route>
             </div>
         </div>

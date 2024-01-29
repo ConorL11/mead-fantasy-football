@@ -26,6 +26,7 @@ const seasonsSchema = new mongoose.Schema({
         ],
         summary: {
             regularSeason: {
+                expectedWins: {type: Number},
                 losses: {type: Number},
                 playoffSeed: {type: Number},
                 points: {type: Number},

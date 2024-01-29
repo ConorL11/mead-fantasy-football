@@ -15,8 +15,8 @@ const seasonResults = [
     {season: 2022, platform: 'espn', championUser: "658e44679c85c8b96b5f517b", runnerUpUser: "658e44679c85c8b96b5f5173", losingUser: "658e44679c85c8b96b5f5179"},
     {season: 2021, platform: 'sleeper', championUser: "658e44679c85c8b96b5f5174", runnerUpUser: "658e44679c85c8b96b5f5178", losingUser: "658e44679c85c8b96b5f5173"},
     {season: 2020, platform: 'espn', championUser: "658e44679c85c8b96b5f5175", runnerUpUser: "658e44679c85c8b96b5f5174", losingUser: "658e44679c85c8b96b5f5179" },
-    {season: 2019, platform: 'espn', championUser: "658e44679c85c8b96b5f5175", runnerUpUser: "658e44679c85c8b96b5f5177", losingUser: "658e44679c85c8b96b5f5179"},
-    {season: 2018, platform: 'espn', championUser: "658e44679c85c8b96b5f5178", runnerUpUser: "658e44679c85c8b96b5f5179", losingUser: "658e44679c85c8b96b5f5176"},
+    {season: 2019, platform: 'espn', championUser: "658e44679c85c8b96b5f5175", runnerUpUser: "658e44679c85c8b96b5f5177", losingUser: "658e44679c85c8b96b5f5176"},
+    {season: 2018, platform: 'espn', championUser: "658e44679c85c8b96b5f5178", runnerUpUser: "658e44679c85c8b96b5f5179", losingUser: "658e44679c85c8b96b5f517b"},
     {season: 2017, platform: 'espn', championUser: "658e44679c85c8b96b5f5174", runnerUpUser: "658e44679c85c8b96b5f5176", losingUser: "658e44679c85c8b96b5f517a"},
     {season: 2016, platform: 'espn', championUser: "658e44679c85c8b96b5f5172", runnerUpUser: "658e44679c85c8b96b5f5178", losingUser: "658e44679c85c8b96b5f517c"},
     {season: 2015, platform: 'espn', championUser: "658e44679c85c8b96b5f5179", runnerUpUser: "658e44679c85c8b96b5f5175", losingUser: "658e44679c85c8b96b5f517a"},
@@ -110,7 +110,6 @@ try {
     // sort final array based on year
     seasons.sort((a,b) => a.season - b.season);
 
-    // CONOR Working Here
     // add hardcoded playoff results to the object
     for(const season of seasons){
         for(const seasonResult of seasonResults){
@@ -121,8 +120,53 @@ try {
         }
     }
 
+
+
+    // Get Expected Wins for each season
+    for(const season of seasons){
+        let weeks = []
+
+        // Build TeamIdLookup and initialize expected wins
+        let teamIdLookup = {};
+        for(const team of season.teams){
+            team.summary.regularSeason.expectedWins = 0;
+            teamIdLookup[team.teamId] = team;
+        }
+
+        // Grab Regular Season games from a teams win/loss record
+        let regularSeasonLength = season.teams[0].summary.regularSeason.wins + season.teams[0].summary.regularSeason.losses;
+
+        // CONOR Working Here
+        // Define weeks and add points into a weekly points array
+        let weekCounter= 1;
+        let tempWeek = [];
+        for(const game of season.schedule){
+            if(game.matchupPeriodId > regularSeasonLength){ break }
+
+            if(game.matchupPeriodId !== weekCounter){
+                tempWeek.sort((a,b) => a.points - b.points);
+                weeks.push(tempWeek);
+                tempWeek = [];
+                weekCounter = game.matchupPeriodId;
+            }
+            tempWeek.push({
+                teamId: game.away.teamId,
+                points: game.away.totalPoints,
+            });
+            tempWeek.push({
+                teamId: game.home.teamId,
+                points: game.home.totalPoints,
+            });
+        }
+
+        for(const week of weeks){
+            for(const [index, team] of week.entries()){
+                teamIdLookup[team.teamId].summary.regularSeason.expectedWins += (index / (week.length - 1));
+            }
+        }
+    }
+
     console.log('Data transform completed!')
-    debugger
 
 } catch (error) {
     console.log(error);

@@ -56,6 +56,9 @@ function TopManagersPage(){
             member.adds = 0;
             member.trades = 0;
 
+            // Expected Wins
+            member.expectedWins = 0;
+
             managerLookup[member._id] = member;
             for(const id of member.espn_ids){
                 ownerLookup[id] = member;
@@ -79,6 +82,7 @@ function TopManagersPage(){
                 ownerLookup[team.owners[0]].seasons ++;
                 ownerLookup[team.owners[0]].adds += team.transactions.adds;
                 ownerLookup[team.owners[0]].trades += team.transactions.trades;
+                ownerLookup[team.owners[0]].expectedWins += team.summary.regularSeason.expectedWins;
             }
         }
 
@@ -100,7 +104,7 @@ function TopManagersPage(){
                 <TopManagersRecords members={members}/>
                 <TopManagersAveragePlayoffSeed members={members}/>
                 <TopManagersActivity members={members}/>
-                <TopManagersLuckRating members={members} seasons={seasons}/>
+                <TopManagersLuckRating members={members}/>
             </div>
         )
     }

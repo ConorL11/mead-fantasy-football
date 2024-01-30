@@ -39,7 +39,7 @@ function TopManagersPoints({members: managers}){
                         </div>
                         <div className="flexHorizontal">
                             <div ><img className="mediumAvatar" src={`/headshots/${manager._id}.png`} alt="" /></div>
-                            <div className={`coloredBar coolBar`} style={{ width: `${(manager.points / maxPoints) * 90 }%` }}>
+                            <div className={`coloredBar coolBar`} style={{ width: `${(manager.points / maxPoints) * 80 }%` }}>
                                 {/* <div className="teamPoints">{manager.points.toFixed(1)}</div> */}
                                 <div className="teamPoints">
                                     <FormatNumberDisplay value={manager.points}/>

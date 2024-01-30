@@ -43,6 +43,7 @@ body {
     width: 100%;
     display: grid;
     color: var(--offWhiteBody);
+    overflow-x: hidden;
 }
 
 .pl_1 { 

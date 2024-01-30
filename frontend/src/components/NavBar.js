@@ -32,6 +32,7 @@ function NavBar({show}){
                     >
                         <span className="navIcon">{link.icon}</span>
                         <span>{link.label}</span>
+                        {link.dropdownIcon && (<span className="navBarDropDownIcon">{link.dropdownIcon}</span>)}
                     </Link>
                     {link.submenu && (
                         <div className={`navSubMenu ${showSubMenu ? 'showNavSubMenu' : ''}`}>

@@ -1,6 +1,8 @@
-import { GoRocket, GoLog, GoTrophy, GoPeople} from "react-icons/go"
+import { GoRocket, GoLog, GoTrophy, GoPeople} from "react-icons/go";
 import { TbChartBar } from "react-icons/tb";
-import { BiBarChartAlt2 } from "react-icons/bi"
+import { BiBarChartAlt2 } from "react-icons/bi";
+import { RiArrowDropDownLine } from "react-icons/ri";
+
 
 
 const historyLinks = [
@@ -16,7 +18,7 @@ const links = [
     {label: 'Standings', path: '/', icon: <BiBarChartAlt2/>},
     {label: 'Bylaws', path: '/bylaws', icon: <GoLog/>},
     {label: 'Analytics', path: '/analytics', icon: <GoRocket/>},
-    {label: 'History', path: '/history', icon: <TbChartBar/>, submenu: historyLinks},
+    {label: 'History', path: '/history', icon: <TbChartBar/>, submenu: historyLinks, dropdownIcon: <RiArrowDropDownLine />},
 ];
 
 export {links, historyLinks};

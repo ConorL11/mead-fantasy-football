@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import NavBarManagers from "../components/NavBarManagers";
 import SeasonsLogAveragePoints from "../components/SeasonsLogAveragePoints";
+import SeasonsLogRecords from "../components/SeasonsLogRecords";
 
 
 function SeasonsLogPage(){
@@ -12,21 +13,6 @@ function SeasonsLogPage(){
 
 
     const [selectedManager, setSelectedManager] = useState(null);
-
-
-    const handleManagerSelection = (manager) => {
-        setSelectedManager((prevManager) => {
-            console.log('manager', manager)
-            console.log(seasons);
-
-            // Hey Conor. Do some shit here tomorrow ya big dumb idiot
-            return manager;
-        });
-    }
-
-    useEffect(() => {
-        getData();
-    }, []);
 
     const getData = async () => {
         const {data: seasonsRaw} = await axios.get('/api/seasons');
@@ -38,13 +24,45 @@ function SeasonsLogPage(){
     }
 
 
+    const handleManagerSelection = (managerRaw) => {
+        setSelectedManager((prevManager) => {
+            const manager = processData(seasons, managerRaw);
+            return manager;
+        });
+    }
+
+    const processData = (seasons, manager) => {
+
+        let ownerIds = manager.espn_ids.concat(manager.sleeper_ids);
+        manager.seasons = [];
+        // Loop over seasons to grab all of a managers seasons
+        for(const season of seasons){
+            let team = season.teams.find(team => team.owners.some(id => ownerIds.includes(id)));
+            if(team){
+                manager.seasons.push({
+                    year: season.season,
+                    results: season.results,
+                    team,
+                });
+            }
+        }
+        manager.seasons.sort((a,b) => b.year - a.year);
+        return manager
+    }
+
+
+    useEffect(() => {
+        getData();
+    }, []);
+
 
     return(
         <div>
-            <NavBarManagers managers={managerList} onItemClick={handleManagerSelection}/>
+            <NavBarManagers managers={managerList} onItemClick={handleManagerSelection} selectedManager={selectedManager}/>
             {selectedManager && (
                 <div>
                     <SeasonsLogAveragePoints manager={selectedManager}/>
+                    <SeasonsLogRecords manager={selectedManager}/>
                 </div>
             )}
         </div>

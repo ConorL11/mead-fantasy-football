@@ -8,8 +8,8 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 const historyLinks = [
     {label: 'Trophy Room', path: '/trophyroom', icon: <GoTrophy/>, description: 'Check out the past winners and losers of the league'},
     {label: 'Top Managers', path: '/topmanagers', icon: <GoPeople/>, description: 'View all time career stats for league managers'},
+    {label: 'Seasons Log', path: '/seasonslog', icon: <GoTrophy/>},
     // {label: 'Head to Head', path: '/headtohead', icon: <GoTrophy/>},
-    // {label: 'Individual Performance', path: '/individualperformance', icon: <GoTrophy/>},
     // {label: 'Season Comparison', path: '/seasoncomparison', icon: <GoTrophy/>},
 
 ];

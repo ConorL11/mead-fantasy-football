@@ -15,7 +15,7 @@ function SeasonsLogRecords({manager}){
                             <div className="noTextBreak">{season.team.teamName}</div>
                         </div>
                         <div className="flexHorizontal">
-                            <div ><img className="mediumAvatar" src={`/headshots/${manager._id}.png`} alt="" /></div>
+                            <div className="seasonIndicator"> {season.year}</div>
                             <div className={`coloredBar coolBar`} style={{ width: `${(season.team.summary.regularSeason.wins / maxWins) * 90 }%` }}>
                                 <div className="teamPoints">{season.team.summary.regularSeason.wins} - {season.team.summary.regularSeason.losses}</div>
                             </div>

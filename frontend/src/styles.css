@@ -1059,6 +1059,11 @@ table.pastChampions {
     white-space: pre;
 }
 
+/* Seasons Log  */
+.seasonsLogContainer {
+    overflow-x: hidden;
+}
+
 /* Nav Bar Managers  */
 .navBarManagersContainer {
     box-shadow: 0px 2px 5px 0px black;
@@ -1070,27 +1075,47 @@ table.pastChampions {
     list-style: none;
     white-space: pre;
     display: flex;
+    overflow-x: scroll;
     justify-content: space-between;
-
 }
 
 .navBarManagersList > li {
     flex-grow: 1;
     flex-basis: 0;
     box-sizing: border-box;
-    padding: 5px;
-
+    padding: 10px;
     text-align: center;
     cursor: pointer;
-    transition: box-shadow ease-in-out 200ms;
+    border-bottom: 2px solid black;
+    transition: border-bottom ease-in-out 150ms, opacity ease-in-out 200ms
 
 }
 
 .navBarManagersList > li:hover {
-    box-shadow: 0px 5px 5px 0px var(--burnt-orange);
+    border-bottom: 2px solid var(--burnt-orange);
+    opacity: 1;
+}
 
+.navBarManagersList > li:not(:hover) {
+    opacity: 0.9;
 }
 
 .highlightElement {
-    background-color: #07d;
+    background-color: black;
+    opacity: 1 !important;
+    border-bottom: 2px solid var(--burnt-orange) !important;
+}
+
+.seasonIndicator {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    z-index: 2;
+    background-color: black;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -13,7 +13,7 @@ function SeasonsLogAveragePoints({manager}){
                     <div>
                         <div className="teamName">{season.team.teamName}</div>
                         <div className="flexHorizontal">
-                            <div ><img className="mediumAvatar" src={`/headshots/${manager.member_id}.png`} alt="" /></div>
+                            <div className="seasonIndicator"> {season.year}</div>
                             <div className={`coloredBar coolBar`} style={{ width: `${(season.team.summary.regularSeason.averagePoints / maxAveragePoints) * 90 }%` }}>
                                 <div className="teamPoints">{season.team.summary.regularSeason.averagePoints.toFixed(1)}</div>
                             </div>

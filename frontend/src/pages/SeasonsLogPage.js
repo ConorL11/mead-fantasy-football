@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-import NavBarManagers from "../components/NavBarManagers";
-import SeasonsLogAveragePoints from "../components/SeasonsLogAveragePoints";
-import SeasonsLogRecords from "../components/SeasonsLogRecords";
+import NavBarManagers from "../components/seasonslog/NavBarManagers";
+import SeasonsLogAveragePoints from "../components/seasonslog/SeasonsLogAveragePoints";
+import SeasonsLogRecords from "../components/seasonslog/SeasonsLogRecords";
+import ManagerSummary from "../components/seasonslog/ManagerSummary";
 
 
 function SeasonsLogPage(){
@@ -57,10 +58,11 @@ function SeasonsLogPage(){
 
 
     return(
-        <div>
+        <div className="seasonsLogContainer">
             <NavBarManagers managers={managerList} onItemClick={handleManagerSelection} selectedManager={selectedManager}/>
             {selectedManager && (
                 <div>
+                    <ManagerSummary manager={selectedManager} />
                     <SeasonsLogAveragePoints manager={selectedManager}/>
                     <SeasonsLogRecords manager={selectedManager}/>
                 </div>

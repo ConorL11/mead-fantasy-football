@@ -9,6 +9,8 @@
     --burnt-orange-light: #c55a0d;
     --offWhiteHeaders: #c2c2c2;
     --offWhiteBody: #e1e1e1;
+
+    --bodyGray: #333;
     --coolColorOne: #446a88;
     --coolColorTwo: #32788f;
     --coolColorThree: #1d808d;
@@ -1066,6 +1068,11 @@ table.pastChampions {
 
 /* Nav Bar Managers  */
 .navBarManagersContainer {
+    position: sticky;
+    top: 0;
+    display: flex;
+    z-index: 4;
+    background-color: var(--bodyGray);
     box-shadow: 0px 2px 5px 0px black;
 }
 

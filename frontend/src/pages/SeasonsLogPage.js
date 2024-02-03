@@ -94,13 +94,17 @@ function SeasonsLogPage(){
 
 
     return(
-        <div className="seasonsLogContainer">
+        <div className="">
             <NavBarManagers managers={managerList} onItemClick={handleManagerSelection} selectedManager={selectedManager}/>
             {selectedManager && (
-                <div>
-                    <ManagerSummary manager={selectedManager} />
-                    <SeasonsLogAveragePoints manager={selectedManager}/>
-                    <SeasonsLogRecords manager={selectedManager}/>
+                <div className="seasonsLogContainer">
+                    <div className="flexCenter">
+                        <ManagerSummary manager={selectedManager} />
+                    </div>
+                    <div className="sleeperInsights">
+                        <SeasonsLogAveragePoints manager={selectedManager}/>
+                        <SeasonsLogRecords manager={selectedManager}/>
+                    </div>
                 </div>
             )}
         </div>

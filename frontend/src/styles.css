@@ -1063,14 +1063,14 @@ table.pastChampions {
 
 /* Seasons Log  */
 .seasonsLogContainer {
-    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Nav Bar Managers  */
 .navBarManagersContainer {
     position: sticky;
     top: 0;
-    display: flex;
     z-index: 4;
     background-color: var(--bodyGray);
     box-shadow: 0px 2px 5px 0px black;
@@ -1111,6 +1111,30 @@ table.pastChampions {
     background-color: black;
     opacity: 1 !important;
     border-bottom: 2px solid var(--burnt-orange) !important;
+}
+
+.managerSummary {
+    align-content: center;
+    justify-self: center;
+    width: 50%;
+}
+
+.flexCenter {
+    display: flex;
+    justify-content: center;
+    text-align: center
+}
+
+.managerSummaryHeader {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.managerSummaryBody {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
 }
 
 .seasonIndicator {

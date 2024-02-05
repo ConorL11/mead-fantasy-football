@@ -1062,10 +1062,6 @@ table.pastChampions {
 }
 
 /* Seasons Log  */
-.seasonsLogContainer {
-    display: flex;
-    flex-direction: column;
-}
 
 /* Nav Bar Managers  */
 .navBarManagersContainer {
@@ -1113,17 +1109,14 @@ table.pastChampions {
     border-bottom: 2px solid var(--burnt-orange) !important;
 }
 
-.managerSummary {
-    align-content: center;
-    justify-self: center;
-    width: 50%;
+
+@media (min-width: 1350px){
+    .seasonsLogHeader {
+        display: flex;
+        justify-content: center;
+    }
 }
 
-.flexCenter {
-    display: flex;
-    justify-content: center;
-    text-align: center
-}
 
 .managerSummaryHeader {
     display: flex;

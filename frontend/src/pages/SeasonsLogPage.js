@@ -79,11 +79,9 @@ function SeasonsLogPage(){
             manager.summary.seedTotal += season.team.summary.regularSeason.playoffSeed;
             manager.summary.adds += season.team.transactions.adds;
             manager.summary.trades += season.team.transactions.trades;
-
             manager.summary.expectedWins += season.team.summary.regularSeason.expectedWins;
             manager.summary.playoffAppearances += (season.team.summary.regularSeason.playoffSeed <= 6) ? 1 : 0;
         }
-
         return manager
     }
 
@@ -98,7 +96,7 @@ function SeasonsLogPage(){
             <NavBarManagers managers={managerList} onItemClick={handleManagerSelection} selectedManager={selectedManager}/>
             {selectedManager && (
                 <div className="seasonsLogContainer">
-                    <div className="flexCenter">
+                    <div className="seasonsLogHeader">
                         <ManagerSummary manager={selectedManager} />
                     </div>
                     <div className="sleeperInsights">

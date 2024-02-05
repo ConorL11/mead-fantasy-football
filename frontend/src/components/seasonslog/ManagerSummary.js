@@ -1,4 +1,5 @@
 import Avatar from "../Avatar";
+import FormatNumber from "../FormatNumber";
 
 function ManagerSummary({ manager }){
 
@@ -20,8 +21,8 @@ function ManagerSummary({ manager }){
                 </div>
                 <div className="gridRight">
                     <div>Record: {manager.summary.wins} - {manager.summary.losses}</div>
-                    <div>Points: {manager.summary.points}</div>
-                    <div>Points Against: {manager.summary.pointsAgainst}</div>
+                    <div>Points: <FormatNumber number={manager.summary.points}/> </div>
+                    <div>Points Against: <FormatNumber number={manager.summary.pointsAgainst}/></div>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
-function Avatar({ manager }){
+function Avatar({ manager, size }){
 
     return(
-        <div ><img className="mediumAvatar" src={`/headshots/${manager._id}.png`} alt="" /></div>
+        <div ><img className={size} src={`/headshots/${manager._id}.png`} alt="" /></div>
     )
 }
 

@@ -3,26 +3,42 @@ import FormatNumber from "../FormatNumber";
 
 function ManagerSummary({ manager }){
 
-
-    console.log(manager)
+    console.log("manager", manager)
 
     return (
         <div className="managerSummary insightContainer">
             <div className="managerSummaryHeader">
-                <Avatar manager={manager}/>
+                <Avatar manager={manager} size="largeAvatar"/>
                 <h1>{manager.user_name}</h1>
             </div>
-            <div className="managerSummaryBody">
-                <div className="gridLeft">
-                    <div>Seasons: {manager.seasons.length}</div>
-                    <div>Championships: {manager.summary.championships}</div>
-                    <div>Runner Ups: {manager.summary.runnerUp}</div>
-                    <div>Biggest Losers: {manager.summary.biggestLosers}</div>
+            <div className="twoColumnContainer">
+                <div className="twoColumnContainer">
+                    <div>
+                        <div>Seasons: </div>
+                        <div>Championships: </div>
+                        <div>Runner Ups: </div>
+                        <div>Biggest Losers: </div>
+                    </div>
+                    <div>
+                        <div>{manager.seasons.length}</div>
+                        <div>{manager.summary.championships}</div>
+                        <div>{manager.summary.runnerUps}</div>
+                        <div>{manager.summary.biggestLosers}</div>
+                    </div>
                 </div>
-                <div className="gridRight">
-                    <div>Record: {manager.summary.wins} - {manager.summary.losses}</div>
-                    <div>Points: <FormatNumber number={manager.summary.points}/> </div>
-                    <div>Points Against: <FormatNumber number={manager.summary.pointsAgainst}/></div>
+                <div className="twoColumnContainer">
+                    <div>
+                        <div>Record: </div>
+                        <div className="noTextBreak">Playoffs: </div>
+                        <div>Points: </div>
+                        <div>Points Against: </div>
+                    </div>
+                    <div>
+                        <div className="noTextBreak">{manager.summary.wins} - {manager.summary.losses}</div>
+                        <div>{manager.summary.playoffAppearances}</div>
+                        <div><FormatNumber number={manager.summary.points}/> </div>
+                        <div><FormatNumber number={manager.summary.pointsAgainst}/></div>
+                    </div>
                 </div>
             </div>
         </div>

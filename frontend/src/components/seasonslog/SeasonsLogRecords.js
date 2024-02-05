@@ -1,3 +1,4 @@
+import { censorContent } from "../../content/constants";
 function SeasonsLogRecords({manager}){
 
     for(const season of manager.seasons){
@@ -7,12 +8,17 @@ function SeasonsLogRecords({manager}){
 
     return(
         <div className="insightContainer">
-            <h1>Overall Records</h1>
+            <h1>Season Records</h1>
             {manager.seasons.map(season => (
                 <div key={season.year} className="teamBar">
                     <div className="">
                         <div className="teamName teamNameGrid">
-                            <div className="noTextBreak">{season.team.teamName}</div>
+                            <div className="noTextBreak">
+                                {censorContent ? 
+                                "": 
+                                season.team.teamName 
+                                }
+                            </div>
                         </div>
                         <div className="flexHorizontal">
                             <div className="seasonIndicator"> {season.year}</div>

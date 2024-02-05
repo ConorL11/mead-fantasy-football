@@ -92,10 +92,10 @@ function SeasonsLogPage(){
 
 
     return(
-        <div className="">
+        <div className="seasonsLogContainer">
             <NavBarManagers managers={managerList} onItemClick={handleManagerSelection} selectedManager={selectedManager}/>
             {selectedManager && (
-                <div className="seasonsLogContainer">
+                <div className="">
                     <div className="seasonsLogHeader">
                         <ManagerSummary manager={selectedManager} />
                     </div>

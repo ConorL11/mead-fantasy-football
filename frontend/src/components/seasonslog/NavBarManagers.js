@@ -5,7 +5,6 @@ function NavBarManagers({ managers, seasons, onItemClick, selectedManager }){
 
     console.log(selectedManager)
     return(
-        <div className="navBarManagersContainer">
             <ul className="navBarManagersList">
                 {managers.map((manager) => (
                     <li 
@@ -17,7 +16,6 @@ function NavBarManagers({ managers, seasons, onItemClick, selectedManager }){
                     </li>
                 ))}
             </ul>
-        </div>
     )
 
 }

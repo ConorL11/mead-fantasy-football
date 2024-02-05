@@ -1,3 +1,5 @@
+import { censorContent } from "../../content/constants";
+
 function SeasonsLogAveragePoints({manager}){
 
     for(const season of manager.seasons){
@@ -7,11 +9,16 @@ function SeasonsLogAveragePoints({manager}){
 
     return(
         <div className="insightContainer">
-            <h1>{manager.user_name}'s Average Points</h1>
+            <h1>Average Points</h1>
             {manager.seasons.map(season => (
                 <div key={season.year} className="teamBar">
                     <div>
-                        <div className="teamName">{season.team.teamName}</div>
+                        <div className="teamName">
+                        {censorContent ? 
+                            "": 
+                            season.team.teamName 
+                        }
+                        </div>
                         <div className="flexHorizontal">
                             <div className="seasonIndicator"> {season.year}</div>
                             <div className={`coloredBar coolBar`} style={{ width: `${(season.team.summary.regularSeason.averagePoints / maxAveragePoints) * 90 }%` }}>
@@ -20,6 +27,7 @@ function SeasonsLogAveragePoints({manager}){
                         </div>
                     </div> 
                 </div>
+
             ))}
         </div>
     )

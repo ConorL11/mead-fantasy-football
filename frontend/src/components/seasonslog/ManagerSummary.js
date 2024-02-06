@@ -9,8 +9,8 @@ function ManagerSummary({ manager }){
                 <Avatar manager={manager} size="largeAvatar"/>
                 <h1>{manager.user_name}</h1>
             </div>
-            <div className="twoColumnContainer">
-                <div className="twoColumnContainer">
+            <div className="twoColumnContainer smallGap">
+                <div className="twoColumnContainer tinyGap">
                     <div>
                         <div>Seasons: </div>
                         <div>Championships: </div>
@@ -24,12 +24,12 @@ function ManagerSummary({ manager }){
                         <div>{manager.summary.biggestLosers}</div>
                     </div>
                 </div>
-                <div className="twoColumnContainer">
+                <div className="twoColumnContainer tinyGap">
                     <div>
                         <div>Record: </div>
                         <div className="noTextBreak">Playoffs: </div>
-                        <div>Points: </div>
-                        <div>Points Against: </div>
+                        <div className="noTextBreak">Points: </div>
+                        <div className="noTextBreak">Points Against: </div>
                     </div>
                     <div>
                         <div className="noTextBreak">{manager.summary.wins} - {manager.summary.losses}</div>

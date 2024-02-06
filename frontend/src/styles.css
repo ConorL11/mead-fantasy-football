@@ -4,10 +4,13 @@
 
 :root{
     --header-background: black;
+    --header-height: 4em;
     --burnt-orange: #702F00;
     --burnt-orange-light: #c55a0d;
     --offWhiteHeaders: #c2c2c2;
     --offWhiteBody: #e1e1e1;
+
+    --bodyGray: #333;
     --coolColorOne: #446a88;
     --coolColorTwo: #32788f;
     --coolColorThree: #1d808d;
@@ -38,7 +41,7 @@ body {
 
 .content { 
     position: absolute;
-    top: 50px;
+    top: var(--header-height);
     height: 100%;
     width: 100%;
     display: grid;
@@ -151,7 +154,7 @@ header {
     text-align: center;
     position: absolute;
     width: 100%;
-    height: 4em;
+    height: var(--header-height);
     z-index: 999;
 }
 
@@ -220,7 +223,6 @@ nav li {
 .navParentLink {
     padding: 0.5em 0em;
     border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
 }
 
 .navParentLink > a > span:first-child{
@@ -667,6 +669,17 @@ table.pastChampions {
     background-color: black;
 }
 
+.largeAvatar {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    z-index: 2;
+    background-color: black;
+}
+
+
 
 .coloredBar { 
     display: flex;
@@ -675,7 +688,7 @@ table.pastChampions {
     margin-left: -5px;
     border-radius: 0 .9em .9em 0;
     z-index: 1;
-    min-width: 25%;
+    min-width: 20%;
 }
 
 
@@ -936,7 +949,7 @@ table.pastChampions {
 /* History Page */
 .historyPageGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(25em, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px,450px));
     gap: 1em;
 }
 
@@ -1059,3 +1072,100 @@ table.pastChampions {
     white-space: pre;
 }
 
+/* Seasons Log  */
+.seasonsLogContainer {
+    overflow-x: hidden;
+}
+/* Nav Bar Managers  */
+
+.navBarManagersList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    overflow-x: scroll;
+    white-space: pre;
+    justify-content: space-between;
+    position: sticky;
+    top: -1px;
+    z-index: 4;
+    background-color: var(--bodyGray);
+    box-shadow: 0px 2px 5px 0px black;
+}
+
+.navBarManagersList > li {
+    flex-grow: 1;
+    flex-basis: 0;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 2px solid black;
+    transition: border-bottom ease-in-out 150ms, opacity ease-in-out 200ms
+
+}
+
+.navBarManagersList > li:hover {
+    border-bottom: 2px solid var(--burnt-orange);
+    opacity: 1;
+}
+
+.navBarManagersList > li:not(:hover) {
+    opacity: 0.9;
+}
+
+.highlightElement {
+    background-color: black;
+    opacity: 1 !important;
+    border-bottom: 2px solid var(--burnt-orange) !important;
+}
+
+
+@media (min-width: 1350px){
+    .seasonsLogHeader {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.managerSummary {
+    padding: 20px;
+    margin: 20px;
+}
+
+.managerSummaryHeader {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.twoColumnContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+}
+
+.seasonIndicator {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    z-index: 2;
+    background-color: black;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.managerPlaceholder {
+    width: 40%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px auto;
+    padding: 25px;
+    white-space: pre;
+}

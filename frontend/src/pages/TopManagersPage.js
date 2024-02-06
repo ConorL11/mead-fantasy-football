@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import TopManagersPoints from "../components/TopManagersPoints";
-import TopManagersChamps from "../components/TopManagersChamps";
-import TopManagersRecords from "../components/TopManagersRecords";
-import TopManagersAveragePlayoffSeed from "../components/TopManagersAveragePlayoffSeed";
-import TopManagersActivity from "../components/TopManagersActivity";
-import TopManagersLuckRating from "../components/TopManagersLuckRating";
-import TopManagersPlayoffAppearances from "../components/TopManagersPlayoffAppearances";
+import TopManagersPoints from "../components/topmanagers/TopManagersPoints";
+import TopManagersChamps from "../components/topmanagers/TopManagersChamps";
+import TopManagersRecords from "../components/topmanagers/TopManagersRecords";
+import TopManagersAveragePlayoffSeed from "../components/topmanagers/TopManagersAveragePlayoffSeed";
+import TopManagersActivity from "../components/topmanagers/TopManagersActivity";
+import TopManagersLuckRating from "../components/topmanagers/TopManagersLuckRating";
+import TopManagersPlayoffAppearances from "../components/topmanagers/TopManagersPlayoffAppearances";
 
 
 function TopManagersPage(){

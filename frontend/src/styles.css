@@ -1142,8 +1142,16 @@ table.pastChampions {
 .twoColumnContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+.tinyGap {
+    gap: 0.5em;
+}
+
+.smallGap {
     gap: 1em;
 }
+
 
 .seasonIndicator {
     position: relative;

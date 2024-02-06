@@ -949,7 +949,7 @@ table.pastChampions {
 /* History Page */
 .historyPageGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(25em, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px,450px));
     gap: 1em;
 }
 
@@ -1157,4 +1157,15 @@ table.pastChampions {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.managerPlaceholder {
+    width: 40%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px auto;
+    padding: 25px;
+    white-space: pre;
 }

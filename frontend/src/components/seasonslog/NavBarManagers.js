@@ -2,8 +2,6 @@
 
 function NavBarManagers({ managers, seasons, onItemClick, selectedManager }){
 
-
-    console.log(selectedManager)
     return(
             <ul className="navBarManagersList">
                 {managers.map((manager) => (

@@ -6,6 +6,11 @@ import SeasonsLogAveragePoints from "../components/seasonslog/SeasonsLogAverageP
 import SeasonsLogRecords from "../components/seasonslog/SeasonsLogRecords";
 import ManagerSummary from "../components/seasonslog/ManagerSummary";
 
+import { GoPeople } from "react-icons/go";
+import SeasonsLogPlayoffSeeds from "../components/seasonslog/SeasonsLogPlayoffSeeds";
+import SeasonsLogLuckRating from "../components/seasonslog/SeasonsLogLuckRating";
+import SeasonsLogManagerActivity from "../components/seasonslog/SeasonsLogManagerActivity";
+
 
 function SeasonsLogPage(){
 
@@ -100,9 +105,18 @@ function SeasonsLogPage(){
                         <ManagerSummary manager={selectedManager} />
                     </div>
                     <div className="sleeperInsights">
-                        <SeasonsLogAveragePoints manager={selectedManager}/>
                         <SeasonsLogRecords manager={selectedManager}/>
+                        <SeasonsLogAveragePoints manager={selectedManager}/>
+                        <SeasonsLogPlayoffSeeds manager={selectedManager}/>
+                        <SeasonsLogLuckRating manager={selectedManager}/>
+                        <SeasonsLogManagerActivity manager={selectedManager} />
                     </div>
+                </div>
+            )}
+            {!selectedManager && (
+                <div className="managerPlaceholder insightContainer">
+                    <GoPeople className="bigIcon"/>
+                    <h2>Select a Manager to load data</h2> 
                 </div>
             )}
         </div>

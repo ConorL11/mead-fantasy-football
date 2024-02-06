@@ -3,8 +3,6 @@ import FormatNumber from "../FormatNumber";
 
 function ManagerSummary({ manager }){
 
-    console.log("manager", manager)
-
     return (
         <div className="managerSummary insightContainer">
             <div className="managerSummaryHeader">

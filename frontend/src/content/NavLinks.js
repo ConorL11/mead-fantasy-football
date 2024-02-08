@@ -11,7 +11,7 @@ const historyLinks = [
     {label: 'Trophy Room', path: '/trophyroom', icon: <GoTrophy/>, description: 'Check out the past winners and losers of the league'},
     {label: 'Top Managers', path: '/topmanagers', icon: <GoPeople/>, description: 'View all time career stats for league managers'},
     {label: 'Seasons Log', path: '/seasonslog', icon: <IoStatsChartOutline/>, description: 'A look at individual manager performance over the years'},
-    // {label: 'Head to Head', path: '/headtohead', icon: <GoTrophy/>},
+    {label: 'Head to Head', path: '/headtohead', icon: <GoTrophy/>},
     // {label: 'Season Comparison', path: '/seasoncomparison', icon: <GoTrophy/>},
 
 ];

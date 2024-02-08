@@ -12,6 +12,7 @@ import SeasonsLogPage from "./pages/SeasonsLogPage";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 import useOutsideClick from "./hooks/useOutsideClick";
+import HeadToHeadPage from "./pages/HeadToHeadPage";
 
 function App() {
 
@@ -69,6 +70,9 @@ function App() {
                 </Route>
                 <Route path="/seasonslog">
                     <SeasonsLogPage/>
+                </Route>
+                <Route path="/headtohead">
+                    <HeadToHeadPage/>
                 </Route>
             </div>
         </div>

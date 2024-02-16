@@ -26,14 +26,13 @@ function HeadToHeadPage(){
     }
 
     const processData = async (seasons, managerList, selectedManagers) => {
-        console.log("seasons", seasons)
-        console.log("managerList", managerList)
 
         // Don't finish processing if we don't have selections for both menus
         if(!selectedManagers.manager1 || !selectedManagers.manager2){ return }
 
         // Initialize Manager Comp Arry and Lookup Map
         const managerComp = [];
+        const managerIds = [];
         const managerLookup = {};
 
         // Initialize Managers, Create Owner Ids Array with ESPN and Sleeper Ids, and Initialize Seasons Array
@@ -41,11 +40,11 @@ function HeadToHeadPage(){
             const manager = managerList.find(manager => manager._id === managerId);
             manager.ownerIds = manager.espn_ids.concat(manager.sleeper_ids);
             manager.seasons = [];
+            manager.headToHeadGames = [];
             manager.summary = {
                 championships: 0,
                 biggestLosers: 0,
                 runnerUps: 0,
-
                 games: 0,
                 points: 0,
                 pointsAgainst: 0,
@@ -57,7 +56,8 @@ function HeadToHeadPage(){
                 expectedWins: 0,
                 playoffAppearances: 0,
             };
-            manager.headToHead = {
+
+            manager.headToHeadSummary = {
                 games: 0, 
                 wins: 0, 
                 losses: 0, 
@@ -67,28 +67,55 @@ function HeadToHeadPage(){
             }
 
             managerComp.push(manager);
-            managerLookup[manager] = manager;
+            managerIds.push(manager._id);
+            managerLookup[manager._id] = manager;
         });
 
-        // Loop over seasons and assign seasons to each selected manager
-        for(const season of seasons){
-            for(const manager of managerComp){
-                let team = season.teams.find(team => team.owners.some(id => manager.ownerIds.includes(id)));
-                if(team){
-                    manager.seasons.push({
-                        year: season.season,
-                        results: season.results,
-                        team,
-                    });
-                }
+        for (const season of seasons) {
+            for (const manager of managerComp) {
+                const team = season.teams.find(team => team.owners.some(id => manager.ownerIds.includes(id)));
+                if (!team) continue;
+
+                const opposingManagerId = managerIds.find(id => id !== manager._id);
+                const opposingTeam = season.teams.find(team => team.owners.some(id => managerLookup[opposingManagerId].ownerIds.includes(id)));
+                const schedule = season.schedule.filter(game => game.away?.teamId === team.teamId || game.home?.teamId === team.teamId);
+                const headToHeadGames = opposingTeam ? schedule.filter(game => game.away?.teamId === opposingTeam.teamId || game.home?.teamId === opposingTeam.teamId) : [];
+                manager.seasons.push({ year: season.season, results: season.results, schedule, team, headToHeadGames});
             }
         }
 
+        
         // Sort Seasons
         managerComp.forEach(manager => {
             manager.seasons.sort((a, b) => b.year - a.year);
         });
 
+
+        // Loop over Manager Seasons to count summaries
+
+        for(const manager of managerComp){
+            for(const season of manager.seasons){
+                // Count overall stats
+                manager.summary.championships += (season.results.championUser === manager._id) ? 1 : 0;
+                manager.summary.runnerUps += (season.results.runnerUpUser === manager._id) ? 1 : 0;
+                manager.summary.biggestLosers += (season.results.losingUser === manager._id) ? 1 : 0;
+                manager.summary.games += (season.team.summary.regularSeason.wins + season.team.summary.regularSeason.losses);
+                manager.summary.points += season.team.summary.regularSeason.points;
+                manager.summary.pointsAgainst += season.team.summary.regularSeason.pointsAgainst;
+                manager.summary.wins += season.team.summary.regularSeason.wins;
+                manager.summary.losses += season.team.summary.regularSeason.losses;
+                manager.summary.seedTotal += season.team.summary.regularSeason.playoffSeed;
+                manager.summary.adds += season.team.transactions.adds;
+                manager.summary.trades += season.team.transactions.trades;
+                manager.summary.expectedWins += season.team.summary.regularSeason.expectedWins;
+                manager.summary.playoffAppearances += (season.team.summary.regularSeason.playoffSeed <= 6) ? 1 : 0;
+
+            }
+        }
+
+
+        console.log("seasons", seasons)
+        // console.log("managerList", managerList)
         console.log("managerComp", managerComp)
 
         

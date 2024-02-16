@@ -136,7 +136,6 @@ try {
         // Grab Regular Season games from a teams win/loss record
         let regularSeasonLength = season.teams[0].summary.regularSeason.wins + season.teams[0].summary.regularSeason.losses;
 
-        // CONOR Working Here
         // Define weeks and add points into a weekly points array
         let weekCounter= 1;
         let tempWeek = [];
@@ -179,6 +178,7 @@ async function fetchSleeperData(leagueId){
     const {data: league} = await axios.get("https://api.sleeper.app/v1/league/"+leagueId);
     const {data: users} = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/users");
     const {data: rosters} = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/rosters");
+    const {data: playoffBracket} = await axios.get("https://api.sleeper.app/v1/league/"+leagueId+"/winners_bracket");
     const transactions = await fetchSleeperTransactions(leagueId);
     const matchups = await fetchSleeperMatchups(leagueId);
     return {season: Number(league.season), league, users, rosters, transactions, matchups};
@@ -221,6 +221,7 @@ function processEspnData(seasonData){
     let teamIdMap = {};
     for(const team of seasonData.teams){
         team.schedule = [];
+        team.playoffSchedule = [];
         teamIdMap[team.id] = team;
     }
 
@@ -230,8 +231,19 @@ function processEspnData(seasonData){
         if(game.matchupPeriodId <= seasonData.settings.scheduleSettings.matchupPeriodCount){
             teamIdMap[game.away.teamId].schedule.push(game);
             teamIdMap[game.home.teamId].schedule.push(game);        
+        } else{
+            if(game.away){
+                teamIdMap[game.away.teamId].playoffSchedule.push(game);
+
+            }
+            if(game.home){
+                teamIdMap[game.home.teamId].playoffSchedule.push(game);   
+            }
         }
     }
+
+    // Get matchupTypes for all games on the schedule
+    getEspnMatchupType(seasonData.schedule, teamIdMap);
 
     // populate teams array
     let teams = []; 
@@ -267,6 +279,52 @@ function processEspnData(seasonData){
         }
         teams.push(tempTeam);
     }
+
+
+    // Function to get ESPN Game Type
+    function getEspnMatchupType(schedule, teamIdMap){
+        const regularSeasonLength = seasonData.settings.scheduleSettings.matchupPeriodCount;
+        const playoffTeamCount = seasonData.settings.scheduleSettings.playoffTeamCount;
+
+
+        // Determine regular season, losers bracket, and playoff bye weeks
+        for(const game of schedule){
+            if(game.matchupPeriodId <= regularSeasonLength){
+                game.matchupType = 'regularSeason';
+            } else if (teamIdMap[game.home.teamId].playoffSeed > playoffTeamCount){
+                game.matchupType = 'losersBracket';
+            } else if(!game.away){
+                game.matchupType = 'playoffBye';
+            }
+        }
+
+        // Determine true playoff games vs consolation ladder in the winners bracket. 
+        // True playoff games will be assinged matchup type 'playoff'. Consolation games will be assigned 'consolation'
+        for(const team of Object.values(teamIdMap)){
+            if(team.playoffSchedule[0].matchupType === 'losersBracket'){ continue }
+
+            let consolation = false;
+
+            for(const game of team.playoffSchedule){
+                // skip bye weeks
+                if(game.matchupType === 'playoffBye'){ continue }
+
+                // Checks if the matchup has already been assigned based on another managers playoffSchedule
+                if(game.matchupType === 'consolation'){
+                    consolation = true;
+                    continue;
+                } else {
+                    // set matchupType based on current consolation value
+                    game.matchupType = consolation ? 'consolation' : 'playoff'
+
+                    // if the team lost, set consolation to true
+                    consolation = ((game.home.teamId === team.id && (game.home.totalPoints < game.away.totalPoints)) || (game.away.teamId === team.id && (game.away.totalPoints < game.home.totalPoints)) ? true : false);
+                }
+            }
+        }
+
+    }
+
     return {season: seasonData.seasonId, teams, schedule: seasonData.schedule};
 }
 
@@ -286,6 +344,7 @@ function processSleeperData(seasonData){
         rosterIdMap[roster.roster_id].weeklyPointsAgainst = [];
         rosterIdMap[roster.roster_id].weeklyExectedWins = [];
         rosterIdMap[roster.roster_id].schedule = [];
+        rosterIdMap[roster.roster_id].playoffSchedule = [];
         rosterIdMap[roster.roster_id].trades = 0;
         rosterIdMap[roster.roster_id].adds = 0;
         ownerIdMap[roster.owner_id] = roster;
@@ -307,9 +366,31 @@ function processSleeperData(seasonData){
     let usedMatchups = [];
     let weekCounter = 1;
     let matchupCounter = 1;
+
     for(const week of seasonData.matchups){
         for(const [index, user] of week.entries()){
+
+            // Push Bye Weeks into matchups without an away game
+            if(user.matchup_id === null && weekCounter === seasonData.league.settings.playoff_week_start){
+                usedMatchups.push('week-'+weekCounter+'-matchup-'+user.matchup_id);
+                let matchObj = {
+                    home: {
+                        pointsByScoringPeriod: {[weekCounter]: user.points},
+                        teamId: user.roster_id,
+                        tiebreak: 0,
+                        totalPoints: user.points
+                    },
+                    id: matchupCounter,
+                    matchupPeriodId: weekCounter
+                };
+
+                schedule.push(matchObj);
+                matchupCounter++;
+                continue;
+            }
+
             let opponent = week.find((o) => o.matchup_id === user.matchup_id && o.roster_id !== user.roster_id);
+
             if(usedMatchups.indexOf('week-'+weekCounter+'-matchup-'+user.matchup_id) === -1){
                 usedMatchups.push('week-'+weekCounter+'-matchup-'+user.matchup_id);
 
@@ -345,14 +426,23 @@ function processSleeperData(seasonData){
         if(game.matchupPeriodId < seasonData.league.settings.playoff_week_start){
             rosterIdMap[game.away.teamId].schedule.push(game);
             rosterIdMap[game.home.teamId].schedule.push(game);
+        } else{
+            if(game.away){
+                rosterIdMap[game.away.teamId].playoffSchedule.push(game);
+
+            }
+            if(game.home){
+                rosterIdMap[game.home.teamId].playoffSchedule.push(game);   
+            }
         }
     }
+
+    getSleeperMatchupType(schedule, rosterIdMap);
 
     // Populate array with data
     for(const user of seasonData.users){
         const roster = ownerIdMap[user.user_id];
         if(roster){
-            
             // calcluate standard deviation
             let totalPoints = roster.settings.fpts + roster.settings.fpts_decimal / 100;
             let AveragePoints = totalPoints / (seasonData.league.settings.playoff_week_start - 1);
@@ -388,6 +478,54 @@ function processSleeperData(seasonData){
     }
 
     teams.sort((a,b) => a.team_id - b.team_id);
+
+
+    // Function to get Sleeper Matchup Type
+    function getSleeperMatchupType(schedule, rosterIdMap){
+        const playoffWeekStart = seasonData.league.settings.playoff_week_start;
+        const playoffTeamCount = seasonData.league.settings.playoff_teams;
+
+        // Determine regular season, losers bracket, and playoff bye weeks
+        for(const game of schedule){
+            if(game.matchupPeriodId < playoffWeekStart){
+                game.matchupType = 'regularSeason';
+            } else if (rosterIdMap[game.home.teamId].settings.playoffSeed > playoffTeamCount){
+                game.matchupType = 'losersBracket';
+            } else if(!game.away ){
+                game.matchupType = 'playoffBye';
+            } 
+        }
+
+        // Determine true playoff games vs consolation ladder in the winners bracket. 
+        // True playoff games will be assinged matchup type 'playoff'. Consolation games will be assigned 'consolation'
+        for(const team of Object.values(rosterIdMap)){
+
+            // any team in the losers bracket will already have those games assigned. Skip those teams
+            if(team.playoffSchedule[0].matchupType === 'losersBracket'){ continue }
+
+            // Set consolation variable to track if the team has lost or not yet. 
+            let consolation = false;
+
+            // Loop over a teams playoff schedule to check for wins and losses and assign the correct game type. 
+            for(const game of team.playoffSchedule){
+                // skip bye weeks
+                if(game.matchupType === 'playoffBye'){ continue }
+
+                // Checks if the matchup has already been assigned based on another managers playoffSchedule
+                if(game.matchupType === 'consolation'){
+                    consolation = true;
+                    continue;
+                } else {
+                    // set matchupType based on current consolation value
+                    game.matchupType = consolation ? 'consolation' : 'playoff'
+                    // Skip resetting consolation if the team had already lost in a previous week. Otherwise, set consolation based on the results of this week. 
+                    if(consolation){ continue }
+                    consolation = ((game.home.teamId === team.roster_id && (game.home.totalPoints < game.away.totalPoints)) || (game.away.teamId === team.roster_id && (game.away.totalPoints < game.home.totalPoints)) ? true : false);
+                }
+            }
+        }
+
+    }
 
     return {season: seasonData.season, teams, schedule}
 }

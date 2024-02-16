@@ -10,6 +10,7 @@ const seasonsSchema = new mongoose.Schema({
     schedule: [{
         id: {type: String, required: true},
         matchupPeriodId: {type: Number, required: true},
+        matchupType: {type: String, required: false},
         away: {
             teamId: {type: Number, required: false},
             totalPoints: {type: Number, required: false},

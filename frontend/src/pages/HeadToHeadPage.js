@@ -4,9 +4,10 @@ import ManagerSelectMenu from "../components/headtohead/ManagerSelectMenu";
 
 function HeadToHeadPage(){
 
-    const [managerList, setManagerList] = useState([]);
-    const [seasons, setSeasons] = useState([]);
-    const [selectedManagers, setSelectedManagers] = useState({manager1: null, manager2: null});
+    const [managerList, setManagerList] = useState([]); // list of all managers - used for dropdown menus
+    const [seasons, setSeasons] = useState([]); // list of all seasons - used for data processing
+    const [selectedManagers, setSelectedManagers] = useState({manager1: null, manager2: null}); // managers selected in dropdown menus - used to process data
+    const [processedManagers, setProcessedManagers] = useState([]); // managers with data processing complete and fully populated with data
 
     // retrieves data from API 
     const getData = async () => {
@@ -40,7 +41,6 @@ function HeadToHeadPage(){
             const manager = managerList.find(manager => manager._id === managerId);
             manager.ownerIds = manager.espn_ids.concat(manager.sleeper_ids);
             manager.seasons = [];
-            manager.headToHeadGames = [];
             manager.summary = {
                 championships: 0,
                 biggestLosers: 0,
@@ -56,16 +56,6 @@ function HeadToHeadPage(){
                 expectedWins: 0,
                 playoffAppearances: 0,
             };
-
-            manager.headToHeadSummary = {
-                games: 0, 
-                wins: 0, 
-                losses: 0, 
-                playoffGames: 0,
-                playoffWins: 0,
-                playoffLosses: 0,
-            }
-
             managerComp.push(manager);
             managerIds.push(manager._id);
             managerLookup[manager._id] = manager;
@@ -109,38 +99,75 @@ function HeadToHeadPage(){
                 manager.summary.trades += season.team.transactions.trades;
                 manager.summary.expectedWins += season.team.summary.regularSeason.expectedWins;
                 manager.summary.playoffAppearances += (season.team.summary.regularSeason.playoffSeed <= 6) ? 1 : 0;
-
             }
         }
 
+        getHeadtoHeadSummary(seasons, managerComp);
 
-        console.log("seasons", seasons)
-        // console.log("managerList", managerList)
+        function getHeadtoHeadSummary(seasons, managerComp){
+
+            // Loop over seasons and find games where the owners matched up. Populate headToHeadGames
+            let headToHeadGames = [];
+            for(const season of seasons){
+
+                let matchups = [];
+
+                // Get array containing selected managers team Ids for that season
+                const managerTeamIds = season.teams.filter(team => team.owners.some(ownerId => managerComp.some(manager => manager.ownerIds.includes(ownerId)))).flatMap(team => team.teamId);
+
+                // Loop over games and populate array with head to head matchups
+                for(const game of season.schedule){
+                    if(managerTeamIds.indexOf(game.away?.teamId) !== -1 && managerTeamIds.indexOf(game.home?.teamId) !== -1){
+                        matchups.push(game);
+                    }
+                }
+                if(matchups.length > 0){
+                    headToHeadGames.push({year: season.season, matchups});
+                }
+            }
+
+
+            // push head to head games onto the managerComp object and calc summaries
+            for(const manager of managerComp){
+                // manager.headToHeadGames = headToHeadGames;
+                manager.headToHeadSummary = {
+                    games: 0, 
+                    wins: 0, 
+                    points: 0,
+
+                    playoffGames: 0,
+                    playoffWins: 0,
+                    playoffPoints: 0,
+                }
+
+                for(const season of manager.seasons){
+                    for(const game of season.headToHeadGames){
+                        // dont count these games
+                        if(game.matchupType === 'consolation' || game.matchupType === 'losersBracket'){ continue }
+
+                        // tally total games and points
+                        let myTeam = game.home.teamId === season.team.teamId ? 'home' : 'away';
+
+                        manager.headToHeadSummary.games ++;
+                        manager.headToHeadSummary.wins += ((myTeam === 'home' && game.home.totalPoints > game.away.totalPoints) || (myTeam === 'away' && game.away.totalPoints > game.home.totalPoints)) ? 1 : 0;
+                        manager.headToHeadSummary.points += myTeam === 'home'? game.home.totalPoints : game.away.totalPoints;
+
+                        // sepcifically tally playoff data
+                        if(game.matchupType === 'playoff'){
+                            manager.headToHeadSummary.playoffGames ++;
+                            manager.headToHeadSummary.playoffWins += ((myTeam === 'home' && game.home.totalPoints > game.away.totalPoints) || (myTeam === 'away' && game.away.totalPoints > game.home.totalPoints)) ? 1 : 0;
+                            manager.headToHeadSummary.playoffPoints += myTeam === 'home'? game.home.totalPoints : game.away.totalPoints;
+
+                        }
+
+                    }
+                }
+            }
+        }
         console.log("managerComp", managerComp)
-
-        
-        //Steps: 
-        // Define Empty object for managers
-        // Loop over Seasons.teams to grab overall comps
-        // Loop over seasons.schedule to grab H2H Comps
-
-
-        // Final Object should look like this: 
-        // const sampleManagerComp = {
-        //     manager1: {
-        //         id: '',
-        //         user_name: '',
-        //         wins: '',
-        //         // ... other properties
-        //     }, 
-        //     manager2: {
-        //         id: '',
-        //         user_name: '',
-        //         wins: '',
-        //         // ... other properties
-        //     },         
-        // }
+        return managerComp;
     }
+
 
     // Grabs full list of managers and seasons from the API
     useEffect(() => {
@@ -150,7 +177,8 @@ function HeadToHeadPage(){
 
     // Runs filters and processes data to compare maanagers when select menus change
     useEffect(()=> {
-        processData(seasons, managerList, selectedManagers)
+        const managers = processData(seasons, managerList, selectedManagers);
+        setProcessedManagers(managers);
     }, [seasons, managerList, selectedManagers]);
 
     return(
@@ -171,6 +199,14 @@ function HeadToHeadPage(){
                     onChange={(value) => handleOptionChange('manager2', value)}
                 />
             </div>
+            <br></br>
+
+            {!processedManagers && processedManagers.map(manager => (
+                <div>
+                    <div>Testing</div>
+                    <div>{manager.user_name}</div>
+                </div>
+            ))}
 
         </div>
     )

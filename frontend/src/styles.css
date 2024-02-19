@@ -1273,7 +1273,37 @@ table.pastChampions {
     border-left: 8px solid var(--offWhiteBody); /* Change color as needed */
 }
 
-@media (max-width: 375px){
+.gameLogContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.gameLogHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin: 0;
+}
+
+.gameLogSubContainer {
+    width: inherit;
+    padding: 1em 1em;
+}
+
+.fontSize2em {
+    font-size: 2em;
+}
+
+.gameLogSubContainer {
+    width: inherit;
+    background-color: var(--bodyGray);
+    border-radius: 20px;
+    padding: 1em 1em;
+    margin: 1em 1em;
+}
+
+@media (min-width: 375px) and (max-width: 700px){
     .headToHeadSelectContainer{
         gap: 10px
     }
@@ -1287,6 +1317,8 @@ table.pastChampions {
         background-color: black;
         color: white;        width: 100%;
     }
+
+
 }
 
 
@@ -1304,11 +1336,33 @@ table.pastChampions {
         margin: 1em;
     }
 
+    .headToHeadBody {
+        width: 90%;
+    }
+
     .headToHeadSelectContainer{
         gap: 5px
     }
 
+    .comparisonContainer {
+        padding: 0.5em 0.5em;
+        width: 90%;
+    }
+
     .comparisonContainer div{
         font-size: 14px;
+    }
+
+    .gameLogContainer {
+        width: 95%;
+    }
+
+    .gameLogSubContainer {
+        width: inherit;
+        margin: 0.5em 0em;
+    }
+    
+    .gameLogBody {
+        width: 95%;
     }
 }

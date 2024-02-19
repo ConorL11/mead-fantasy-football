@@ -24,12 +24,12 @@ function ManagerCompDisplay({ managers }){
                 <div>
                     {manager1.headToHeadSummary.wins}
                 </div>
-                <div>
-                    <span className={`${manager1.headToHeadSummary.wins > manager2.headToHeadSummary.wins ? '' : 'displayNone'}`}>&#9664;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager1.headToHeadSummary.wins > manager2.headToHeadSummary.wins ? 'triangleLeft' : ''}`}></span>
                 </div>
                 <div className="justifyCenter textCenter">Wins</div>
-                <div>
-                    <span className={`${manager2.headToHeadSummary.wins > manager1.headToHeadSummary.wins ? '' : 'displayNone'}`}>&#9654;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager2.headToHeadSummary.wins > manager1.headToHeadSummary.wins ? 'triangleRight' : ''}`}></span>
                 </div>
                 <div className="justifyEnd">
                     {manager2.headToHeadSummary.wins}
@@ -37,34 +37,34 @@ function ManagerCompDisplay({ managers }){
             </div>
             <div className="comparisonSection">
                 <div>{manager1.headToHeadSummary.points.toFixed(2)}</div>
-                <div>
-                    <span className={`${manager1.headToHeadSummary.points > manager2.headToHeadSummary.points ? '' : 'displayNone'}`}>&#9664;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager1.headToHeadSummary.points > manager2.headToHeadSummary.points ? 'triangleLeft' : ''}`}></span>
                 </div>
                 <div className="justifyCenter textCenter">Points</div>
-                <div>
-                    <span className={`${manager2.headToHeadSummary.points > manager1.headToHeadSummary.points ? '' : 'displayNone'}`}>&#9654;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager2.headToHeadSummary.points > manager1.headToHeadSummary.points ? 'triangleRight' : ''}`}></span>
                 </div>               
                 <div className="justifyEnd">{manager2.headToHeadSummary.points.toFixed(2)}</div>
             </div>
             <div className="comparisonSection">
                 <div>{manager1.headToHeadSummary.playoffWins}</div>
-                <div>
-                    <span className={`${manager1.headToHeadSummary.playoffWins > manager2.headToHeadSummary.playoffWins ? '' : 'displayNone'}`}>&#9664;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager1.headToHeadSummary.playoffWins > manager2.headToHeadSummary.playoffWins ? 'triangleLeft' : ''}`}></span>
                 </div>
                 <div className="justifyCenter textCenter">Playoff Wins</div>
-                <div>
-                    <span className={`${manager2.headToHeadSummary.playoffWins > manager1.headToHeadSummary.playoffWins ? '' : 'displayNone'}`}>&#9654;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager2.headToHeadSummary.playoffWins > manager1.headToHeadSummary.playoffWins ? 'triangleRight' : ''}`}></span>
                 </div>           
                 <div className="justifyEnd">{manager2.headToHeadSummary.playoffWins}</div>
             </div>
             <div className="comparisonSection">
                 <div>{manager1.headToHeadSummary.playoffPoints.toFixed(2)}</div>
-                <div>
-                    <span className={`${manager1.headToHeadSummary.playoffPoints > manager2.headToHeadSummary.playoffPoints ? '' : 'displayNone'}`}>&#9664;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager1.headToHeadSummary.playoffPoints > manager2.headToHeadSummary.playoffPoints ? 'triangleLeft' : ''}`}></span>
                 </div>
                 <div className="justifyCenter textCenter">Playoff Points</div>
-                <div>
-                    <span className={`${manager2.headToHeadSummary.playoffPoints > manager1.headToHeadSummary.playoffPoints ? '' : 'displayNone'}`}>&#9654;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager2.headToHeadSummary.playoffPoints > manager1.headToHeadSummary.playoffPoints ? 'triangleRight' : ''}`}></span>
                 </div>                          
                  <div className="justifyEnd">{manager2.headToHeadSummary.playoffPoints.toFixed(2)}</div>
             </div>
@@ -72,45 +72,45 @@ function ManagerCompDisplay({ managers }){
             <h2 className="justifyCenter textCenter">Overall Stats</h2>
             <div className="comparisonSection">
                 <div>{manager1.summary.championships}</div>
-                <div>
-                    <span className={`${manager1.summary.championships > manager2.summary.championships ? '' : 'displayNone'}`}>&#9664;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager1.summary.championships > manager2.summary.championships ? 'triangleLeft' : ''}`}></span>
                 </div>
                 <div className="justifyCenter textCenter">Championships</div>
-                <div>
-                    <span className={`${manager2.summary.championships > manager1.summary.championships ? '' : 'displayNone'}`}>&#9654;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager2.summary.championships > manager1.summary.championships ? 'triangleRight' : ''}`}></span>
                 </div> 
                 <div className="justifyEnd">{manager2.summary.championships}</div>
             </div>
             <div className="comparisonSection">
                 <div>{manager1.summary.runnerUps}</div>
-                <div>
-                    <span className={`${manager1.summary.runnerUps > manager2.summary.runnerUps ? '' : 'displayNone'}`}>&#9664;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager1.summary.runnerUps > manager2.summary.runnerUps ? 'triangleLeft' : ''}`}></span>
                 </div>
                 <div className="justifyCenter textCenter">Runner Ups</div>
-                <div>
-                    <span className={`${manager2.summary.runnerUps > manager1.summary.runnerUps ? '' : 'displayNone'}`}>&#9654;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager2.summary.runnerUps > manager1.summary.runnerUps ? 'triangleRight' : ''}`}></span>
                 </div>                 
                 <div className="justifyEnd">{manager2.summary.runnerUps}</div>
             </div>
             <div className="comparisonSection">
                 <div>{manager1.summary.biggestLosers}</div>
-                <div>
-                    <span className={`${manager1.summary.biggestLosers < manager2.summary.biggestLosers ? '' : 'displayNone'}`}>&#9664;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager1.summary.biggestLosers < manager2.summary.biggestLosers ? 'triangleLeft' : ''}`}></span>
                 </div>
                 <div className="justifyCenter textCenter">Biggest Losers</div>
-                <div>
-                    <span className={`${manager2.summary.biggestLosers < manager1.summary.biggestLosers ? '' : 'displayNone'}`}>&#9654;</span>
+                <div className="flexHorizontal">
+                    <span className={`${manager2.summary.biggestLosers < manager1.summary.biggestLosers ? 'triangleRight' : ''}`}></span>
                 </div>                        
                 <div className="justifyEnd">{manager2.summary.biggestLosers}</div>
             </div>
             <div className="comparisonSection">
                 <div>{(manager1.summary.wins / manager1.summary.games).toFixed(3)}</div>
-                <div>
-                    <span className={`${(manager1.summary.wins / manager1.summary.games).toFixed(3) > (manager2.summary.wins / manager2.summary.games).toFixed(3) ? '' : 'displayNone'}`}>&#9664;</span>
+                <div className="flexHorizontal">
+                    <span className={`${(manager1.summary.wins / manager1.summary.games).toFixed(3) > (manager2.summary.wins / manager2.summary.games).toFixed(3) ? 'triangleLeft' : ''}`}></span>
                 </div>
                 <div className="justifyCenter textCenter">Win Percentage</div>
-                <div>
-                    <span className={`${(manager2.summary.wins / manager2.summary.games).toFixed(3) > (manager1.summary.wins / manager1.summary.games).toFixed(3) ? '' : 'displayNone'}`}>&#9654;</span>
+                <div className="flexHorizontal">
+                    <span className={`${(manager2.summary.wins / manager2.summary.games).toFixed(3) > (manager1.summary.wins / manager1.summary.games).toFixed(3) ? 'triangleRight' : ''}`}></span>
                 </div>                     
                 <div className="justifyEnd">{(manager2.summary.wins / manager2.summary.games).toFixed(3)}</div>
             </div>

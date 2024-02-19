@@ -63,29 +63,29 @@ connectDB();
 //     }
 // }
 
-// // Seasons Seeder Functions
-// const importData = async () => {
-//     try {
-//         await Season.deleteMany();
-//         const createdSeasons = await Season.insertMany(seasons);
-//         console.log('Data Imported!'.green.inverse);
-//         process.exit();
-//     } catch (error) {
-//         console.log(`${error}`.red.inverse);
-//         process.exit(1);
-//     }
-// }
+// Seasons Seeder Functions
+const importData = async () => {
+    try {
+        await Season.deleteMany();
+        const createdSeasons = await Season.insertMany(seasons);
+        console.log('Data Imported!'.green.inverse);
+        process.exit();
+    } catch (error) {
+        console.log(`${error}`.red.inverse);
+        process.exit(1);
+    }
+}
 
-// const destroyData = async () => {
-//     try {
-//         await Season.deleteMany();
-//         console.log('Data Destroyed!'.red.inverse);
-//         process.exit();
-//     } catch (error) {
-//         console.log(`${error}`.red.inverse);
-//         process.exit(1);
-//     }
-// }
+const destroyData = async () => {
+    try {
+        await Season.deleteMany();
+        console.log('Data Destroyed!'.red.inverse);
+        process.exit();
+    } catch (error) {
+        console.log(`${error}`.red.inverse);
+        process.exit(1);
+    }
+}
 
 
 if(process.argv[2] === '-d') {

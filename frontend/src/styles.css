@@ -57,6 +57,10 @@ body {
     padding-left: 2em;
 }
 
+.pr_1 { 
+    padding-right: 10px;
+}
+
 .ml_1 {
     margin-left: 10px;
 }
@@ -1176,4 +1180,115 @@ table.pastChampions {
     margin: 50px auto;
     padding: 25px;
     white-space: pre;
+}
+
+/* Head to Head Page */
+
+.headToHeadPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.headToHeadSelectContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.headToHeadPage select {
+    display: inline-block;
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid var(--burnt-orange);
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    display: inline-grid;
+}
+
+
+.headToHeadPage select:focus-visible {
+    outline: none
+}
+
+.comparisonContainer {
+    padding: 2em 2em;
+}
+
+.comparisonContainer div{
+    font-size: 18px;
+}
+
+.comparisonHeader {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.comparisonSection {
+    display: grid;
+    grid-template-columns: 0.5fr 10px 1fr 10px 0.5fr;
+    align-content: center;
+    padding-bottom: 10px;
+}
+
+.justifyEnd {
+    justify-self: end;
+}
+
+.justifyCenter {
+    justify-self: center;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.displayNone {
+    display: none;
+}
+
+
+@media (max-width: 650px){
+    .headToHeadSelectContainer{
+        gap: 10px
+    }
+
+    .headToHeadPage select {
+        padding: 10px 10px;
+        font-size: 13px;
+        cursor: pointer;
+        border: 2px solid var(--burnt-orange);
+        border-radius: 5px;
+        background-color: black;
+        color: white;        width: 100%;
+    }
+}
+
+
+/* Styling for very small screens*/
+@media (min-width: 300px) and (max-width: 424px){
+    h1 {
+        font-size: 1.5em;
+    }
+    h2 {
+        font-size: 1em;
+    }
+
+    .managerSummary {
+        padding: 0.25em;
+        margin: 1em;
+    }
+
+    .headToHeadSelectContainer{
+        gap: 5px
+    }
+
+    .comparisonContainer div{
+        font-size: 14px;
+    }
 }

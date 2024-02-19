@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import ManagerSelectMenu from "../components/headtohead/ManagerSelectMenu";
 import ManagerCompDisplay from "../components/headtohead/ManagerCompDisplay";
+import GameLog from "../components/headtohead/GameLog";
 
 function HeadToHeadPage(){
 
@@ -199,7 +200,10 @@ function HeadToHeadPage(){
                     onChange={(value) => handleOptionChange('manager2', value)}
                 />
             </div>
-            {processedManagers &&  <ManagerCompDisplay managers={processedManagers}/>}
+            <div className="headToHeadBody">
+                {processedManagers &&  <ManagerCompDisplay managers={processedManagers}/>}
+                {processedManagers &&  <GameLog managers={processedManagers} seasons={seasons}/>}
+            </div>
         </div>
     )
 

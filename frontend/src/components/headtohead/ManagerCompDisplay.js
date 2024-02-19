@@ -2,7 +2,6 @@ import Avatar from "../Avatar";
 
 function ManagerCompDisplay({ managers }){
     
-    console.log("managers", managers)
     const [manager1, manager2] = managers;
 
     return (

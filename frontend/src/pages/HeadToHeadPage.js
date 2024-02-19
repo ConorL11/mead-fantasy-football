@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ManagerSelectMenu from "../components/headtohead/ManagerSelectMenu";
+import ManagerCompDisplay from "../components/headtohead/ManagerCompDisplay";
 
 function HeadToHeadPage(){
 
@@ -181,16 +182,16 @@ function HeadToHeadPage(){
     }
 
     return(
-        <div>
-            <br></br>
-            <div>I'm the Head to head matchup page!</div>
-            <div className="flexHorizontal">
+        <div className="headToHeadPage">
+            <h1>Compare Managers</h1>
+            <div className="headToHeadSelectContainer">
                 <ManagerSelectMenu 
                     managers={managerList}
                     selectedManagers={selectedManagers}
                     dropdownName="manager1"
                     onChange={(value) => handleOptionChange('manager1', value)}
                 />
+                <div>vs</div>
                 <ManagerSelectMenu 
                     managers={managerList}
                     selectedManagers={selectedManagers}
@@ -198,18 +199,7 @@ function HeadToHeadPage(){
                     onChange={(value) => handleOptionChange('manager2', value)}
                 />
             </div>
-            <br></br>
-            <div>
-                {!processedManagers ? 
-                    <div>Select managers</div> 
-                    : 
-                    processedManagers.map(manager => (
-                        <div key={manager.user_name}>
-                            {manager.user_name}
-                        </div>
-                    ))
-                }
-            </div>
+            {processedManagers &&  <ManagerCompDisplay managers={processedManagers}/>}
         </div>
     )
 

@@ -1273,7 +1273,7 @@ table.pastChampions {
     border-left: 8px solid var(--offWhiteBody); /* Change color as needed */
 }
 
-@media (max-width: 650px){
+@media (max-width: 375px){
     .headToHeadSelectContainer{
         gap: 10px
     }
@@ -1291,7 +1291,7 @@ table.pastChampions {
 
 
 /* Styling for very small screens*/
-@media (min-width: 300px) and (max-width: 424px){
+@media (min-width: 300px) and (max-width: 374px){
     h1 {
         font-size: 1.5em;
     }

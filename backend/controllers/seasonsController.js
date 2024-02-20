@@ -6,7 +6,18 @@ import Season from '../models/seasonsModel.js';
 //@route GET /api/seasons
 //@access Public
 const getSeasons = asyncHandler(async (req, res) => {
-    const seasons = await Season.find({});
+    let query = Season.find();
+
+    // Check if fields query parameter is present
+    if (req.query.fields) {
+        // Extract fields from the query parameter
+        const fields = req.query.fields.split(',');
+
+        // Select only the specified fields
+        query = query.select(fields.join(' '));
+    }
+
+    const seasons = await query.exec();
     res.json(seasons);
 });
 

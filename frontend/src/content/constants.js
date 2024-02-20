@@ -8,6 +8,7 @@ const espnTestApiUrl = 'https://fantasy.espn.com/apis/v3/games/ffl/seasons/2019/
 
 // Old ESPN League URLs https://fantasy.espn.com/football/league/history?leagueId=322485&seasonId=2023
 const pastWinners = [
+    {year: '2023', platform: 'espn', winningUser: 'Boobsink', winningTeam: 'Americas Fantasy Team', losingUser: 'Patty', losingTeam: 'Boobsinks Hawg', punishment: '??'},
     {year: '2022', platform: 'espn', winningUser: 'Fisher', winningTeam: 'Big Bussin Bouncy Balls', losingUser: 'Cody', losingTeam: 'Just Last', punishment: 'Wore Griffs HS Football Jersey to the draft (kinda).'},
     {year: '2021', platform: 'sleeper', winningUser: 'Rob', winningTeam: 'Unlucky Bastards', losingUser: 'Griff', losingTeam: 'Balerian the Dreadful', punishment: 'Got pelted with eggs'},
     {year: '2020', platform: 'espn', winningUser: 'Desch', winningTeam: 'Pop Drop and Lockett', losingUser: 'Cody', losingTeam: 'I quit', punishment: 'Made an Only Fans (kinda)'},

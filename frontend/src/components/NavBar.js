@@ -1,20 +1,21 @@
 import { useState } from "react";
-import {links} from "../content/NavLinks"
+import NavLinks from "../content/NavLinks"
 
 import Link from "./Link";
 import "../styles.css"
 
 function NavBar({show}){
 
+    const { links } = NavLinks(); // Call NavLink function to get the links
 
-    const [showSubMenu, setShowSubmenu] = useState(false);
+    const [activeSubMenu, setActiveSubMenu] = useState(null);
 
-    const handleHistoryMouseEnter = () => {
-        setShowSubmenu(true);
+    const handleMouseEnter = (label) => {
+        setActiveSubMenu(label);
     };
 
-    const handleHistoryMouseLeave = () => {
-        setShowSubmenu(false);
+    const handleMouseLeave = () => {
+        setActiveSubMenu(null);
     };
 
 
@@ -22,8 +23,8 @@ function NavBar({show}){
         return (
             <li 
                 key={link.label} 
-                onMouseEnter={link.submenu ? handleHistoryMouseEnter : undefined} 
-                onMouseLeave={link.submenu ? handleHistoryMouseLeave : undefined}
+                onMouseEnter={link.submenu ? () => handleMouseEnter(link.label) : undefined}
+                onMouseLeave={link.submenu ? handleMouseLeave : undefined}
             >
                 <div className={`navLink ${link.submenu ? 'navParentLink' : ''}`}>
                     <Link
@@ -35,7 +36,7 @@ function NavBar({show}){
                         {link.dropdownIcon && (<span className="navBarDropDownIcon">{link.dropdownIcon}</span>)}
                     </Link>
                     {link.submenu && (
-                        <div className={`navSubMenu ${showSubMenu ? 'showNavSubMenu' : ''}`}>
+                        <div className={`navSubMenu ${activeSubMenu === link.label ? 'showNavSubMenu' : ''}`}>
                             {link.submenu.map((submenuLink) => (
                                 <div key={submenuLink.label} className="navSubMenuItem">
                                 <Link to={submenuLink.path}>

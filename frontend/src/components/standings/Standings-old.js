@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { currentLeagueId, censorContent } from "../content/constants";
+import { currentLeagueId, censorContent } from "../../content/constants";
 
 function Standings(){
     const [currentStandings, setCurrentStandings] = useState([]);

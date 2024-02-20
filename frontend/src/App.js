@@ -1,6 +1,5 @@
 import NavBar from "./components/NavBar";
 import Route from "./components/Route";
-
 import BylawsPage from "./pages/BylawsPage";
 import HomePage from "./pages/HomePage";
 import AnalyticsPage from "./pages/AnalyticsPage";
@@ -8,11 +7,15 @@ import HistoryPage from "./pages/HistoryPage";
 import TrophyRoomPage from "./pages/TrophyRoomPage";
 import TopManagersPage from "./pages/TopManagersPage";
 import SeasonsLogPage from "./pages/SeasonsLogPage";
+import HeadToHeadPage from "./pages/HeadToHeadPage";
+import StandingsPage from "./pages/StandingsPage";
+import StandingsDisplay from "./components/standings/StandingsDisplay";
+import NavLinks from "./content/NavLinks";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 import useOutsideClick from "./hooks/useOutsideClick";
-import HeadToHeadPage from "./pages/HeadToHeadPage";
+
 
 function App() {
 
@@ -34,6 +37,8 @@ function App() {
 
     const ref = useOutsideClick(handleClickOutside);
 
+    const { seasons } = NavLinks(); // Call NavLink function to get seasons in our DB
+
     return ( 
         <div className="App">
             <div>
@@ -50,8 +55,13 @@ function App() {
             </div>
 
             <div className="content">
-                <Route path="/">
-                    <HomePage/>
+                {seasons.map((season) => (
+                    <Route key={season.season} path={`/standings/${season.season}`}>
+                        <StandingsDisplay year={season.season}/>
+                    </Route>
+                ))}
+                <Route path="/standings">
+                    <StandingsPage/>
                 </Route>
                 <Route path="/bylaws">
                     <BylawsPage />
@@ -73,6 +83,9 @@ function App() {
                 </Route>
                 <Route path="/headtohead">
                     <HeadToHeadPage/>
+                </Route>
+                <Route path="/">
+                    <HomePage/>
                 </Route>
             </div>
         </div>

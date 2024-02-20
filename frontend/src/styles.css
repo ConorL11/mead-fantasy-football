@@ -1366,3 +1366,34 @@ table.pastChampions {
         width: 95%;
     }
 }
+
+/* History Page */
+.standingsPageGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10em,20em));
+    gap: 1em;
+}
+
+.standingsPageGrid a {
+    height: 15em;
+    margin: 2em;
+    background-color: #333;
+    border-radius: 5%;
+    color: var(--offWhiteHeaders);
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.standingsPageGrid h2 {
+    text-align: center;
+}
+.standingsPageGrid a:hover {
+    color: var(--burnt-orange-light);
+    box-shadow: inset 0 0 0.5em var(--burnt-orange);
+}
+
+.bigIcon {
+    font-size: 6em;
+}

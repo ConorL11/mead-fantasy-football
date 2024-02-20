@@ -26,7 +26,7 @@ function NavBar({show}){
                 onMouseEnter={link.submenu ? () => handleMouseEnter(link.label) : undefined}
                 onMouseLeave={link.submenu ? handleMouseLeave : undefined}
             >
-                <div className={`navLink ${link.submenu ? 'navParentLink' : ''}`}>
+                <div className={`navLink ${link.submenu ? 'navParentLink' : ''} ${link.label === 'Standings' ? 'standingsNav' : ''}`}>
                     <Link
                         key={link.label} 
                         to={link.path} 
@@ -36,7 +36,7 @@ function NavBar({show}){
                         {link.dropdownIcon && (<span className="navBarDropDownIcon">{link.dropdownIcon}</span>)}
                     </Link>
                     {link.submenu && (
-                        <div className={`navSubMenu ${activeSubMenu === link.label ? 'showNavSubMenu' : ''}`}>
+                        <div className={`navSubMenu ${activeSubMenu === link.label ? 'showNavSubMenu' : ''}` }>
                             {link.submenu.map((submenuLink) => (
                                 <div key={submenuLink.label} className="navSubMenuItem">
                                 <Link to={submenuLink.path}>

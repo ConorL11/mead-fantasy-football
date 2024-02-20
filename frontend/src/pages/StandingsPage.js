@@ -7,14 +7,17 @@ function StandingsPage() {
 
     seasons.sort((a,b) => b.season - a.season);
     return (
-        <div className="standingsPageGrid">
+        <div >
+            <div className="standingsPageHeader">Standings</div>
             {seasons && 
-                seasons.map((season) => (
-                    // <div key={season._id}>{season.season}</div>
-                    <Link key={season._id} to={`/standings/${season.season}`} className="historyPageCard">
-                        <h2 className="">{season.season}</h2>
-                    </Link>
-                ))
+                <div className="standingsPage">
+                    {seasons.map((season) => (
+                        // <div key={season._id}>{season.season}</div>
+                        <Link key={season._id} to={`/standings/${season.season}`} className="historyPageCard">
+                            <h2 className="">{season.season}</h2>
+                        </Link>
+                    ))}
+                </div>
             }
         </div>
     )

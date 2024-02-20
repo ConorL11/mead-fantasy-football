@@ -239,7 +239,8 @@ nav li {
 
 .navSubMenuItem {
     padding: 0.75em 0;
-    border-bottom: 1px solid #333;}
+    border-bottom: 1px solid #333;
+}
 
 nav a {
     color: var(--offWhiteHeaders);
@@ -262,6 +263,18 @@ nav a:hover {
     opacity: 1;
     transition: opacity 100ms ease-in-out 100ms;
 }
+
+.standingsNav > a > span:first-child{
+    display: inline-block;
+    padding-left: 0.5em;
+}
+
+.standingsNav .navSubMenu {
+    display: none;
+}
+/* .standingsNav .navSubMenu .navSubMenuItem .navIcon {
+    padding-left: 1.5em
+} */
 
 
 /* Desktop Nav Styling */
@@ -337,7 +350,6 @@ nav a:hover {
     .navSubMenu {
         grid-column: span 1;
         grid-row: 2;
-        width: fit-content;
         background-color: black;
         border: 1px solid var(--burnt-orange);
         margin: 1em 0;
@@ -1367,16 +1379,23 @@ table.pastChampions {
     }
 }
 
-/* History Page */
-.standingsPageGrid {
+/* Standings */
+
+.standingsPage {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(10em,20em));
-    gap: 1em;
 }
 
-.standingsPageGrid a {
-    height: 15em;
-    margin: 2em;
+.standingsPageHeader {
+    background: hsl(0 0% 0%);
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.standingsPage a {
+    height: 5em;
+    margin: 1em;
     background-color: #333;
     border-radius: 5%;
     color: var(--offWhiteHeaders);
@@ -1386,14 +1405,30 @@ table.pastChampions {
     align-items: center;
 }
 
-.standingsPageGrid h2 {
+.standingsPage h2 {
     text-align: center;
 }
-.standingsPageGrid a:hover {
+.standingsPage a:hover {
     color: var(--burnt-orange-light);
     box-shadow: inset 0 0 0.5em var(--burnt-orange);
 }
 
 .bigIcon {
     font-size: 6em;
+}
+
+.centerText {
+    text-align: center;
+}
+
+@media (min-width: 630px){
+    .standingsPage {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(10em,20em));
+        gap: 1em;
+    }
+    
+    .standingsPage a {
+        height: 20em;
+    }
 }

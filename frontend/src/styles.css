@@ -212,8 +212,8 @@ nav ul {
 }
 
 nav li {
-    margin-bottom: 1em;
-    margin-left: 1em;
+    border-top: 1px solid #333;
+    padding: 0.75em 0.75em;
 }
 
 .navIcon {
@@ -224,22 +224,24 @@ nav li {
     display: none;
 }
 
-.navParentLink {
-    padding: 0.5em 0em;
-    border-top: 1px solid #333;
+.navBarDropDownIcon {
+    padding-left: 0.2em;
 }
 
-.navParentLink > a > span:first-child{
-    display: none;
+.navParentLink {
+    padding: 0.5em 0em;
 }
 
 .navSubMenu {
-    padding: 0.5em 0em;
+    padding: 0.5em 1em;
 }
 
 .navSubMenuItem {
     padding: 0.75em 0;
-    border-bottom: 1px solid #333;
+}
+
+.navSubMenuItem > a > span:first-child{
+    display: none;
 }
 
 nav a {
@@ -264,18 +266,16 @@ nav a:hover {
     transition: opacity 100ms ease-in-out 100ms;
 }
 
-.standingsNav > a > span:first-child{
-    display: inline-block;
-    padding-left: 0.5em;
+.navParentLink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.standingsNav .navSubMenu {
-    display: none;
+.mobileNavDropDownIcon {
+    display: flex;
+    font-size: 2em;
 }
-/* .standingsNav .navSubMenu .navSubMenuItem .navIcon {
-    padding-left: 1.5em
-} */
-
 
 /* Desktop Nav Styling */
 @media screen and (min-width: 1300px){
@@ -299,7 +299,7 @@ nav a:hover {
         all: unset;
         grid-column: 3 / 4;
         display: grid;
-        padding-top: 1.5em;
+        padding-top: 1em;
     }
 
     nav a {
@@ -334,6 +334,7 @@ nav a:hover {
         grid-column: span 1;
         margin-left: 3em;
         margin-bottom: 0;
+        border-top: none;
     }
 
     .navIcon {
@@ -368,6 +369,10 @@ nav a:hover {
         display: block;
     }
 
+    .hideNavSubMenu {
+        display: none;
+    }
+
     .navParentLink {
         all: unset;
     }
@@ -378,6 +383,10 @@ nav a:hover {
 
     .navSubMenu a {
         font-size: 0.8rem;
+    }
+
+    .mobileNavDropDownIcon {
+        display: none;
     }
 }
 
@@ -1408,6 +1417,7 @@ table.pastChampions {
 .standingsPage h2 {
     text-align: center;
 }
+
 .standingsPage a:hover {
     color: var(--burnt-orange-light);
     box-shadow: inset 0 0 0.5em var(--burnt-orange);

@@ -32,7 +32,7 @@ const NavLinks = () => {
     
     const links = [
         {label: 'Home', path: '/', icon: <GoHome/>},
-        {label: 'Standings', path: '/standings', icon: <BiBarChartAlt2/>, submenu: seasons.map((season, index) => ({label: season.season, path: `/standings/${season.season}`})), dropdownIcon: <RiArrowDropDownLine />, },
+        {label: 'Standings', path: '/standings', icon: <BiBarChartAlt2/>, submenu: seasons.map((season, index) => ({label: season.season, path: `/standings/${season.season}`})), dropdownIcon: <RiArrowDropDownLine />},
         {label: 'Bylaws', path: '/bylaws', icon: <GoLog/>},
         {label: 'Analytics', path: '/analytics', icon: <GoRocket/>},
         {label: 'History', path: '/history', icon: <TbChartBar/>, submenu: historyLinks, dropdownIcon: <RiArrowDropDownLine />},

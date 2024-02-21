@@ -75,7 +75,7 @@ function Gamelog({ managers, seasons }){
                     <div className="gameLogHeader" onClick={handlePlayoffClick}>
                         <h2 >Playoff Matchups</h2>
                         <div className="flexHorizontal fontSize2em">
-                            {showPlayoffGames ? <RiArrowDownSLine /> : <RiArrowRightSLine />}
+                            {showPlayoffGames ? <RiArrowRightSLine /> : <RiArrowDownSLine />}
                         </div>
                     </div>
                     {showPlayoffGames && 
@@ -126,7 +126,7 @@ function Gamelog({ managers, seasons }){
                 <div className="gameLogHeader" onClick={handleRegularSeasonClick}>
                     <h2 >Regular Season Matchups</h2>
                     <div className="flexHorizontal fontSize2em">
-                        {showRegularSeasonGames ? <RiArrowDownSLine /> : <RiArrowRightSLine />}
+                        {showRegularSeasonGames ? <RiArrowRightSLine /> : <RiArrowDownSLine />}
                     </div>
                 </div>
                 {showRegularSeasonGames && 

@@ -14,12 +14,14 @@ import NavLinks from "./content/NavLinks";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
+import { useRef } from "react";
 import useOutsideClick from "./hooks/useOutsideClick";
 
 
 function App() {
 
     const [isChecked, setIsChecked] = useState(false);
+    const exceptionRef = useRef(null);
 
     const handleClickOutside = () => {
         setIsChecked(false);
@@ -46,7 +48,7 @@ function App() {
                     <h3 className="title">Mead Fantasy Football</h3>
                     <input type="checkbox" id="nav-toggle" className="nav-toggle" ref={ref} checked={isChecked} onChange={handleCheck}/>
                     <nav>
-                        <NavBar/>
+                        <NavBar exceptionRef={exceptionRef}/>
                     </nav>
                     <label htmlFor="nav-toggle" className="nav-toggle-label" onClick={handleMenuClick}>
                         <span><AiOutlineMenu className="nav-dropdown-icon"/></span>

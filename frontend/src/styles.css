@@ -1443,3 +1443,12 @@ table.pastChampions {
     }
 }
 
+.homePageContainer {
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+    text-align: left;
+    max-width: 500px;
+}

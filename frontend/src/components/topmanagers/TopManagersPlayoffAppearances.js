@@ -13,7 +13,7 @@ function TopManagersPlayoffAppearances({members: managers}){
                             <div className="teamName">{manager.user_name}</div>
                             <div className="flexHorizontal">
                                 <div ><img className="mediumAvatar" src={`/headshots/${manager.user_id}.png`} alt="" /></div>
-                                <div className={`coloredBar coolBar`} style={{ width: `${(manager.playoffAppearances / maxPlayoffAppearances) * 100 }%` }}>
+                                <div className={`coloredBar coolBar`} style={{ width: `${(manager.playoffAppearances / maxPlayoffAppearances) * 100 }%`, background: `linear-gradient(to right, ${manager.colors.join(', ')})` }}>
                                     <div className="teamPoints">{manager.playoffAppearances.toFixed(0)}</div>
                                 </div>
                             </div>

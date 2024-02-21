@@ -53,7 +53,7 @@ function TrophyRoomPage(){
             let championOwners;
             let runnerUpOnwers;
             let loserOwners;
-            debugger
+
             if(season.results.platform === 'espn'){
                 championOwners = championUser.espn_ids;
                 runnerUpOnwers = runnerUpUser.espn_ids;

@@ -20,14 +20,14 @@ function TopManagersLuckRating({members: managers}){
                     <div key={manager.user_id} className="teamLuckContainer">
                         {manager.luckRating < 0 && <div className="negativeLuckTeamName">{manager.user_name}</div>}
                         {manager.luckRating < 0 && <div className="negativeLuckContainer">
-                            <div className="negativeLuckBar" style={{ width: `${(Math.abs(manager.luckRating) / maxLuckRating) * 90 }%` }}>
+                            <div className="negativeLuckBar" style={{ width: `${(Math.abs(manager.luckRating) / maxLuckRating) * 90 }%`, background: `linear-gradient(to right, ${manager.colors.join(', ')})` }}>
                                 <div className="negativeLuckTeamPoints">{manager.luckRating.toFixed(2)}</div>
                             </div>
                         </div>}
                         <img className="luckAvatar mediumAvatar" src={`/headshots/${manager.user_id}.png`} alt="" />
                         {manager.luckRating >= 0 && <div className="positiveLuckTeamName">{manager.user_name}</div>}
                         {manager.luckRating >= 0 && <div className="positiveLuckContainer">
-                            <div className="positiveLuckBar" style={{ width: `${(Math.abs(manager.luckRating) / maxLuckRating) * 90 }%` }}>
+                            <div className="positiveLuckBar" style={{ width: `${(Math.abs(manager.luckRating) / maxLuckRating) * 90 }%`, background: `linear-gradient(to right, ${manager.colors.join(', ')})` }}>
                                 <div className="positiveLuckTeamPoints">{manager.luckRating.toFixed(1)}</div>
                             </div>
                         </div>}

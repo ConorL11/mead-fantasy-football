@@ -62,8 +62,6 @@ function TopManagersPage(){
             // Playoff Appearances
             member.playoffAppearances = 0;
 
-            member.colors = ['#4F2683', '#FFC62F'];
-
             managerLookup[member.user_id] = member;
             for(const id of member.espn_ids){
                 ownerLookup[id] = member;

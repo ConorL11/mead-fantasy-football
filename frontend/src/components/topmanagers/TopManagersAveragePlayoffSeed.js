@@ -16,7 +16,7 @@ function TopManagersAveragePlayoffSeed({members: managers}){
                             <div className="teamName">{manager.user_name}</div>
                             <div className="flexHorizontal">
                                 <div ><img className="mediumAvatar" src={`/headshots/${manager.user_id}.png`} alt="" /></div>
-                                <div className={`coloredBar coolBar`} style={{ width: `${(manager.averagePlayoffSeed / maxPlayoffSeed) * 100 }%` }}>
+                                <div className={`coloredBar coolBar`} style={{ width: `${(manager.averagePlayoffSeed / maxPlayoffSeed) * 100 }%`, background: `linear-gradient(to right, ${manager.colors.join(', ')})` }}>
                                     <div className="teamPoints">{manager.averagePlayoffSeed.toFixed(1)}</div>
                                 </div>
                             </div>

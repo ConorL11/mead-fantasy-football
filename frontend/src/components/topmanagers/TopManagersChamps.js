@@ -18,7 +18,7 @@ function TopManagersChamps({members: managers}){
                                     <div className="teamName">{manager.user_name}</div>
                                     <div className="flexHorizontal">
                                         <div ><img className="mediumAvatar" src={`/headshots/${manager.user_id}.png`} alt="" /></div>
-                                        <div className={`coloredBar coolBar`} style={{ width: `${(manager.championships / maxChampionships) * 90 }%` }}>
+                                        <div className={`coloredBar coolBar`} style={{ width: `${(manager.championships / maxChampionships) * 90 }%`, background: `linear-gradient(to right, ${manager.colors.join(', ')})`}}>
                                             <div className="teamPoints">{manager.championships}</div>
                                         </div>
                                     </div>
@@ -34,7 +34,7 @@ function TopManagersChamps({members: managers}){
                                     <div className="teamName">{manager.user_name}</div>
                                     <div className="flexHorizontal">
                                         <div ><img className="mediumAvatar" src={`/headshots/${manager.user_id}.png`} alt="" /></div>
-                                        <div className={`coloredBar coolBar`} style={{ width: `${(manager.biggestLosers / maxBiggestLosers) * 90 }%` }}>
+                                        <div className={`coloredBar coolBar`} style={{ width: `${(manager.biggestLosers / maxBiggestLosers) * 90 }%`, background: `linear-gradient(to right, ${manager.colors.join(', ')})` }}>
                                             <div className="teamPoints">{manager.biggestLosers}</div>
                                         </div>
                                     </div>

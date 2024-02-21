@@ -6,7 +6,18 @@ import LeagueMember from '../models/leagueMembersModel.js';
 //@route GET /api/leagueMembers
 //@access Public
 const getLeagueMembers = asyncHandler(async (req, res) => {
-    const leagueMembers = await LeagueMember.find({});
+    let query = LeagueMember.find();
+
+    // Check if fields query parameter is present
+    if (req.query.fields) {
+        // Extract fields from the query parameter
+        const fields = req.query.fields.split(',');
+
+        // Select only the specified fields
+        query = query.select(fields.join(' '));
+    }
+
+    const leagueMembers = await query.exec();
     res.json(leagueMembers);
 });
 

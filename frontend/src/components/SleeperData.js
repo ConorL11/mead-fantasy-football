@@ -89,7 +89,7 @@ function SleeperData(){
             user.user_name = leagueMembers.find(member => member.sleeper_ids.some(id => id === user.user_id )).user_name;
 
             // Assign Member ID to User Object from leagueMembers Back End
-            user.member_id = memberMap[user.user_id]._id;
+            user.member_id = memberMap[user.user_id].user_id;
 
             // by default sleeper API has this as undefined at the start of a season. Comment written in 2023 at start of the sesason
             if(!user.settings.winning_pct){

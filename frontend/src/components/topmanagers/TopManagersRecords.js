@@ -16,8 +16,8 @@ function TopManagersRecords({members: managers}){
                             <div className="noTextBreak">{manager.user_name}</div>
                         </div>
                         <div className="flexHorizontal">
-                            <div ><img className="mediumAvatar" src={`/headshots/${manager._id}.png`} alt="" /></div>
-                            <div className={`coloredBar coolBar`} style={{ width: `${(manager.wins / maxWins) * 90 }%` }}>
+                            <div ><img className="mediumAvatar" src={`/headshots/${manager.user_id}.png`} alt="" /></div>
+                            <div className={`coloredBar coolBar`} style={{ width: `${(manager.wins / maxWins) * 90 }%`, background: `linear-gradient(to right, ${manager.colors.join(', ')})` }}>
                                 <div className="teamPoints">{manager.wins} - {manager.losses}</div>
                             </div>
                         </div>

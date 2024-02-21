@@ -8,8 +8,8 @@ const seasonsSchema = new mongoose.Schema({
         runnerUpUser: {type: String},
     },
     schedule: [{
-        id: {type: String, required: true},
-        matchupPeriodId: {type: Number, required: true},
+        id: {type: String, required: false},
+        matchupPeriodId: {type: Number, required: false},
         matchupType: {type: String, required: false},
         away: {
             teamId: {type: Number, required: false},
@@ -20,10 +20,10 @@ const seasonsSchema = new mongoose.Schema({
             totalPoints: {type: Number, required: false},
         }
     }],
-    season: {type: Number, required: true, unique: true}, 
+    season: {type: Number, required: false, unique: false}, 
     teams: [{
         owners: [
-            {type: String, unique: true}
+            {type: String, unique: false, required: false}
         ],
         summary: {
             regularSeason: {

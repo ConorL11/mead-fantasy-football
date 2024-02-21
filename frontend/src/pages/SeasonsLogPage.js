@@ -16,8 +16,6 @@ function SeasonsLogPage(){
 
     const [managerList, setManagerList] = useState([]);
     const [seasons, setSeasons] = useState([]);
-
-
     const [selectedManager, setSelectedManager] = useState(null);
 
     const getData = async () => {
@@ -32,13 +30,14 @@ function SeasonsLogPage(){
 
     const handleManagerSelection = (managerRaw) => {
         setSelectedManager((prevManager) => {
-            const manager = processData(seasons, managerRaw);
+            const manager = processData(seasons, managerList, managerRaw);
             return manager;
         });
     }
 
-    const processData = (seasons, manager) => {
+    const processData = (seasons, managerList, rawManager) => {
 
+        const manager = managerList.find((listManager) => listManager._id === rawManager._id);
         let ownerIds = manager.espn_ids.concat(manager.sleeper_ids);
         manager.seasons = [];
         // Loop over seasons to grab all of a managers seasons
@@ -98,7 +97,8 @@ function SeasonsLogPage(){
 
     return(
         <div className="seasonsLogContainer">
-            <NavBarManagers managers={managerList} onItemClick={handleManagerSelection} selectedManager={selectedManager}/>
+            {/* <NavBarManagers managers={managerList} onItemClick={handleManagerSelection} selectedManager={selectedManager}/> */}
+            <NavBarManagers onItemClick={handleManagerSelection} selectedManager={selectedManager}/>
             {selectedManager && (
                 <div className="">
                     <div className="seasonsLogHeader">

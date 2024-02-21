@@ -1,6 +1,20 @@
-// import { useState } from "react";
+import NavLinks from "../../content/NavLinks";
 
-function NavBarManagers({ managers, seasons, onItemClick, selectedManager }){
+function NavBarManagers({ seasons, onItemClick, selectedManager }){
+
+    const { managers, managersLoading } = NavLinks();
+    if (managersLoading) {
+        // Render skeleton loading
+        return (
+            <ul className="navBarManagersList">
+                {[1].map((index) => (
+                    <li key={index} className="seasonsLogNav skeletonLoading">
+                        ...Loading Managers
+                    </li>
+                ))}
+            </ul>
+        );
+    }
 
     return(
             <ul className="navBarManagersList">

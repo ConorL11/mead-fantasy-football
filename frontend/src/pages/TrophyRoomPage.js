@@ -23,8 +23,9 @@ function TrophyRoomPage(){
         let memberLookup = {};
         let espnMemberLookup = {};
         let sleeperMemberLookup = {};
+
         for(const member of members){
-            memberLookup[member._id] = member
+            memberLookup[member.user_id] = member
             for(const id of member.espn_ids){
                 espnMemberLookup[id] = member;
             }
@@ -52,6 +53,7 @@ function TrophyRoomPage(){
             let championOwners;
             let runnerUpOnwers;
             let loserOwners;
+
             if(season.results.platform === 'espn'){
                 championOwners = championUser.espn_ids;
                 runnerUpOnwers = runnerUpUser.espn_ids;
@@ -121,7 +123,7 @@ function TrophyRoomPage(){
                         <h2 className="trophyRoomSeason">{season.season}</h2>
                         <div className="trophyRoomUserCard trophyRoomChampion">
                             <h2>League Champion</h2>
-                            <div ><img className="mediumAvatar" src={`/headshots/${season.champion.user._id}.png`} alt=""/></div>
+                            <div ><img className="mediumAvatar" src={`/headshots/${season.champion.user.user_id}.png`} alt=""/></div>
                             <div>{season.champion.user.user_name}</div>
                             <div>{season.champion.stats.summary.regularSeason.wins} - {season.champion.stats.summary.regularSeason.losses}</div>
                             <div>{(season.champion.stats.summary.regularSeason.points / (season.champion.stats.summary.regularSeason.wins + season.champion.stats.summary.regularSeason.losses)).toFixed(1)} PPG</div>
@@ -129,7 +131,7 @@ function TrophyRoomPage(){
                         </div>
                         <div className="trophyRoomUserCard trophyRoomRunnerUp">
                             <h3>Runner Up</h3>
-                            <div ><img className="mediumAvatar" src={`/headshots/${season.runnerUp.user._id}.png`} alt=""/></div>
+                            <div ><img className="mediumAvatar" src={`/headshots/${season.runnerUp.user.user_id}.png`} alt=""/></div>
                             <div>{season.runnerUp.user.user_name}</div>
                             <div>{season.runnerUp.stats.summary.regularSeason.wins} - {season.runnerUp.stats.summary.regularSeason.losses}</div>
                             <div>{(season.runnerUp.stats.summary.regularSeason.points / (season.runnerUp.stats.summary.regularSeason.wins + season.runnerUp.stats.summary.regularSeason.losses)).toFixed(1)} PPG</div>
@@ -137,7 +139,7 @@ function TrophyRoomPage(){
                         </div>
                         <div className="trophyRoomUserCard trophyRoomLoser" >
                             <h3>Biggest Loser</h3>
-                            <div ><img className="mediumAvatar" src={`/headshots/${season.loser.user._id}.png`} alt=""/></div>
+                            <div ><img className="mediumAvatar" src={`/headshots/${season.loser.user.user_id}.png`} alt=""/></div>
                             <div>{season.loser.user.user_name}</div>
                             <div>{season.loser.stats.summary.regularSeason.wins} - {season.loser.stats.summary.regularSeason.losses}</div>
                             <div>{(season.loser.stats.summary.regularSeason.points / (season.loser.stats.summary.regularSeason.wins + season.loser.stats.summary.regularSeason.losses)).toFixed(1)} PPG</div>
@@ -145,7 +147,7 @@ function TrophyRoomPage(){
                         </div>
                         <div className="trophyRoomUserCard trophyRoomHighScorer">
                             <h3>High Scorer </h3>
-                            <div ><img className="mediumAvatar" src={`/headshots/${season.highScorer.user._id}.png`} alt=""/></div>
+                            <div ><img className="mediumAvatar" src={`/headshots/${season.highScorer.user.user_id}.png`} alt=""/></div>
                             <div>{season.highScorer.user.user_name}</div>
                             <div>{season.highScorer.stats.summary.regularSeason.wins} - {season.highScorer.stats.summary.regularSeason.losses}</div>
                             <div>{(season.highScorer.stats.summary.regularSeason.points / (season.highScorer.stats.summary.regularSeason.wins + season.highScorer.stats.summary.regularSeason.losses)).toFixed(1)} PPG</div>

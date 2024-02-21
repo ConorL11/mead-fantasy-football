@@ -38,8 +38,8 @@ function TopManagersPoints({members: managers}){
                             <div className="pl_2">{manager.games} Games</div>
                         </div>
                         <div className="flexHorizontal">
-                            <div ><img className="mediumAvatar" src={`/headshots/${manager._id}.png`} alt="" /></div>
-                            <div className={`coloredBar coolBar`} style={{ width: `${(manager.points / maxPoints) * 80 }%` }}>
+                            <div ><img className="mediumAvatar" src={`/headshots/${manager.user_id}.png`} alt="" /></div>
+                            <div className={`coloredBar coolBar`} style={{ width: `${(manager.points / maxPoints) * 80 }%`, background: `linear-gradient(to right, ${manager.colors.join(', ')})`}}>
                                 {/* <div className="teamPoints">{manager.points.toFixed(1)}</div> */}
                                 <div className="teamPoints">
                                     <FormatNumberDisplay value={manager.points}/>

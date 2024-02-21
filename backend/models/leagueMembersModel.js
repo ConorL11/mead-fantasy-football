@@ -26,7 +26,14 @@ const LeagueMemberSchema = new mongoose.Schema({
             type: String,
             required: false
         }
-    ]
+    ], 
+    colors: [
+        {
+            type: String,
+            required: false
+        }
+    ], 
+    active: {type: Boolean}
 });
 
 const LeagueMember = mongoose.model("LeagueMember", LeagueMemberSchema );

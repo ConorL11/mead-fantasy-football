@@ -10,7 +10,10 @@ import axios from "axios";
 
 const NavLinks = () => {
 
+    const [managersLoading, setManagersLoading] = useState(true);
     const [seasons, setSeasons] = useState([]);
+    const [managers, setManagers] = useState([]);
+
 
     useEffect(() => {
         const getSeasons = async() => {
@@ -19,6 +22,15 @@ const NavLinks = () => {
             setSeasons(seasons);
         }
 
+        const getManagers = async () => {
+            const {data: managersRaw} = await axios.get('/api/leagueMembers?fields=_id,user_name,active');
+            const managers = managersRaw.filter(manager => manager.active).sort((a,b) => a.user_name.localeCompare(b.user_name));
+
+            setManagers(managers);
+            setManagersLoading(false);
+        }
+    
+        getManagers();
         getSeasons();
     }, []);
 
@@ -38,7 +50,7 @@ const NavLinks = () => {
         {label: 'History', path: '/history', icon: <TbChartBar/>, submenu: historyLinks, dropdownIcon: <RiArrowDropDownLine />},
     ];
 
-    return { links, historyLinks, seasons}
+    return { links, historyLinks, seasons, managers, managersLoading}
 
 }
 

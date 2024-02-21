@@ -42,7 +42,6 @@ function NavBar({show, exceptionRef}){
     }
 
     const handleMouseLeave = () => {
-        console.log("mouseLeave")
         setActiveSubMenu(null);
         setActiveMobileSubMenus([]);
     }

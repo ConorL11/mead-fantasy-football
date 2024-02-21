@@ -1443,12 +1443,57 @@ table.pastChampions {
     }
 }
 
-.homePageContainer {
+.homeIntro {
     justify-self: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2em;
     text-align: left;
-    max-width: 500px;
+    padding: 1em;
+}
+
+/* Preseason Info */
+.preseasonHeader {
+    background-color: black;
+    color: var(--offWhiteHeaders);
+    border-top: 2px solid var(--burnt-orange);
+    border-bottom: 2px solid var(--burnt-orange);
+    padding: 1em 0;
+    text-align: center;
+}
+
+.preseasonBody {
+    padding: 1em;
+}
+
+/* Countdown Timer */
+
+.countdownTimerContainer {
+    background-color: var(--bodyGray);
+    padding: 1em;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.timeContainer {
+    display: grid;
+    grid-template-columns: 1fr 0.2fr 1fr 0.2fr  1fr 0.2fr  1fr;
+}
+
+.intervalContainer {
+    display: flex;
+    align-items: center;
+}
+
+.interval {
+    text-align: center;
+    padding: 0.75em;
+}
+
+.countdownTime {
+    font-size: 1.5em;
+}
+
+.countdownLabel {
+    text-transform: capitalize;
 }

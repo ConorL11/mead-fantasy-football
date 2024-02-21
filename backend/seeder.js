@@ -39,35 +39,11 @@ connectDB();
 //     }
 // }
 
-// // // League Member Seeder Functions
-// const importData = async () => {
-//     try {
-//         await LeagueMember.deleteMany();
-//         const createdMembers = await LeagueMember.insertMany(leagueMembers);
-//         console.log('Data Imported!'.green.inverse);
-//         process.exit();
-//     } catch (error) {
-//         console.log(`${error}`.red.inverse);
-//         process.exit(1);
-//     }
-// }
-
-// const destroyData = async () => {
-//     try {
-//         await LeagueMember.deleteMany();
-//         console.log('Data Destroyed!'.red.inverse);
-//         process.exit();
-//     } catch (error) {
-//         console.log(`${error}`.red.inverse);
-//         process.exit(1);
-//     }
-// }
-
-// Seasons Seeder Functions
+//  League Member Seeder Functions
 const importData = async () => {
     try {
-        await Season.deleteMany();
-        const createdSeasons = await Season.insertMany(seasons);
+        await LeagueMember.deleteMany();
+        const createdMembers = await LeagueMember.insertMany(leagueMembers);
         console.log('Data Imported!'.green.inverse);
         process.exit();
     } catch (error) {
@@ -78,7 +54,7 @@ const importData = async () => {
 
 const destroyData = async () => {
     try {
-        await Season.deleteMany();
+        await LeagueMember.deleteMany();
         console.log('Data Destroyed!'.red.inverse);
         process.exit();
     } catch (error) {
@@ -86,6 +62,30 @@ const destroyData = async () => {
         process.exit(1);
     }
 }
+
+// Seasons Seeder Functions
+// const importData = async () => {
+//     try {
+//         await Season.deleteMany();
+//         const createdSeasons = await Season.insertMany(seasons);
+//         console.log('Data Imported!'.green.inverse);
+//         process.exit();
+//     } catch (error) {
+//         console.log(`${error}`.red.inverse);
+//         process.exit(1);
+//     }
+// }
+
+// const destroyData = async () => {
+//     try {
+//         await Season.deleteMany();
+//         console.log('Data Destroyed!'.red.inverse);
+//         process.exit();
+//     } catch (error) {
+//         console.log(`${error}`.red.inverse);
+//         process.exit(1);
+//     }
+// }
 
 
 if(process.argv[2] === '-d') {

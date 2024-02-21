@@ -34,13 +34,13 @@ function Gamelog({ managers, seasons }){
                     game.home.team = {
                         user_name: manager.user_name,
                         user_nickname: manager.user_nickname,
-                        id: manager._id
+                        id: manager.user_id
                     }
                 } else {
                     game.away.team = {
                         user_name: manager.user_name,
                         user_nickname: manager.user_nickname,
-                        id: manager._id
+                        id: manager.user_id
                     }                
                 }
             }
@@ -78,8 +78,8 @@ function Gamelog({ managers, seasons }){
                             {showPlayoffGames ? <RiArrowRightSLine /> : <RiArrowDownSLine />}
                         </div>
                     </div>
-                    {showPlayoffGames && 
-                        <div className="gameLogBody">
+                    {showPlayoffGames &&
+                        <div className="gameLogBody open">
                             {playoffMatchups.map(game => (
                                 <div key={`${game.season.toString() + game.id.toString()}`} className="matchupContainer mt_2">
                                     <div className="matchupWeek noTextBreak">
@@ -117,7 +117,7 @@ function Gamelog({ managers, seasons }){
                                     </div>
                                 </div>
                             ))}
-                        </div>
+                        </div> 
                     }
                 </div>
             }

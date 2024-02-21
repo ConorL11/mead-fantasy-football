@@ -24,7 +24,7 @@ function TopManagersLuckRating({members: managers}){
                                 <div className="negativeLuckTeamPoints">{manager.luckRating.toFixed(2)}</div>
                             </div>
                         </div>}
-                        <img className="luckAvatar mediumAvatar" src={`/headshots/${manager._id}.png`} alt="" />
+                        <img className="luckAvatar mediumAvatar" src={`/headshots/${manager.user_id}.png`} alt="" />
                         {manager.luckRating >= 0 && <div className="positiveLuckTeamName">{manager.user_name}</div>}
                         {manager.luckRating >= 0 && <div className="positiveLuckContainer">
                             <div className="positiveLuckBar" style={{ width: `${(Math.abs(manager.luckRating) / maxLuckRating) * 90 }%` }}>

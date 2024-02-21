@@ -66,7 +66,7 @@ function StandingsDisplay({ year }) {
                             <tr key={team.teamId}>
                                 <td data-cell="Team">
                                     <div className="team-display flexHorizontal">
-                                        <div className="smallAvatar"><img src={`/headshots/${team.manager._id}.png`} alt="" /></div>
+                                        <div className="smallAvatar"><img src={`/headshots/${team.manager.user_id}.png`} alt="" /></div>
                                         <div className="ml_1">
                                             <div>{team.manager.user_name}</div>
                                         </div>

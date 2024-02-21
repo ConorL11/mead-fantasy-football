@@ -62,7 +62,9 @@ function TopManagersPage(){
             // Playoff Appearances
             member.playoffAppearances = 0;
 
-            managerLookup[member._id] = member;
+            member.colors = ['#4F2683', '#FFC62F'];
+
+            managerLookup[member.user_id] = member;
             for(const id of member.espn_ids){
                 ownerLookup[id] = member;
             }
@@ -86,7 +88,6 @@ function TopManagersPage(){
                 ownerLookup[team.owners[0]].adds += team.transactions.adds;
                 ownerLookup[team.owners[0]].trades += team.transactions.trades;
                 ownerLookup[team.owners[0]].expectedWins += team.summary.regularSeason.expectedWins;
-
                 ownerLookup[team.owners[0]].playoffAppearances += (team.summary.regularSeason.playoffSeed <= 6) ? 1 : 0;
             }
         }

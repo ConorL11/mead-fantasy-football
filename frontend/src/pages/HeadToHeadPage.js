@@ -6,6 +6,7 @@ import GameLog from "../components/headtohead/GameLog";
 
 function HeadToHeadPage(){
 
+    const [loading, setLoading] = useState(true); // tracking initial page load
     const [managerList, setManagerList] = useState([]); // list of all managers - used for dropdown menus
     const [seasons, setSeasons] = useState([]); // list of all seasons - used for data processing
     const [selectedManagers, setSelectedManagers] = useState({manager1: null, manager2: null}); // managers selected in dropdown menus - used to process data
@@ -40,6 +41,7 @@ function HeadToHeadPage(){
         const managers = managersRaw.filter(manager => manager.active).sort((a,b) => a.user_name.localeCompare(b.user_name));
         setManagerList(managers);
         setSeasons(seasonsRaw);
+        setLoading(false);
     }
 
     const processData = (seasons, managerList, selectedManagers) => {    
@@ -191,6 +193,7 @@ function HeadToHeadPage(){
                     selectedManagers={selectedManagers}
                     dropdownName="manager1"
                     onChange={(value) => handleOptionChange('manager1', value)}
+                    isLoading={loading}
                 />
                 <div>vs</div>
                 <ManagerSelectMenu 
@@ -198,6 +201,7 @@ function HeadToHeadPage(){
                     selectedManagers={selectedManagers}
                     dropdownName="manager2"
                     onChange={(value) => handleOptionChange('manager2', value)}
+                    isLoading={loading}
                 />
             </div>
             <div className="headToHeadBody">

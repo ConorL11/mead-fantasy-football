@@ -17,7 +17,7 @@ function TopManagersChamps({members: managers}){
                                 <div key={manager.user_id} className="teamBar">
                                     <div className="teamName">{manager.user_name}</div>
                                     <div className="flexHorizontal">
-                                        <div ><img className="mediumAvatar" src={`/headshots/${manager._id}.png`} alt="" /></div>
+                                        <div ><img className="mediumAvatar" src={`/headshots/${manager.user_id}.png`} alt="" /></div>
                                         <div className={`coloredBar coolBar`} style={{ width: `${(manager.championships / maxChampionships) * 90 }%` }}>
                                             <div className="teamPoints">{manager.championships}</div>
                                         </div>
@@ -33,7 +33,7 @@ function TopManagersChamps({members: managers}){
                                 <div key={manager.user_id} className="teamBar">
                                     <div className="teamName">{manager.user_name}</div>
                                     <div className="flexHorizontal">
-                                        <div ><img className="mediumAvatar" src={`/headshots/${manager._id}.png`} alt="" /></div>
+                                        <div ><img className="mediumAvatar" src={`/headshots/${manager.user_id}.png`} alt="" /></div>
                                         <div className={`coloredBar coolBar`} style={{ width: `${(manager.biggestLosers / maxBiggestLosers) * 90 }%` }}>
                                             <div className="teamPoints">{manager.biggestLosers}</div>
                                         </div>

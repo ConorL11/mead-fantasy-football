@@ -1,10 +1,10 @@
-function ManagerSelectMenu({ managers, selectedManagers, dropdownName, onChange }){
+function ManagerSelectMenu({ managers, selectedManagers, dropdownName, onChange, isLoading }){
 
     
     const disabledOptions = Object.values(selectedManagers).filter(value => value !== selectedManagers[dropdownName]);
     return(
         <div className="managerSelectMenuContainer">
-            <select onChange={(event) => onChange(event.target.value)} defaultValue="" className={`${dropdownName}`}>
+            <select onChange={(event) => onChange(event.target.value)} defaultValue="" className={`${dropdownName}`} disabled={isLoading}>
                 <option value="" disabled >
                     Select a Manager
                 </option>

@@ -11,16 +11,16 @@ const espnLeagueId = '322485';
 
 // Constant for Past Season Results
 const seasonResults = [
-    {season: 2023, platform: 'sleeper', championUser: "658e44679c85c8b96b5f5177", runnerUpUser:  "658e44679c85c8b96b5f5173", losingUser: "658e44679c85c8b96b5f5178"},
-    {season: 2022, platform: 'espn', championUser: "658e44679c85c8b96b5f517b", runnerUpUser: "658e44679c85c8b96b5f5173", losingUser: "658e44679c85c8b96b5f5179"},
-    {season: 2021, platform: 'sleeper', championUser: "658e44679c85c8b96b5f5174", runnerUpUser: "658e44679c85c8b96b5f5178", losingUser: "658e44679c85c8b96b5f5173"},
-    {season: 2020, platform: 'espn', championUser: "658e44679c85c8b96b5f5175", runnerUpUser: "658e44679c85c8b96b5f5174", losingUser: "658e44679c85c8b96b5f5179" },
-    {season: 2019, platform: 'espn', championUser: "658e44679c85c8b96b5f5175", runnerUpUser: "658e44679c85c8b96b5f5177", losingUser: "658e44679c85c8b96b5f5176"},
-    {season: 2018, platform: 'espn', championUser: "658e44679c85c8b96b5f5178", runnerUpUser: "658e44679c85c8b96b5f5179", losingUser: "658e44679c85c8b96b5f517b"},
-    {season: 2017, platform: 'espn', championUser: "658e44679c85c8b96b5f5174", runnerUpUser: "658e44679c85c8b96b5f5176", losingUser: "658e44679c85c8b96b5f517a"},
-    {season: 2016, platform: 'espn', championUser: "658e44679c85c8b96b5f5172", runnerUpUser: "658e44679c85c8b96b5f5178", losingUser: "658e44679c85c8b96b5f517c"},
-    {season: 2015, platform: 'espn', championUser: "658e44679c85c8b96b5f5179", runnerUpUser: "658e44679c85c8b96b5f5175", losingUser: "658e44679c85c8b96b5f517a"},
-    {season: 2014, platform: 'espn', championUser: "658e44679c85c8b96b5f5176", runnerUpUser: "658e44679c85c8b96b5f5175", losingUser: "658e44679c85c8b96b5f517d"},
+    {season: 2023, platform: 'sleeper', championUser: "6", runnerUpUser:  "2", losingUser: "7"},
+    {season: 2022, platform: 'espn', championUser: "10", runnerUpUser: "2", losingUser: "8"},
+    {season: 2021, platform: 'sleeper', championUser: "3", runnerUpUser: "7", losingUser: "2"},
+    {season: 2020, platform: 'espn', championUser: "4", runnerUpUser: "3", losingUser: "8" },
+    {season: 2019, platform: 'espn', championUser: "4", runnerUpUser: "6", losingUser: "5"},
+    {season: 2018, platform: 'espn', championUser: "7", runnerUpUser: "8", losingUser: "10"},
+    {season: 2017, platform: 'espn', championUser: "3", runnerUpUser: "5", losingUser: "9"},
+    {season: 2016, platform: 'espn', championUser: "1", runnerUpUser: "7", losingUser: "11"},
+    {season: 2015, platform: 'espn', championUser: "8", runnerUpUser: "4", losingUser: "9"},
+    {season: 2014, platform: 'espn', championUser: "5", runnerUpUser: "4", losingUser: "12"},
 ];
 
 // const seasonResultsReadable = [

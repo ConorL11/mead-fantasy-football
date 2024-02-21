@@ -1,7 +1,7 @@
 function Avatar({ manager, size }){
 
     return(
-        <div ><img className={size} src={`/headshots/${manager._id}.png`} alt="" /></div>
+        <div ><img className={size} src={`/headshots/${manager.user_id}.png`} alt="" /></div>
     )
 }
 

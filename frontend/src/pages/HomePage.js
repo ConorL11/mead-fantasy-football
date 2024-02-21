@@ -1,10 +1,9 @@
-import Standings from "../components/Standings";
 
 function HomePage(){
 
     return (
         <div>
-            <Standings/>
+            I'm the home Page!
         </div>
     )
 }

@@ -1,11 +1,9 @@
-// import { pastWinners } from "../content/constants";
-// import { useState, useEffect } from "react";
-// import axios from "axios";
 import Link from "../components/Link";
-import {historyLinks} from "../content/NavLinks";
-// import TrophyRoom from "./TrophyRoomPage";
+import NavLinks from "../content/NavLinks";
 
 function HistoryPage() {
+
+    const { historyLinks } = NavLinks();
 
     return (
         <div className="historyPageGrid">

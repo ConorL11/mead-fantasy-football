@@ -57,8 +57,11 @@ function NavBar({show, exceptionRef}){
                     <div className={`${link.submenu ? 'navParentLink' : ''}` }>
                         <Link key={link.label} to={link.path}>
                             <span className="navIcon">{link.icon}</span>
-                            <span>{link.label}</span>
-                            {link.dropdownIcon && (<span className="navBarDropDownIcon">{link.dropdownIcon}</span>)}
+                            <span>
+                                <span>{link.label} </span>
+                                {link.dropdownIcon && (<span className="navBarDropDownIcon">{link.dropdownIcon}</span>)}
+                            </span>
+                            
                         </Link>
                         {link.dropdownIcon && (
                             activeMobileSubMenus.includes(link.label) ?
@@ -67,15 +70,14 @@ function NavBar({show, exceptionRef}){
                                 <span className="mobileNavDropDownIcon" onClick={(event) => expandMobileMenu(event, link.label)} ref={exceptionRef}> <RiArrowDownSLine /></span>
                         )}
                     </div>
-
                     {(link.submenu && (activeSubMenu === link.label || activeMobileSubMenus.includes(link.label))) && (
                         <div className={`navSubMenu showNavSubMenu`}>
                             {link.submenu.map((submenuLink) => (
                                 <div key={submenuLink.label} className="navSubMenuItem">
-                                <Link to={submenuLink.path}>
-                                    <span className="navIcon">{submenuLink.icon}</span>
-                                    <span>{submenuLink.label}</span>
-                                </Link>
+                                    <Link to={submenuLink.path} >
+                                        <span className="navIcon">{submenuLink.icon}</span>
+                                        <span className={`${link.label === 'Standings' ? 'mediumFont' : ''}`}>{submenuLink.label}</span>
+                                    </Link>
                                 </div>
                             ))}
                         </div>

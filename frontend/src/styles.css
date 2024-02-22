@@ -350,6 +350,7 @@ nav a:hover {
         grid-column: span 1;
         grid-row: 2;
         background-color: black;
+        font-size: xx-small;
         border: 1px solid var(--burnt-orange);
         margin: 1em 0;
         padding: 1em;
@@ -380,11 +381,15 @@ nav a:hover {
     }
 
     .navSubMenu a {
-        font-size: 0.8rem;
+        font-size: 1.2em;
     }
 
     .mobileNavDropDownIcon {
         display: none;
+    }
+
+    .mediumFont {
+        font-size: medium !important;
     }
 }
 
@@ -518,6 +523,7 @@ table.pastChampions {
         margin: 20px;
         background-color: #333;
         border-radius: 25px;
+        border: 1px solid var(--burnt-orange);
     }
 
     .sleeperInsights {
@@ -597,6 +603,7 @@ table.pastChampions {
         padding: 20px;
         margin: 20px;
         background-color: #333;
+        border: 1px solid var(--burnt-orange);
         border-radius: 25px;
     }
     
@@ -1295,6 +1302,7 @@ table.pastChampions {
 .gameLogContainer {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .gameLogHeader {
@@ -1305,9 +1313,26 @@ table.pastChampions {
     margin: 0;
 }
 
-.gameLogSubContainer {
-    width: inherit;
-    padding: 1em 1em;
+.gameLogBody {
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    transition: max-height 150ms ease-in-out, opacity 100ms ease-in-out, visibility 0s 300ms;
+}
+
+.openPlayoffGames {
+    max-height: 5000px;
+    opacity: 1;
+    visibility: visible;
+    transition: max-height 100ms ease-in-out, opacity 100ms ease-in-out, visibility 0s;
+}
+
+.openRegularSeasonGames {
+    max-height: 5000px;
+    opacity: 1;
+    visibility: visible;
+    transition: max-height 100ms ease-in-out, opacity 100ms ease-in-out, visibility 0s;
 }
 
 .fontSize2em {
@@ -1320,6 +1345,7 @@ table.pastChampions {
     border-radius: 20px;
     padding: 1em 1em;
     margin: 1em 1em;
+    border: 1px solid var(--burnt-orange);
 }
 
 @media (min-width: 375px) and (max-width: 700px){
@@ -1473,6 +1499,7 @@ table.pastChampions {
     background-color: var(--bodyGray);
     padding: 1em;
     border-radius: 10px;
+    border: 1px solid var(--burnt-orange);
 }
 
 /* Countdown Timer */
@@ -1544,5 +1571,51 @@ table.pastChampions {
 
     .preseasonHeader {
         border-top: none;
+    }
+}
+
+.bylawContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.bylawSection {
+    background-color: var(--bodyGray);
+    padding: 1em;
+    margin: 1em;
+    border-radius: 10px;
+    border: 1px solid var(--burnt-orange);
+    overflow: hidden; 
+}
+
+.bylawHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.bigArrow {
+    font-size: xx-large;
+    transition: transform 0.3s ease;
+}
+
+.bylawBody {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease; 
+}
+
+.openBylaws {
+    max-height: 1000px; 
+}
+
+@media (min-width: 1300px) {
+    .bylawContainer {
+        align-items: center;
+    }
+    .bylawSection {
+        width: 50%;
     }
 }

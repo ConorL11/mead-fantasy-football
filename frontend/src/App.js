@@ -69,7 +69,7 @@ function App() {
                 <Route path="/bylaws">
                     <BylawsPage />
                 </Route>
-                <Route path="/analytics">
+                <Route path="/stats2023">
                     <AnalyticsPage/>
                 </Route>
                 <Route path="/history">

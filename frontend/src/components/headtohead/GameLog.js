@@ -70,7 +70,7 @@ function Gamelog({ managers, seasons }){
 
     return(
         <div className="gameLogContainer">
-            {playoffMatchups.length > 0 &&             
+            {playoffMatchups.length > 0 &&      
                 <div className="insightContainer gameLogSubContainer">
                     <div className="gameLogHeader" onClick={handlePlayoffClick}>
                         <h2 >Playoff Matchups</h2>
@@ -78,63 +78,11 @@ function Gamelog({ managers, seasons }){
                             {showPlayoffGames ? <RiArrowRightSLine /> : <RiArrowDownSLine />}
                         </div>
                     </div>
-                    {showPlayoffGames &&
-                        <div className="gameLogBody open">
-                            {playoffMatchups.map(game => (
-                                <div key={`${game.season.toString() + game.id.toString()}`} className="matchupContainer mt_2">
-                                    <div className="matchupWeek noTextBreak">
-                                        <div className="">{game.season} {game.playoffMatchup}</div>
-                                    </div>
-                                    <div className={`team1Bar ${game.home.totalPoints > game.away.totalPoints ? 'heavy_font' : ''}`}>
-                                        <div>
-                                            <div className="matchupTeam1Name">
-                                            <div className="teamName1Text"></div>
-                                            </div>
-                                            <div className="flexHorizontal">
-                                                <div className=""><img className="mediumAvatar" src={`/headshots/${game.home.team.id}.png`} alt="" /></div>
-                                                <div className={`matchupBar player1Bar ${game.home.totalPoints > game.away.totalPoints ? 'winningBar' : 'losingBar'}`}>
-                                                    <div className="mr_4">{game.home.totalPoints}</div>
-                                                </div>   
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div className="vsContainer">
-                                        <div className="vsBubble"></div> 
-                                        <div className="vsText">VS</div> 
-                                    </div>
-                                    <div className={`team2Bar ${game.home.totalPoints < game.away.totalPoints ? 'heavy_font' : ''}`}>
-                                        <div>
-                                            <div className="matchupTeam2Name">
-                                                <div className="teamName2Text"></div>
-                                            </div>
-                                            <div className="flexHorizontal">
-                                                <div className={`matchupBar player2Bar ${game.home.totalPoints < game.away.totalPoints ? 'winningBar' : 'losingBar'}`}>
-                                                    <div className="ml_4">{game.away.totalPoints}</div>
-                                                </div>   
-                                                <div className=""><img className="mediumAvatar" src={`/headshots/${game.away.team.id}.png`} alt="" /></div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div>
-                            ))}
-                        </div> 
-                    }
-                </div>
-            }
-
-            <div className="insightContainer gameLogSubContainer">
-                <div className="gameLogHeader" onClick={handleRegularSeasonClick}>
-                    <h2 >Regular Season Matchups</h2>
-                    <div className="flexHorizontal fontSize2em">
-                        {showRegularSeasonGames ? <RiArrowRightSLine /> : <RiArrowDownSLine />}
-                    </div>
-                </div>
-                {showRegularSeasonGames && 
-                    <div className="gameLogBody">
-                        {regularSeasonMatchups.map(game => (
+                    <div className={`gameLogBody ${showPlayoffGames ? 'openPlayoffGames' : ''}`}>
+                        {playoffMatchups.map(game => (
                             <div key={`${game.season.toString() + game.id.toString()}`} className="matchupContainer mt_2">
                                 <div className="matchupWeek noTextBreak">
-                                    <div className="">{game.season} Week {game.matchupPeriodId}</div>
+                                    <div className="">{game.season} {game.playoffMatchup}</div>
                                 </div>
                                 <div className={`team1Bar ${game.home.totalPoints > game.away.totalPoints ? 'heavy_font' : ''}`}>
                                     <div>
@@ -168,8 +116,55 @@ function Gamelog({ managers, seasons }){
                                 </div>
                             </div>
                         ))}
+                    </div> 
+                </div>
+            }
+            <div className="insightContainer gameLogSubContainer">
+                <div className="gameLogHeader" onClick={handleRegularSeasonClick}>
+                    <h2 >Regular Season Matchups</h2>
+                    <div className="flexHorizontal fontSize2em">
+                        {showRegularSeasonGames ? <RiArrowRightSLine /> : <RiArrowDownSLine />}
                     </div>
-                }         
+                </div>
+                <div className={`gameLogBody ${showRegularSeasonGames ? 'openRegularSeasonGames' : ''}`}>
+                    {regularSeasonMatchups.map(game => (
+                        <div key={`${game.season.toString() + game.id.toString()}`} className="matchupContainer mt_2">
+                            <div className="matchupWeek noTextBreak">
+                                <div className="">{game.season} Week {game.matchupPeriodId}</div>
+                            </div>
+                            <div className={`team1Bar ${game.home.totalPoints > game.away.totalPoints ? 'heavy_font' : ''}`}>
+                                <div>
+                                    <div className="matchupTeam1Name">
+                                    <div className="teamName1Text"></div>
+                                    </div>
+                                    <div className="flexHorizontal">
+                                        <div className=""><img className="mediumAvatar" src={`/headshots/${game.home.team.id}.png`} alt="" /></div>
+                                        <div className={`matchupBar player1Bar ${game.home.totalPoints > game.away.totalPoints ? 'winningBar' : 'losingBar'}`}>
+                                            <div className="mr_4">{game.home.totalPoints}</div>
+                                        </div>   
+                                    </div>
+                                </div> 
+                            </div>
+                            <div className="vsContainer">
+                                <div className="vsBubble"></div> 
+                                <div className="vsText">VS</div> 
+                            </div>
+                            <div className={`team2Bar ${game.home.totalPoints < game.away.totalPoints ? 'heavy_font' : ''}`}>
+                                <div>
+                                    <div className="matchupTeam2Name">
+                                        <div className="teamName2Text"></div>
+                                    </div>
+                                    <div className="flexHorizontal">
+                                        <div className={`matchupBar player2Bar ${game.home.totalPoints < game.away.totalPoints ? 'winningBar' : 'losingBar'}`}>
+                                            <div className="ml_4">{game.away.totalPoints}</div>
+                                        </div>   
+                                        <div className=""><img className="mediumAvatar" src={`/headshots/${game.away.team.id}.png`} alt="" /></div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )

@@ -44,10 +44,10 @@ const NavLinks = () => {
     
     const links = [
         {label: 'Home', path: '/', icon: <GoHome/>},
+        {label: '2023 Stats', path: '/stats2023', icon: <GoRocket/>},
         {label: 'Standings', path: '/standings', icon: <BiBarChartAlt2/>, submenu: seasons.map((season, index) => ({label: season.season, path: `/standings/${season.season}`})), dropdownIcon: <RiArrowDropDownLine />},
-        {label: 'Bylaws', path: '/bylaws', icon: <GoLog/>},
-        {label: 'Analytics', path: '/analytics', icon: <GoRocket/>},
         {label: 'History', path: '/history', icon: <TbChartBar/>, submenu: historyLinks, dropdownIcon: <RiArrowDropDownLine />},
+        {label: 'Bylaws', path: '/bylaws', icon: <GoLog/>},
     ];
 
     return { links, historyLinks, seasons, managers, managersLoading}

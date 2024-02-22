@@ -103,9 +103,9 @@ function HeadToHeadPage(){
         for(const manager of managerComp){
             for(const season of manager.seasons){
                 // Count overall stats
-                manager.summary.championships += (season.results.championUser === manager._id) ? 1 : 0;
-                manager.summary.runnerUps += (season.results.runnerUpUser === manager._id) ? 1 : 0;
-                manager.summary.biggestLosers += (season.results.losingUser === manager._id) ? 1 : 0;
+                manager.summary.championships += (season.results.championUser === manager.user_id) ? 1 : 0;
+                manager.summary.runnerUps += (season.results.runnerUpUser === manager.user_id) ? 1 : 0;
+                manager.summary.biggestLosers += (season.results.losingUser === manager.user_id) ? 1 : 0;
                 manager.summary.games += (season.team.summary.regularSeason.wins + season.team.summary.regularSeason.losses);
                 manager.summary.points += season.team.summary.regularSeason.points;
                 manager.summary.pointsAgainst += season.team.summary.regularSeason.pointsAgainst;

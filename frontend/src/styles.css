@@ -523,6 +523,7 @@ table.pastChampions {
         margin: 20px;
         background-color: #333;
         border-radius: 25px;
+        border: 1px solid var(--burnt-orange);
     }
 
     .sleeperInsights {
@@ -602,6 +603,7 @@ table.pastChampions {
         padding: 20px;
         margin: 20px;
         background-color: #333;
+        border: 1px solid var(--burnt-orange);
         border-radius: 25px;
     }
     
@@ -1343,6 +1345,7 @@ table.pastChampions {
     border-radius: 20px;
     padding: 1em 1em;
     margin: 1em 1em;
+    border: 1px solid var(--burnt-orange);
 }
 
 @media (min-width: 375px) and (max-width: 700px){
@@ -1496,6 +1499,7 @@ table.pastChampions {
     background-color: var(--bodyGray);
     padding: 1em;
     border-radius: 10px;
+    border: 1px solid var(--burnt-orange);
 }
 
 /* Countdown Timer */
@@ -1581,6 +1585,7 @@ table.pastChampions {
     padding: 1em;
     margin: 1em;
     border-radius: 10px;
+    border: 1px solid var(--burnt-orange);
     overflow: hidden; 
 }
 

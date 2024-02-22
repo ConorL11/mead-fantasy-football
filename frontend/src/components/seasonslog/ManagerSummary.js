@@ -1,5 +1,5 @@
-import Avatar from "../Avatar";
-import FormatNumber from "../FormatNumber";
+import Avatar from "../global/Avatar";
+import FormatNumber from "../global/FormatNumber";
 
 function ManagerSummary({ manager }){
 

@@ -4,15 +4,17 @@ const CountdownTimer = ({countdownDate}) => {
     const calculateTimeLeft = () => {
 
         const difference = +new Date(countdownDate) - +new Date();
-        let timeLeft = {};
+        let timeLeft = [];
 
         if (difference > 0) {
-            timeLeft = {
-                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-                minutes: Math.floor((difference / 1000 / 60) % 60),
-                seconds: Math.floor((difference / 1000) % 60),
-            };
+
+            timeLeft = [
+                {label: 'days', value: Math.floor(difference / (1000 * 60 * 60 * 24))},
+                {label: 'hours', value: Math.floor((difference / (1000 * 60 * 60)) % 24)},
+                {label: 'minutes', value: Math.floor((difference / 1000 / 60) % 60)},
+                {label: 'seconds', value: Math.floor((difference / 1000) % 60)}
+
+            ]
         }
 
         return timeLeft;
@@ -28,31 +30,25 @@ const CountdownTimer = ({countdownDate}) => {
         return () => clearTimeout(timer);
     });
 
-    const timerComponents = [];
-
-    Object.keys(timeLeft).forEach((interval) => {
-
-        timerComponents.push(
-            <div key={interval} className='intervalContainer'>
-                <div className='interval'>
-                    <div className='countdownTime'> {timeLeft[interval]}</div>
-                    <div className='countdownLabel'> {interval}{' '}</div>
-                </div>
-                {interval !== 'seconds' && <div className='countdownTime'> : </div>}
-            </div>
-        );
-    });
-
     return (
         <div className="countdownTimerContainer">
-            <h2>NFL Kickoff</h2>
-            <div className="timeContainer">
-                {timerComponents.length ? (
-                    timerComponents
-                ) : (
-                    <span>Countdown is over!</span>
-                )}
-            </div>
+            <h2 className='countdownTimerHeader'>NFL Kickoff</h2>
+            {timeLeft.length ? (
+                <div className='timerBody'>
+                    {timeLeft.map((interval) => (
+                        <div key={interval.label} className='timerValues'>
+                            <div className='justifyCenter'>{interval.value} </div>
+                            {interval.label !== 'seconds' && <div className='justifyEnd'> : </div>}
+                        </div>
+                    ))}
+                    {timeLeft.map((interval) => (
+                        <div key={interval.label} className='timerLabels'>
+                            {interval.label}
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <span>Countdown is over!</span>)}
         </div>
     );
 };

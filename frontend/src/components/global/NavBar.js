@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
-import NavLinks from "../content/NavLinks"
+import NavLinks from "../../content/NavLinks"
 import { RiArrowDownSLine, RiArrowRightSLine } from "react-icons/ri";
 
 import Link from "./Link";
-import "../styles.css"
+import "../../styles.css"
 
 function NavBar({show, exceptionRef}){
 

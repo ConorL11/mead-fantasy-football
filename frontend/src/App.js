@@ -1,5 +1,5 @@
-import NavBar from "./components/NavBar";
-import Route from "./components/Route";
+import NavBar from "./components/global/NavBar";
+import Route from "./hooks/Route";
 import BylawsPage from "./pages/BylawsPage";
 import HomePage from "./pages/HomePage";
 import AnalyticsPage from "./pages/AnalyticsPage";
@@ -50,6 +50,7 @@ function App() {
                     <nav>
                         <NavBar exceptionRef={exceptionRef}/>
                     </nav>
+
                     <label htmlFor="nav-toggle" className="nav-toggle-label" onClick={handleMenuClick}>
                         <span><AiOutlineMenu className="nav-dropdown-icon"/></span>
                     </label>

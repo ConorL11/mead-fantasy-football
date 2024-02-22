@@ -6,7 +6,7 @@ import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import leagueMemberRoutes from './routes/leagueMemberRoutes.js';
 import seasonsRoutes from './routes/seasonsRoutes.js';
-import cpiDataRoutes from './routes/cpiDataRoutes.js';
+
 const port = process.env.PORT || 5000;
 
 connectDB(); // Connect to MongoDB
@@ -18,7 +18,6 @@ app.use(express.urlencoded({extended: false}));
 app.use('/api/leagueMembers', leagueMemberRoutes);
 app.use('/api/seasons', seasonsRoutes);
 
-app.use('/api/cpiData', cpiDataRoutes);
 
 const __dirname = path.resolve();
 if(process.env.NODE_ENV === 'production'){

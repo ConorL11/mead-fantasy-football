@@ -286,18 +286,17 @@ nav a:hover {
     header {
         position: fixed;
         display: grid;
-        grid-template-columns: 1fr 2fr 3fr 1fr;
+        grid-template-columns: 1fr 2fr 1fr
     }
 
     .title { 
-        grid-column: 2 / 3;
-        grid-row: 1;
+        grid-column: 1;
         padding-top: 1em;
     }
 
     nav {
         all: unset;
-        grid-column: 3 / 4;
+        grid-column: 2;
         display: grid;
         padding-top: 1em;
     }
@@ -331,10 +330,9 @@ nav a:hover {
     }
 
     nav li {
-        grid-column: span 1;
-        margin-left: 3em;
-        margin-bottom: 0;
+        /* grid-column: span 1; */
         border-top: none;
+        padding: 1em 1.2em
     }
 
     .navIcon {
@@ -1443,12 +1441,108 @@ table.pastChampions {
     }
 }
 
-.homePageContainer {
+.homeIntro {
     justify-self: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2em;
     text-align: left;
-    max-width: 500px;
+    padding: 1em;
+}
+
+/* Preseason Info */
+.preseasonHeader {
+    background-color: black;
+    color: var(--offWhiteHeaders);
+    border-top: 2px solid var(--burnt-orange);
+    border-bottom: 2px solid var(--burnt-orange);
+    padding: 1em 0;
+    margin: 0;
+    text-align: center;
+}
+
+.preseasonBody {
+    display: grid;
+    justify-content: center;
+    padding: 1em;
+    gap: 1em;
+}
+
+.preseasonItem {
+    width: 100%;
+    background-color: var(--bodyGray);
+    padding: 1em;
+    border-radius: 10px;
+}
+
+/* Countdown Timer */
+.countdownTimerContainer {
+    display: grid;
+}
+
+.countdownTimerHeader {
+    text-align: center;
+}
+.timerBody {
+    display: grid;
+    text-align: center;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.timerValues {
+    grid-row: 1;
+    font-size: 1.5em;
+    display: grid;
+    grid-template-columns: 1fr 10px;
+}
+
+.timerLabels {
+    grid-row: 2;
+    text-transform: capitalize;
+}
+
+.seasonResults {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.seasonResultsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+}
+
+.seasonResultsHeader {
+    grid-column: 1 / 4;
+    grid-row: 1;
+    margin: 0;
+}
+
+@media (min-width: 1300px) {
+    .homePageContainer {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+
+    .homeIntro{
+        width: 50%;
+    }
+
+    .homeBody {
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .preseasonBody {
+        flex: 1;
+        padding: 2em;
+        gap: 2em;
+    }
+
+    .preseasonHeader {
+        border-top: none;
+    }
 }

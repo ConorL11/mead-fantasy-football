@@ -1,4 +1,4 @@
-import SleeperData from "../components/SleeperData";
+import SleeperData from "../components/sleeperseason/SleeperData";
 
 function AnalyticsPage(){
 

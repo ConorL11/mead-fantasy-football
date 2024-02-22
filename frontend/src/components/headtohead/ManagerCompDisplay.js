@@ -1,4 +1,4 @@
-import Avatar from "../Avatar";
+import Avatar from "../global/Avatar";
 
 function ManagerCompDisplay({ managers }){
     

@@ -1,4 +1,4 @@
-import Link from "../components/Link";
+import Link from "../components/global/Link";
 import NavLinks from "../content/NavLinks";
 
 function StandingsPage() {

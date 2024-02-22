@@ -1,5 +1,5 @@
-import useNavigation from "../hooks/use-navigation";
-import "../styles.css"
+import useNavigation from "../../hooks/use-navigation";
+import "../../styles.css"
 function Link({ to, children, className, activeClassName }){
     const { navigate } = useNavigation();
     
